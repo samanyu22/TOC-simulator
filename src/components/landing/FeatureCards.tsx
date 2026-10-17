@@ -68,7 +68,11 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
       </div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch relative">
+        {/* Ambient Backlight Radiance behind cards in light mode */}
+        <div className="absolute -top-12 left-1/4 -translate-x-1/2 w-[480px] h-[320px] bg-violet-400/25 dark:bg-transparent rounded-full blur-[90px] pointer-events-none -z-10" />
+        <div className="absolute -top-12 right-1/4 translate-x-1/2 w-[480px] h-[320px] bg-cyan-400/25 dark:bg-transparent rounded-full blur-[90px] pointer-events-none -z-10" />
+
         {/* =========================================================
             CARD 1: TURING MACHINE SIMULATOR
             ========================================================= */}
@@ -76,13 +80,15 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
           glowColor="purple"
           customSize={true}
           borderRadius={24}
-          spotlightSize={340}
-          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-violet-900/20 p-7 sm:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-[#ded5c5] dark:border-transparent"
+          spotlightSize={380}
+          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/20 dark:hover:shadow-violet-900/20 p-7 sm:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-[#ded5c5] hover:border-violet-400/50 dark:hover:border-transparent dark:border-transparent"
           onMouseEnter={() => setIsTmAuto(false)}
           onMouseLeave={() => setIsTmAuto(true)}
         >
-          {/* Ambient Lighting Glow */}
-          <div className="absolute top-0 right-0 w-72 h-72 bg-violet-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 group-hover:bg-violet-600/15 transition-colors duration-500" />
+          {/* Ambient Lighting Glow - Rich vibrant aurora in light mode */}
+          <div className="absolute top-0 right-0 w-84 h-84 bg-gradient-to-bl from-violet-500/35 via-purple-500/22 to-transparent dark:from-violet-600/10 dark:via-transparent dark:to-transparent rounded-full blur-3xl pointer-events-none -mr-16 -mt-16 group-hover:from-violet-500/50 group-hover:via-purple-500/32 transition-all duration-500" />
+          <div className="absolute top-0 right-0 w-48 h-48 bg-violet-400/30 dark:bg-transparent rounded-full blur-2xl pointer-events-none -mr-8 -mt-8 group-hover:scale-125 transition-transform duration-700" />
+          <div className="absolute top-0 right-0 w-44 h-[2px] bg-gradient-to-l from-violet-500/70 via-purple-400/40 to-transparent dark:from-violet-400/20 dark:to-transparent pointer-events-none" />
 
             {/* Header */}
             <div className="space-y-4 relative z-10">
@@ -185,13 +191,15 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
           glowColor="blue"
           customSize={true}
           borderRadius={24}
-          spotlightSize={340}
-          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20 p-7 sm:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-[#ded5c5] dark:border-transparent"
+          spotlightSize={380}
+          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 dark:hover:shadow-cyan-900/20 p-7 sm:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-[#ded5c5] hover:border-cyan-400/50 dark:hover:border-transparent dark:border-transparent"
           onMouseEnter={() => setIsNfaAuto(false)}
           onMouseLeave={() => setIsNfaAuto(true)}
         >
-          {/* Ambient Lighting Glow */}
-          <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 group-hover:bg-cyan-600/15 transition-colors duration-500" />
+          {/* Ambient Lighting Glow - Rich vibrant aurora in light mode */}
+          <div className="absolute top-0 right-0 w-84 h-84 bg-gradient-to-bl from-cyan-500/35 via-teal-500/22 to-transparent dark:from-cyan-600/10 dark:via-transparent dark:to-transparent rounded-full blur-3xl pointer-events-none -mr-16 -mt-16 group-hover:from-cyan-500/50 group-hover:via-teal-500/32 transition-all duration-500" />
+          <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-400/30 dark:bg-transparent rounded-full blur-2xl pointer-events-none -mr-8 -mt-8 group-hover:scale-125 transition-transform duration-700" />
+          <div className="absolute top-0 right-0 w-44 h-[2px] bg-gradient-to-l from-cyan-500/70 via-teal-400/40 to-transparent dark:from-cyan-400/20 dark:to-transparent pointer-events-none" />
 
             {/* Header */}
             <div className="space-y-4 relative z-10">

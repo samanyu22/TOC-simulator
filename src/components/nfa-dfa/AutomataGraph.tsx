@@ -535,26 +535,52 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
           <marker
             id="arrowhead-normal"
             viewBox="0 0 10 10"
-            refX="9"
+            refX="5"
             refY="5"
-            markerWidth="6"
-            markerHeight="6"
+            markerWidth="7"
+            markerHeight="7"
             orient="auto-start-reverse"
           >
-            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill={isDark ? '#64748b' : '#94a3b8'} />
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill={isDark ? '#64748b' : '#94a3b8'} />
+          </marker>
+
+          {/* Arrowhead marker for hovered edges */}
+          <marker
+            id="arrowhead-hover"
+            viewBox="0 0 10 10"
+            refX="5"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill={isDark ? '#38bdf8' : '#0284c7'} />
           </marker>
 
           {/* Arrowhead marker for active/highlighted edges */}
           <marker
             id="arrowhead-active"
             viewBox="0 0 10 10"
-            refX="9"
+            refX="5"
             refY="5"
             markerWidth="8"
             markerHeight="8"
             orient="auto-start-reverse"
           >
-            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill={isDark ? '#22d3ee' : '#0891b2'} />
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill={isDark ? '#22d3ee' : '#0891b2'} />
+          </marker>
+
+          {/* Arrowhead marker for START initial state pointer */}
+          <marker
+            id="arrowhead-initial"
+            viewBox="0 0 10 10"
+            refX="5"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill={isDark ? '#8b5cf6' : '#7c3aed'} />
           </marker>
 
           {/* Glowing Filter */}
@@ -574,8 +600,9 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
             const target = nodeMap.get(edge.to);
             if (!source || !target) return null;
 
-            const radius = getNodeRadius(source.label);
-            const { path, labelPos } = calculateEdgePath(source, target, edge, radius);
+            const sourceRadius = getNodeRadius(source.label);
+            const targetRadius = getNodeRadius(target.label);
+            const { path, labelPos } = calculateEdgePath(source, target, edge, sourceRadius, targetRadius);
             
             const isHighlighted = highlightedEdges.some(
               he => he.from === edge.from && he.to === edge.to && (!he.symbol || edge.symbols.includes(he.symbol))
@@ -616,7 +643,14 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
                   stroke={edgeStroke}
                   strokeWidth={isHighlighted || isEdgeHovered ? 3 : 2}
                   strokeDasharray={isHighlighted ? '6 4' : 'none'}
-                  markerEnd={isHighlighted ? 'url(#arrowhead-active)' : 'url(#arrowhead-normal)'}
+                  strokeLinecap="butt"
+                  markerEnd={
+                    isHighlighted 
+                      ? 'url(#arrowhead-active)' 
+                      : isEdgeHovered 
+                      ? 'url(#arrowhead-hover)' 
+                      : 'url(#arrowhead-normal)'
+                  }
                   filter={isHighlighted || isEdgeHovered ? 'url(#neon-glow)' : undefined}
                 />
 
@@ -687,6 +721,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
                   stroke="#22d3ee"
                   strokeWidth="2.5"
                   strokeDasharray="6 4"
+                  strokeLinecap="butt"
                   markerEnd="url(#arrowhead-active)"
                   className="animate-pulse"
                 />
@@ -749,7 +784,8 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
                       y2={0}
                       stroke={isDark ? '#8b5cf6' : '#7c3aed'}
                       strokeWidth={2.5}
-                      markerEnd="url(#arrowhead-active)"
+                      strokeLinecap="butt"
+                      markerEnd="url(#arrowhead-initial)"
                     />
                     <rect
                       x={-42}

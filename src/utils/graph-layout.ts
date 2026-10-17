@@ -180,24 +180,33 @@ export function calculateEdgePath(
   source: GraphNode,
   target: GraphNode,
   edge: GraphEdge,
-  nodeRadius: number = 32
+  sourceRadius: number = 30,
+  targetRadius?: number
 ): { path: string; labelPos: Point } {
+  const sRadius = sourceRadius;
+  const tRadius = targetRadius ?? sourceRadius;
+  // With marker viewBox="0 0 10 10", refX="5", tip at x=9, and markerWidth=7:
+  // The tip extends (9 - 5) * 0.7 = 2.8px beyond the line endpoint.
+  // We offset the endpoint by (tRadius + 2.8) so the tip touches the node border,
+  // and the line stops cleanly inside the arrowhead body without poking past it.
+  const arrowTipExtension = 2.8;
+
   if (edge.isSelfLoop) {
     // Self-loop bezier curve on top of node
     const loopHeight = 55;
     const loopWidth = 40;
     const startX = source.x - 12;
-    const startY = source.y - nodeRadius;
+    const startY = source.y - sRadius;
     const endX = source.x + 12;
-    const endY = source.y - nodeRadius;
+    const endY = source.y - sRadius - arrowTipExtension;
 
     const cp1x = source.x - loopWidth;
-    const cp1y = source.y - nodeRadius - loopHeight;
+    const cp1y = source.y - sRadius - loopHeight;
     const cp2x = source.x + loopWidth;
-    const cp2y = source.y - nodeRadius - loopHeight;
+    const cp2y = source.y - sRadius - loopHeight;
 
     const path = `M ${startX} ${startY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${endX} ${endY}`;
-    const labelPos = { x: source.x, y: source.y - nodeRadius - loopHeight * 0.75 };
+    const labelPos = { x: source.x, y: source.y - sRadius - loopHeight * 0.75 };
     return { path, labelPos };
   }
 
@@ -217,11 +226,11 @@ export function calculateEdgePath(
   const curvature = edge.curvature || 0;
 
   if (curvature === 0) {
-    // Straight line offset by node radius
-    const startX = source.x + ux * nodeRadius;
-    const startY = source.y + uy * nodeRadius;
-    const endX = target.x - ux * (nodeRadius + 6); // slight gap for arrowhead
-    const endY = target.y - uy * (nodeRadius + 6);
+    // Straight line offset dynamically by node radii
+    const startX = source.x + ux * sRadius;
+    const startY = source.y + uy * sRadius;
+    const endX = target.x - ux * (tRadius + arrowTipExtension);
+    const endY = target.y - uy * (tRadius + arrowTipExtension);
 
     const path = `M ${startX} ${startY} L ${endX} ${endY}`;
     const labelPos = {
@@ -239,10 +248,10 @@ export function calculateEdgePath(
     const startAngle = Math.atan2(midY - source.y, midX - source.x);
     const endAngle = Math.atan2(target.y - midY, target.x - midX);
 
-    const startX = source.x + Math.cos(startAngle) * nodeRadius;
-    const startY = source.y + Math.sin(startAngle) * nodeRadius;
-    const endX = target.x - Math.cos(endAngle) * (nodeRadius + 6);
-    const endY = target.y - Math.sin(endAngle) * (nodeRadius + 6);
+    const startX = source.x + Math.cos(startAngle) * sRadius;
+    const startY = source.y + Math.sin(startAngle) * sRadius;
+    const endX = target.x - Math.cos(endAngle) * (tRadius + arrowTipExtension);
+    const endY = target.y - Math.sin(endAngle) * (tRadius + arrowTipExtension);
 
     const path = `M ${startX} ${startY} Q ${midX} ${midY} ${endX} ${endY}`;
     const labelPos = {

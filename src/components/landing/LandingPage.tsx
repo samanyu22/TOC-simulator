@@ -61,7 +61,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-28 py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
       {/* Background Ambient Mathematics & Lights */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-tr from-violet-600/8 via-cyan-500/8 dark:from-violet-600/15 dark:via-cyan-500/15 to-transparent rounded-full blur-[100px] pointer-events-none -z-10" />
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[850px] h-[480px] bg-gradient-to-tr from-violet-500/22 via-cyan-400/20 dark:from-violet-600/15 dark:via-cyan-500/15 to-transparent rounded-full blur-[110px] pointer-events-none -z-10" />
 
       {/* Floating mathematical glyphs */}
       <div className="absolute top-36 left-12 text-stone-400 dark:text-slate-700 font-mono text-3xl font-extrabold select-none pointer-events-none opacity-25 dark:opacity-30 animate-float hidden lg:block">

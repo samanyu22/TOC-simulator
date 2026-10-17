@@ -99,7 +99,8 @@ export const LearnAcademy: React.FC = () => {
     <div className="space-y-8 max-w-5xl mx-auto px-4 sm:px-6 py-8">
       {/* Academy Banner */}
       <div className="p-8 rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 relative overflow-hidden transition-colors">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-violet-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-violet-500/35 via-purple-500/20 to-transparent dark:from-violet-600/10 dark:to-transparent rounded-full blur-3xl pointer-events-none -mr-16 -mt-16" />
+        <div className="absolute top-0 right-0 w-44 h-44 bg-violet-400/25 dark:bg-transparent rounded-full blur-2xl pointer-events-none -mr-8 -mt-8" />
 
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-500 text-white shadow-md">
