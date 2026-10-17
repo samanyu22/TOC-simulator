@@ -1,0 +1,440 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Cpu, 
+  Network, 
+  ArrowRight, 
+  Layers, 
+  Binary, 
+  Clock, 
+  Sparkles,
+  GitBranch,
+  ShieldCheck,
+  CheckCircle2,
+  Terminal,
+  Zap
+} from 'lucide-react';
+
+interface FeatureCardsProps {
+  onNavigate: (view: 'tm' | 'nfa-dfa') => void;
+}
+
+export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
+  // --- Turing Machine Interactive Preview State ---
+  const [tmTape, setTmTape] = useState(['1', '0', '1', '1', '0', '_']);
+  const [tmHead, setTmHead] = useState(2);
+  const [isTmAuto, setIsTmAuto] = useState(true);
+
+  // Gentle, calm simulation step
+  useEffect(() => {
+    if (!isTmAuto) return;
+    const timer = setInterval(() => {
+      setTmHead(prev => (prev + 1) % tmTape.length);
+    }, 2400);
+    return () => clearInterval(timer);
+  }, [isTmAuto, tmTape.length]);
+
+  // Derived TM state details based on head
+  const tmActiveState = tmHead === 5 ? 'q_accept' : tmHead === 0 ? 'q0' : `q${tmHead}`;
+  const tmActiveSymbol = tmTape[tmHead];
+  const tmNextSymbol = tmActiveSymbol === '1' ? '0' : '1';
+  const tmNextState = tmHead === 5 ? 'q_accept' : `q${(tmHead + 1) % 6}`;
+
+  // --- Automata Interactive Preview State ---
+  const [activeNfaIndex, setActiveNfaIndex] = useState(1);
+  const [isNfaAuto, setIsNfaAuto] = useState(true);
+
+  useEffect(() => {
+    if (!isNfaAuto) return;
+    const timer = setInterval(() => {
+      setActiveNfaIndex(prev => (prev + 1) % 3);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, [isNfaAuto]);
+
+  const nfaStates = [
+    { id: 'q0', label: 'q0', isStart: true, isAccept: false, subset: '{q0}' },
+    { id: 'q1', label: 'q1', isStart: false, isAccept: false, subset: '{q1}' },
+    { id: 'q01', label: 'q0, q1', isStart: false, isAccept: true, subset: '{q0, q1}' },
+  ];
+
+  const currentSubset = nfaStates[activeNfaIndex];
+
+  return (
+    <section className="space-y-10">
+      {/* Section Header */}
+      <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs font-mono text-cyan-700 dark:text-cyan-300 shadow-xs">
+          <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+          <span>Interactive Virtual Workbenches</span>
+        </div>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Choose Your Computation Engine
+        </h2>
+        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
+          Engineered for computer science students and educators. Explore real theoretical algorithms through interactive visualizations, step controls, and formal mathematical telemetry.
+        </p>
+      </div>
+
+      {/* Cards Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        {/* =========================================================
+            CARD 1: TURING MACHINE SIMULATOR
+            ========================================================= */}
+        <div 
+          className="group relative rounded-3xl p-[1px] bg-gradient-to-b from-violet-500/20 via-slate-200/50 to-transparent dark:from-violet-500/30 dark:via-white/[0.04] dark:to-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-violet-900/10 flex flex-col"
+          onMouseEnter={() => setIsTmAuto(false)}
+          onMouseLeave={() => setIsTmAuto(true)}
+        >
+          {/* Card Body */}
+          <div className="relative rounded-[23px] p-7 sm:p-8 bg-white/95 dark:bg-[#080d1e]/95 border border-slate-200/90 dark:border-white/[0.08] backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden transition-colors">
+            {/* Ambient Lighting Glow */}
+            <div className="absolute top-0 right-0 w-72 h-72 bg-violet-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 group-hover:bg-violet-600/15 transition-colors duration-500" />
+
+            {/* Header */}
+            <div className="space-y-4 relative z-10">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-12 h-12 rounded-2xl bg-violet-100 dark:bg-violet-950/80 border border-violet-300/80 dark:border-violet-500/40 text-violet-700 dark:text-violet-300 flex items-center justify-center shadow-xs">
+                    <Cpu className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-violet-100 dark:bg-violet-500/20 text-violet-800 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30 tracking-wider uppercase">
+                        Formal 7-Tuple
+                      </span>
+                      <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        Deterministic
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+                      Turing Machine Simulator
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
+                Full deterministic Turing machine execution with an interactive infinite memory tape, bidirectional head kinematics, customizable delta transition matrix, and reversible time-travel debugging.
+              </p>
+            </div>
+
+            {/* Interactive Showcase: Virtual Tape Chassis */}
+            <div className="relative z-10 rounded-2xl p-4 bg-slate-50/90 dark:bg-[#040713] border border-slate-200 dark:border-white/[0.07] space-y-3.5 transition-colors shadow-inner">
+              {/* Telemetry Bar */}
+              <div className="flex items-center justify-between text-xs font-mono">
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-500 dark:text-slate-400 text-[11px]">Head State:</span>
+                  <span className="font-bold px-2 py-0.5 rounded-md bg-violet-100 dark:bg-violet-950 text-violet-900 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30">
+                    {tmActiveState}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400">
+                  <span>Head: <strong className="text-violet-700 dark:text-violet-300">#{tmHead}</strong></span>
+                  <span>Scanned: <strong className="text-cyan-700 dark:text-cyan-300">'{tmActiveSymbol}'</strong></span>
+                </div>
+              </div>
+
+              {/* Tape Cells Ribbon with Optical Laser Head */}
+              <div className="relative py-2 px-1 flex items-center justify-between gap-1.5 overflow-x-auto">
+                {tmTape.map((symbol, idx) => {
+                  const isCurrent = idx === tmHead;
+
+                  return (
+                    <div
+                      key={idx}
+                      onClick={() => setTmHead(idx)}
+                      onMouseEnter={() => setTmHead(idx)}
+                      className={`relative flex-1 min-w-[42px] h-14 rounded-xl flex flex-col items-center justify-center font-mono select-none cursor-pointer transition-all duration-200 border ${
+                        isCurrent
+                          ? 'bg-gradient-to-b from-violet-600 to-indigo-700 text-white border-violet-400 shadow-md shadow-violet-500/30 z-10 scale-105'
+                          : 'bg-white dark:bg-slate-900/70 border-slate-200 dark:border-white/[0.06] text-slate-700 dark:text-slate-300 hover:border-violet-400/50 hover:bg-slate-50 dark:hover:bg-slate-900 shadow-xs'
+                      }`}
+                    >
+                      {/* Active Optical Marker */}
+                      {isCurrent && (
+                        <div className="absolute -top-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-xs" />
+                      )}
+
+                      <span className={`text-[8px] font-mono leading-none ${isCurrent ? 'text-violet-200' : 'text-slate-400 dark:text-slate-500'}`}>
+                        #{idx}
+                      </span>
+                      <span className="text-sm font-black mt-1">
+                        {symbol === '_' ? '␣' : symbol}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Transition Rule Preview Banner */}
+              <div className="text-[11px] font-mono text-center text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-950/80 py-2 px-3 rounded-xl border border-slate-200/80 dark:border-white/[0.05] shadow-xs">
+                Active Rule: <span className="text-violet-700 dark:text-violet-300 font-bold">δ({tmActiveState}, '{tmActiveSymbol}')</span> → <span className="text-emerald-700 dark:text-emerald-400 font-bold">('{tmNextSymbol}', R, {tmNextState})</span>
+              </div>
+            </div>
+
+            {/* Spec Highlights Grid */}
+            <div className="grid grid-cols-2 gap-2.5 text-xs relative z-10">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
+                <Binary className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
+                <div>
+                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Infinite Memory</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Bidirectional dynamic expansion</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
+                <Clock className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
+                <div>
+                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Time-Travel Audit</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Step undo, redo, and state rollback</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
+                <Terminal className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
+                <div>
+                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Custom 7-Tuple</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Editable δ matrix & validation</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
+                <Zap className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
+                <div>
+                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Verified Presets</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Binary addition, palindrome, increment</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Launch Button */}
+            <button
+              onClick={() => onNavigate('tm')}
+              className="relative w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold text-xs tracking-wide shadow-md shadow-violet-900/20 active:scale-[0.99] transition-all group/btn"
+            >
+              <span>Launch Turing Machine Simulator</span>
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </div>
+
+        {/* =========================================================
+            CARD 2: NFA TO DFA CONVERTER
+            ========================================================= */}
+        <div 
+          className="group relative rounded-3xl p-[1px] bg-gradient-to-b from-cyan-500/20 via-slate-200/50 to-transparent dark:from-cyan-500/30 dark:via-white/[0.04] dark:to-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/10 flex flex-col"
+          onMouseEnter={() => setIsNfaAuto(false)}
+          onMouseLeave={() => setIsNfaAuto(true)}
+        >
+          {/* Card Body */}
+          <div className="relative rounded-[23px] p-7 sm:p-8 bg-white/95 dark:bg-[#080d1e]/95 border border-slate-200/90 dark:border-white/[0.08] backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden transition-colors">
+            {/* Ambient Lighting Glow */}
+            <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 group-hover:bg-cyan-600/15 transition-colors duration-500" />
+
+            {/* Header */}
+            <div className="space-y-4 relative z-10">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-12 h-12 rounded-2xl bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-300/80 dark:border-cyan-500/40 text-cyan-700 dark:text-cyan-300 flex items-center justify-center shadow-xs">
+                    <Network className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30 tracking-wider uppercase">
+                        Powerset Construction
+                      </span>
+                      <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 font-semibold flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                        ε-Closure Engine
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+                      NFA → DFA Converter
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
+                Convert nondeterministic automata with spontaneous epsilon transitions into complete deterministic state machines with animated subset construction and synchronized dual execution.
+              </p>
+            </div>
+
+            {/* Interactive Showcase: Mini Automata Network */}
+            <div className="relative z-10 rounded-2xl p-4 bg-slate-50/90 dark:bg-[#040713] border border-slate-200 dark:border-white/[0.07] space-y-3.5 transition-colors shadow-inner">
+              {/* Telemetry Bar */}
+              <div className="flex items-center justify-between text-xs font-mono">
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-500 dark:text-slate-400 text-[11px]">Subset Trace:</span>
+                  <span className="font-bold px-2 py-0.5 rounded-md bg-cyan-100 dark:bg-cyan-950 text-cyan-900 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30">
+                    {currentSubset.subset}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  {currentSubset.isAccept ? (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40">
+                      ★ ACCEPTING SUBSET
+                    </span>
+                  ) : (
+                    <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
+                      Evaluating δ moves
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Mini SVG State Graph with Calm Flow */}
+              <div className="h-20 w-full flex items-center justify-center relative select-none">
+                <svg className="w-full h-full" viewBox="0 0 320 80">
+                  <defs>
+                    <marker
+                      id="card-arrow-flow"
+                      viewBox="0 0 10 10"
+                      refX="8"
+                      refY="5"
+                      markerWidth="6"
+                      markerHeight="6"
+                      orient="auto-start-reverse"
+                    >
+                      <path d="M 0 2 L 8 5 L 0 8 z" fill="#06b6d4" />
+                    </marker>
+                  </defs>
+
+                  {/* Transition curve q0 -> q1 */}
+                  <path
+                    d="M 68 40 Q 115 14 158 38"
+                    fill="none"
+                    stroke={activeNfaIndex >= 1 ? '#06b6d4' : '#94a3b8'}
+                    strokeWidth="2"
+                    className={activeNfaIndex >= 1 ? 'animate-dash-flow' : ''}
+                    markerEnd="url(#card-arrow-flow)"
+                  />
+                  <text x="115" y="20" fill="#0284c7" className="dark:fill-[#38bdf8]" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">0, 1</text>
+
+                  {/* Transition curve q1 -> {q0, q1} */}
+                  <path
+                    d="M 182 40 Q 224 14 256 38"
+                    fill="none"
+                    stroke={activeNfaIndex === 2 ? '#10b981' : '#94a3b8'}
+                    strokeWidth="2"
+                    className={activeNfaIndex === 2 ? 'animate-dash-flow' : ''}
+                    markerEnd="url(#card-arrow-flow)"
+                  />
+                  <text x="220" y="20" fill="#059669" className="dark:fill-[#34d399]" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">1</text>
+
+                  {/* Node 0: q0 */}
+                  <g 
+                    transform="translate(50, 40)" 
+                    className="cursor-pointer"
+                    onClick={() => setActiveNfaIndex(0)}
+                    onMouseEnter={() => setActiveNfaIndex(0)}
+                  >
+                    <circle 
+                      r="18" 
+                      fill={activeNfaIndex === 0 ? '#0891b2' : '#ffffff'} 
+                      stroke={activeNfaIndex === 0 ? '#22d3ee' : '#94a3b8'} 
+                      strokeWidth="2" 
+                      className="dark:fill-[#0d1424] dark:stroke-slate-600 transition-colors"
+                    />
+                    <text textAnchor="middle" dominantBaseline="central" fill={activeNfaIndex === 0 ? '#ffffff' : '#0f172a'} className="dark:fill-slate-100" fontSize="10" fontFamily="monospace" fontWeight="bold">q0</text>
+                  </g>
+
+                  {/* Node 1: q1 */}
+                  <g 
+                    transform="translate(170, 40)" 
+                    className="cursor-pointer"
+                    onClick={() => setActiveNfaIndex(1)}
+                    onMouseEnter={() => setActiveNfaIndex(1)}
+                  >
+                    <circle 
+                      r="18" 
+                      fill={activeNfaIndex === 1 ? '#0891b2' : '#ffffff'} 
+                      stroke={activeNfaIndex === 1 ? '#22d3ee' : '#94a3b8'} 
+                      strokeWidth="2" 
+                      className="dark:fill-[#0d1424] dark:stroke-slate-600 transition-colors"
+                    />
+                    <text textAnchor="middle" dominantBaseline="central" fill={activeNfaIndex === 1 ? '#ffffff' : '#0f172a'} className="dark:fill-slate-100" fontSize="10" fontFamily="monospace" fontWeight="bold">q1</text>
+                  </g>
+
+                  {/* Node 2: {q0, q1} (Accepting) */}
+                  <g 
+                    transform="translate(275, 40)" 
+                    className="cursor-pointer"
+                    onClick={() => setActiveNfaIndex(2)}
+                    onMouseEnter={() => setActiveNfaIndex(2)}
+                  >
+                    <circle 
+                      r="20" 
+                      fill={activeNfaIndex === 2 ? '#047857' : '#ffffff'} 
+                      stroke={activeNfaIndex === 2 ? '#34d399' : '#059669'} 
+                      strokeWidth="2" 
+                      className="dark:fill-[#0d1424] dark:stroke-emerald-500 transition-colors"
+                    />
+                    <circle 
+                      r="16" 
+                      fill="none" 
+                      stroke={activeNfaIndex === 2 ? '#a7f3d0' : '#059669'} 
+                      strokeWidth="1.5" 
+                      className="dark:stroke-emerald-400"
+                    />
+                    <text textAnchor="middle" dominantBaseline="central" fill={activeNfaIndex === 2 ? '#ffffff' : '#0f172a'} className="dark:fill-slate-100" fontSize="9" fontFamily="monospace" fontWeight="bold">q0,q1</text>
+                  </g>
+                </svg>
+              </div>
+
+              {/* Subset conversion equation badge */}
+              <div className="text-[11px] font-mono text-center text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-950/80 py-2 px-3 rounded-xl border border-slate-200/80 dark:border-white/[0.05] shadow-xs">
+                Subset: <span className="text-cyan-700 dark:text-cyan-300 font-bold">δ({'{'}q0{'}'}, '1')</span> → <span className="text-emerald-700 dark:text-emerald-400 font-bold">{'{'}q0, q1{'}'} (Accepting)</span>
+              </div>
+            </div>
+
+            {/* Spec Highlights Grid */}
+            <div className="grid grid-cols-2 gap-2.5 text-xs relative z-10">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
+                <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
+                <div>
+                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Powerset Engine</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Strict 2^Q subset determinization</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
+                <GitBranch className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
+                <div>
+                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">ε-Closure Trace</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Recursive spontaneous moves</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
+                <ShieldCheck className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
+                <div>
+                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Dual Equivalence</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Parallel string validation</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
+                <CheckCircle2 className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
+                <div>
+                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Trap State Routing</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Automatic ∅ sink transition</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Launch Button */}
+            <button
+              onClick={() => onNavigate('nfa-dfa')}
+              className="relative w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs tracking-wide shadow-md shadow-cyan-900/20 active:scale-[0.99] transition-all group/btn"
+            >
+              <span>Launch NFA → DFA Converter</span>
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
