@@ -61,16 +61,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-28 py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
       {/* Background Ambient Mathematics & Lights */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-tr from-violet-600/15 via-cyan-500/15 to-transparent rounded-full blur-[100px] pointer-events-none -z-10" />
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-tr from-violet-600/8 via-cyan-500/8 dark:from-violet-600/15 dark:via-cyan-500/15 to-transparent rounded-full blur-[100px] pointer-events-none -z-10" />
 
       {/* Floating mathematical glyphs */}
-      <div className="absolute top-36 left-12 text-slate-800 font-mono text-3xl font-extrabold select-none pointer-events-none opacity-40 animate-float hidden lg:block">
+      <div className="absolute top-36 left-12 text-slate-400 dark:text-slate-700 font-mono text-3xl font-extrabold select-none pointer-events-none opacity-25 dark:opacity-30 animate-float hidden lg:block">
         δ(q, a)
       </div>
-      <div className="absolute top-48 right-16 text-slate-800 font-mono text-3xl font-extrabold select-none pointer-events-none opacity-40 animate-float delay-1000 hidden lg:block">
+      <div className="absolute top-48 right-16 text-slate-400 dark:text-slate-700 font-mono text-3xl font-extrabold select-none pointer-events-none opacity-25 dark:opacity-30 animate-float delay-1000 hidden lg:block">
         Σ* ⟷ Γ
       </div>
-      <div className="absolute top-96 left-28 text-slate-800 font-mono text-2xl font-extrabold select-none pointer-events-none opacity-30 animate-float delay-700 hidden lg:block">
+      <div className="absolute top-96 left-28 text-slate-400 dark:text-slate-700 font-mono text-2xl font-extrabold select-none pointer-events-none opacity-20 dark:opacity-30 animate-float delay-700 hidden lg:block">
         ε-closure(S)
       </div>
 

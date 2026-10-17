@@ -10,11 +10,19 @@ import { TMConfigModal } from './TMConfigModal';
 import { Cpu, Settings2, BookOpen, Download, RotateCcw } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-export const TMSimulator: React.FC = () => {
-  const [currentMachine, setCurrentMachine] = useState<TMDefinition>(TM_EXAMPLES[0]);
-  const [inputString, setInputString] = useState(TM_EXAMPLES[0].defaultInput);
+interface TMSimulatorProps {
+  initialMachine?: TMDefinition;
+  onMachineChange?: (machine: TMDefinition) => void;
+}
+
+export const TMSimulator: React.FC<TMSimulatorProps> = ({
+  initialMachine = TM_EXAMPLES[0],
+  onMachineChange,
+}) => {
+  const [currentMachine, setCurrentMachine] = useState<TMDefinition>(initialMachine);
+  const [inputString, setInputString] = useState(initialMachine.defaultInput);
   const [simState, setSimState] = useState<TMExecutionState>(() => 
-    initializeTM(TM_EXAMPLES[0], TM_EXAMPLES[0].defaultInput)
+    initializeTM(initialMachine, initialMachine.defaultInput)
   );
   const [history, setHistory] = useState<TMHistoryEntry[]>([]);
   const [speed, setSpeed] = useState<number>(3); // 1 to 10
@@ -25,6 +33,18 @@ export const TMSimulator: React.FC = () => {
   // Playback timer ref
   const timerRef = useRef<any>(null);
 
+  // Synchronize when initialMachine prop changes from Library or Import
+  useEffect(() => {
+    if (initialMachine) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      setCurrentMachine(initialMachine);
+      setInputString(initialMachine.defaultInput);
+      setSimState(initializeTM(initialMachine, initialMachine.defaultInput));
+      setHistory([]);
+      setInspectingStep(null);
+    }
+  }, [initialMachine]);
+
   // Handle machine selection
   const handleSelectExample = (exampleId: string) => {
     const selected = TM_EXAMPLES.find(e => e.id === exampleId) || TM_EXAMPLES[0];
@@ -34,6 +54,7 @@ export const TMSimulator: React.FC = () => {
     setSimState(initial);
     setHistory([]);
     setInspectingStep(null);
+    if (onMachineChange) onMachineChange(selected);
   };
 
   // Reset live state

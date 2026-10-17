@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import type { NFADefinition } from '../../types/automata';
 import { NFA_EXAMPLES } from '../../simulators/nfa-dfa/examples';
 import { convertNfaToDfa } from '../../simulators/nfa-dfa/subset-construction';
@@ -9,8 +9,16 @@ import { StringTester } from './StringTester';
 import { AutomataStats } from './AutomataStats';
 import { Network, BookOpen, Download, RotateCcw, Columns, Square } from 'lucide-react';
 
-export const NFADFASimulator: React.FC = () => {
-  const [currentNFA, setCurrentNFA] = useState<NFADefinition>(NFA_EXAMPLES[0]);
+interface NFADFASimulatorProps {
+  initialNFA?: NFADefinition;
+  onNFAChange?: (nfa: NFADefinition) => void;
+}
+
+export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
+  initialNFA = NFA_EXAMPLES[0],
+  onNFAChange,
+}) => {
+  const [currentNFA, setCurrentNFA] = useState<NFADefinition>(initialNFA);
   const [conversionStepIndex, setConversionStepIndex] = useState<number>(1);
   const [viewLayout, setViewLayout] = useState<'side-by-side' | 'tabbed'>('side-by-side');
   const [activeTab, setActiveTab] = useState<'nfa' | 'dfa'>('nfa');
@@ -19,6 +27,16 @@ export const NFADFASimulator: React.FC = () => {
   // Real-time active states from string tester
   const [activeNFAStates, setActiveNFAStates] = useState<string[]>([]);
   const [activeDFAState, setActiveDFAState] = useState<string>('');
+
+  // Synchronize when initialNFA prop changes from Library or Import
+  useEffect(() => {
+    if (initialNFA) {
+      setCurrentNFA(initialNFA);
+      setConversionStepIndex(1);
+      setActiveNFAStates([]);
+      setActiveDFAState('');
+    }
+  }, [initialNFA]);
 
   // Re-run subset construction on NFA change
   const conversionResult = useMemo(() => {
@@ -34,6 +52,7 @@ export const NFADFASimulator: React.FC = () => {
     setConversionStepIndex(1);
     setActiveNFAStates([]);
     setActiveDFAState('');
+    if (onNFAChange) onNFAChange(selected);
   };
 
   // Export JSON

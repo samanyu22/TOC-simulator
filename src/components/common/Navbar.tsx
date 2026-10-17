@@ -61,22 +61,22 @@ export const Navbar: React.FC<NavbarProps> = ({
       id: 'tm', 
       label: 'Turing Machine', 
       icon: Cpu, 
-      badge: 'Simulator',
+      badge: undefined,
       activeGradient: 'from-indigo-600 to-blue-600',
       activeShadow: 'shadow-indigo-600/30 border-indigo-400/40',
       ambientGlow: 'bg-indigo-500/20 dark:bg-indigo-500/25',
-      badgeClass: 'bg-white/20 text-white border-white/30',
+      badgeClass: undefined,
       shortcut: '2',
     },
     { 
       id: 'nfa-dfa', 
       label: 'NFA → DFA', 
       icon: Network, 
-      badge: 'Converter',
+      badge: undefined,
       activeGradient: 'from-cyan-600 to-blue-600',
       activeShadow: 'shadow-cyan-600/30 border-cyan-400/40',
       ambientGlow: 'bg-cyan-500/20 dark:bg-cyan-500/25',
-      badgeClass: 'bg-white/20 text-white border-white/30',
+      badgeClass: undefined,
       shortcut: '3',
     },
     { 
@@ -192,32 +192,33 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Brand Logo & Interactive Glow */}
             <div 
               onClick={() => handleNavClick('home')}
-              className="flex items-center gap-3 cursor-pointer group select-none transition-transform duration-200 active:scale-95"
+              className="flex items-center gap-3 cursor-pointer group select-none transition-transform duration-300 active:scale-95"
               title="TOC LAB — Back to Home"
             >
               <div className="relative">
-                {/* Multi-layered animated aura on hover */}
-                <div className="absolute -inset-1.5 bg-gradient-to-r from-violet-600 via-cyan-500 to-indigo-600 rounded-2xl blur-md opacity-40 group-hover:opacity-90 group-hover:blur-lg transition-all duration-500 group-hover:scale-110"></div>
+                {/* Multi-layered animated aura with smooth 500ms ease-out */}
+                <div className="absolute -inset-1.5 bg-gradient-to-r from-violet-600 via-cyan-500 to-indigo-600 rounded-2xl blur-md opacity-55 group-hover:opacity-95 group-hover:blur-xl transition-all duration-500 ease-out group-hover:scale-115"></div>
                 
-                <div className="relative p-2.5 rounded-2xl bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-200/90 dark:border-white/10 group-hover:border-violet-500/40 shadow-xs transition-all duration-300 group-hover:shadow-md">
-                  <Cpu className="w-5 h-5 text-violet-600 dark:text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
+                <div className="relative p-2.5 rounded-2xl bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-200/90 dark:border-white/10 group-hover:border-violet-500/50 shadow-xs transition-all duration-400 ease-out group-hover:shadow-[0_0_20px_rgba(139,92,246,0.35)]">
+                  <Cpu className="w-5 h-5 text-violet-600 dark:text-cyan-400 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300 ease-out" />
                 </div>
               </div>
 
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white font-sans group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-cyan-500 transition-all duration-300">
-                    TOC <span className="gradient-text-cyan">LAB</span>
+                  <span className="font-extrabold text-base tracking-tight font-sans flex items-center gap-1.5 select-none">
+                    <span className="brand-toc">TOC</span>
+                    <span className="brand-lab">LAB</span>
                   </span>
                   
                   {/* High-tech pulsing status badge */}
-                  <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-700 dark:bg-violet-500/20 dark:text-violet-300 border border-violet-500/30 font-semibold shadow-2xs">
+                  <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-700 dark:bg-violet-500/20 dark:text-violet-300 border border-violet-500/30 font-semibold shadow-2xs group-hover:border-cyan-500/50 transition-colors duration-300">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
                     v1.0
                   </span>
                 </div>
 
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block -mt-0.5 tracking-wider uppercase font-semibold">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block -mt-0.5 tracking-wider uppercase font-semibold group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors duration-300">
                   Theory Playground
                 </span>
               </div>

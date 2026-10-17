@@ -59,7 +59,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-[#070a13] dark:text-slate-100 font-sans selection:bg-violet-500/30 selection:text-violet-900 dark:selection:text-cyan-200 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#edf1f7] text-slate-800 dark:bg-[#070a13] dark:text-slate-100 font-sans selection:bg-violet-500/30 selection:text-violet-900 dark:selection:text-cyan-200 transition-colors duration-200">
       {/* Top Navigation */}
       <Navbar
         currentView={currentView}
@@ -75,11 +75,19 @@ export function App() {
         )}
 
         {currentView === 'tm' && (
-          <TMSimulator key={activeTM.id} />
+          <TMSimulator 
+            key={activeTM.id} 
+            initialMachine={activeTM} 
+            onMachineChange={setActiveTM} 
+          />
         )}
 
         {currentView === 'nfa-dfa' && (
-          <NFADFASimulator key={activeNFA.id} />
+          <NFADFASimulator 
+            key={activeNFA.id} 
+            initialNFA={activeNFA} 
+            onNFAChange={setActiveNFA} 
+          />
         )}
 
         {currentView === 'learn' && (
