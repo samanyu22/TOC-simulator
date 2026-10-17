@@ -20,15 +20,38 @@
     --border-glow: rgba(139, 92, 246, 0.3);
   }
 
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     background-color: var(--bg-primary);
     color: #0f172a;
     overflow-x: hidden;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   html.dark body {
     color: #f1f5f9;
   }
+}
+
+/* 120fps Hardware Compositing & Layer Promotion */
+.gpu-accelerated,
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+/* Optimize Layout Containment to Prevent Global Reflows */
+.contain-paint {
+  contain: paint layout;
 }
 
 /* Premium Glassmorphic Panels */

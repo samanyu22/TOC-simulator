@@ -26,15 +26,23 @@ export const TapeView: React.FC<TapeViewProps> = ({
     cellIndices.push(i);
   }
 
-  // Auto-scroll tape to keep head smoothly centered in view
+  // Auto-scroll tape to keep head smoothly centered in view with 120fps cadence
+  const lastScrollTimeRef = useRef<number>(0);
   useEffect(() => {
     if (activeCellRef.current && containerRef.current) {
       const container = containerRef.current;
       const cell = activeCellRef.current;
       const scrollTarget = cell.offsetLeft - container.offsetWidth / 2 + cell.offsetWidth / 2;
+      
+      const now = performance.now();
+      const isRapidStepping = (now - lastScrollTimeRef.current) < 220;
+      lastScrollTimeRef.current = now;
+
+      // During rapid simulation execution, instant scroll prevents browser scroll physics from queuing and dropping frames.
+      // During single-stepping or idle inspection, smooth scroll provides buttery-smooth 120fps centering.
       container.scrollTo({
         left: scrollTarget,
-        behavior: 'smooth',
+        behavior: isRapidStepping ? 'auto' : 'smooth',
       });
     }
   }, [state.headPosition]);
@@ -146,9 +154,9 @@ export const TapeView: React.FC<TapeViewProps> = ({
                   key={idx}
                   ref={isHead ? activeCellRef : undefined}
                   onClick={() => onCellClick && onCellClick(idx)}
-                  className={`relative flex flex-col items-center justify-center w-14 h-16 rounded-xl font-mono transition-all duration-200 select-none cursor-pointer ${
+                  className={`relative flex flex-col items-center justify-center w-14 h-16 rounded-xl font-mono transition-[transform,border-color,background-color] duration-150 transform-gpu select-none cursor-pointer ${
                     isHead
-                      ? 'bg-gradient-to-b from-cyan-50 to-white dark:from-cyan-950/90 dark:via-slate-900 dark:to-slate-950 border-2 border-cyan-500 dark:border-cyan-400 shadow-md scale-110 z-10'
+                      ? 'bg-gradient-to-b from-cyan-50 to-white dark:from-cyan-950/90 dark:via-slate-900 dark:to-slate-950 border-2 border-cyan-500 dark:border-cyan-400 shadow-md scale-110 z-10 will-change-transform'
                       : isOrigin
                       ? 'bg-white dark:bg-slate-900/90 border-2 border-violet-400 dark:border-violet-500/50 hover:border-violet-500 shadow-xs'
                       : 'bg-white dark:bg-slate-900/50 border border-slate-300 dark:border-white/[0.06] hover:border-slate-400 dark:hover:border-white/20 shadow-xs'

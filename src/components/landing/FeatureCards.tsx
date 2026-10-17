@@ -145,9 +145,9 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                       key={idx}
                       onClick={() => setTmHead(idx)}
                       onMouseEnter={() => setTmHead(idx)}
-                      className={`relative flex-1 min-w-[42px] h-14 rounded-xl flex flex-col items-center justify-center font-mono select-none cursor-pointer transition-all duration-200 border ${
+                      className={`relative flex-1 min-w-[42px] h-14 rounded-xl flex flex-col items-center justify-center font-mono select-none cursor-pointer transition-[transform,border-color,background-color] duration-150 transform-gpu ${
                         isCurrent
-                          ? 'bg-gradient-to-b from-violet-600 to-indigo-700 text-white border-violet-400 shadow-md shadow-violet-500/30 z-10 scale-105'
+                          ? 'bg-gradient-to-b from-violet-600 to-indigo-700 text-white border-violet-400 shadow-md shadow-violet-500/30 z-10 scale-105 will-change-transform'
                           : 'bg-white dark:bg-slate-900/70 border-slate-200 dark:border-white/[0.06] text-slate-700 dark:text-slate-300 hover:border-violet-400/50 hover:bg-slate-50 dark:hover:bg-slate-900 shadow-xs'
                       }`}
                     >

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import type { GraphNode, GraphEdge } from '../../types/automata';
 import { computeInitialLayout, groupEdges, calculateEdgePath, resolveNodeCollisions } from '../../utils/graph-layout';
 import { ZoomIn, ZoomOut, Maximize2, Move } from 'lucide-react';
@@ -99,8 +99,9 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = ({
     });
   }, [states, initialState, acceptStates, dimensions.width, dimensions.height, subsetsMap]);
 
-  const edges: GraphEdge[] = groupEdges(transitions);
-  const nodeMap = new Map<string, GraphNode>(nodes.map(n => [n.id, n]));
+  // Memoize grouped edges to prevent expensive map allocations on every frame
+  const edges: GraphEdge[] = useMemo(() => groupEdges(transitions), [transitions]);
+  const nodeMap = useMemo(() => new Map<string, GraphNode>(nodes.map(n => [n.id, n])), [nodes]);
 
   // Handle node dragging
   const handleNodeMouseDown = (e: React.MouseEvent, nodeId: string) => {
@@ -117,29 +118,52 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = ({
     panStartRef.current = { x: e.clientX - pan.x, y: e.clientY - pan.y };
   };
 
+  // 120fps RAF-throttled mouse handler to synchronize dragging perfectly with VSYNC
+  const rafIdRef = useRef<number | null>(null);
+  const pendingMoveRef = useRef<{ clientX: number; clientY: number } | null>(null);
+
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (draggingNodeId) {
-      const dx = (e.clientX - dragStartRef.current.x) / zoom;
-      const dy = (e.clientY - dragStartRef.current.y) / zoom;
-      
-      setNodes(prev => prev.map(n => {
-        if (n.id === draggingNodeId) {
-          return {
-            ...n,
-            x: n.x + dx,
-            y: n.y + dy,
-          };
+    if (!draggingNodeId && !isPanning) return;
+    pendingMoveRef.current = { clientX: e.clientX, clientY: e.clientY };
+
+    if (rafIdRef.current === null) {
+      rafIdRef.current = requestAnimationFrame(() => {
+        rafIdRef.current = null;
+        if (!pendingMoveRef.current) return;
+        const { clientX, clientY } = pendingMoveRef.current;
+
+        if (draggingNodeId) {
+          const dx = (clientX - dragStartRef.current.x) / zoom;
+          const dy = (clientY - dragStartRef.current.y) / zoom;
+
+          setNodes(prev => prev.map(n => {
+            if (n.id === draggingNodeId) {
+              return {
+                ...n,
+                x: n.x + dx,
+                y: n.y + dy,
+              };
+            }
+            return n;
+          }));
+          dragStartRef.current = { x: clientX, y: clientY };
+        } else if (isPanning) {
+          setPan({
+            x: clientX - panStartRef.current.x,
+            y: clientY - panStartRef.current.y,
+          });
         }
-        return n;
-      }));
-      dragStartRef.current = { x: e.clientX, y: e.clientY };
-    } else if (isPanning) {
-      setPan({
-        x: e.clientX - panStartRef.current.x,
-        y: e.clientY - panStartRef.current.y,
       });
     }
   }, [draggingNodeId, isPanning, zoom]);
+
+  useEffect(() => {
+    return () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    };
+  }, []);
 
   const handleMouseUp = () => {
     setDraggingNodeId(null);

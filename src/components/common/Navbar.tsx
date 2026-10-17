@@ -234,7 +234,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               {/* Soft Translucent Hover Backdrop */}
               <div
-                className="absolute top-1 bottom-1 rounded-xl bg-slate-200/60 dark:bg-white/[0.06] transition-all duration-200 ease-out pointer-events-none"
+                className="absolute top-1 bottom-1 rounded-xl bg-slate-200/60 dark:bg-white/[0.06] transition-all duration-200 ease-out pointer-events-none transform-gpu will-change-[left,width]"
                 style={{
                   left: `${hoverIndicatorStyle.left}px`,
                   width: `${hoverIndicatorStyle.width}px`,
@@ -245,7 +245,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* Active Morphing Gradient Pill with Spring Physics */}
               <div
-                className={`absolute top-1 bottom-1 rounded-xl bg-gradient-to-r ${activeItem.activeGradient} shadow-md ${activeItem.activeShadow} border transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] pointer-events-none`}
+                className={`absolute top-1 bottom-1 rounded-xl bg-gradient-to-r ${activeItem.activeGradient} shadow-md ${activeItem.activeShadow} border transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] pointer-events-none transform-gpu will-change-[left,width]`}
                 style={{
                   left: `${indicatorStyle.left}px`,
                   width: `${indicatorStyle.width}px`,
