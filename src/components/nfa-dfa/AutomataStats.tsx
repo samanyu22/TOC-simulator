@@ -18,7 +18,7 @@ export const AutomataStats: React.FC<AutomataStatsProps> = ({
   onToggleViewMode,
 }) => {
   return (
-    <div className="glass-panel rounded-3xl p-6 border border-stone-300/80 dark:border-white/[0.08] shadow-2xl space-y-5 transition-colors duration-200">
+    <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-5 transition-colors duration-200">
       {/* Header and View Mode Toggle */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-200 dark:border-white/[0.07]">
         <div className="flex items-center gap-2.5">
@@ -32,7 +32,7 @@ export const AutomataStats: React.FC<AutomataStatsProps> = ({
         </div>
 
         {/* View mode toggle: Graph vs Table */}
-        <div className="flex items-center gap-1 p-1 rounded-2xl bg-[#ede7da] dark:bg-slate-950 border border-stone-300/90 dark:border-white/10">
+        <div className="flex items-center gap-1 p-1 rounded-2xl bg-[#f4efe8] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10">
           <button
             onClick={() => onToggleViewMode('graph')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition ${
@@ -60,19 +60,19 @@ export const AutomataStats: React.FC<AutomataStatsProps> = ({
 
       {/* Metrics Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="p-4 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950/70 border border-stone-300/80 dark:border-white/[0.06] hover:border-violet-500/40 transition">
+        <div className="p-4 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.06] hover:border-violet-500/40 transition">
           <span className="text-[10px] text-stone-500 dark:text-slate-400 uppercase font-mono font-bold block">Original NFA</span>
           <div className="text-2xl font-black font-mono text-violet-600 dark:text-violet-400 mt-1">{nfa.states.length}</div>
           <span className="text-[11px] text-stone-500 dark:text-slate-400 font-mono block mt-0.5">Start: {nfa.initialState}</span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950/70 border border-stone-300/80 dark:border-white/[0.06] hover:border-cyan-500/40 transition">
+        <div className="p-4 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.06] hover:border-cyan-500/40 transition">
           <span className="text-[10px] text-stone-500 dark:text-slate-400 uppercase font-mono font-bold block">Converted DFA</span>
           <div className="text-2xl font-black font-mono text-cyan-600 dark:text-cyan-400 mt-1">{dfa.states.length}</div>
           <span className="text-[11px] text-stone-500 dark:text-slate-400 font-mono block mt-0.5">Start: {dfa.initialState}</span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950/70 border border-stone-300/80 dark:border-white/[0.06] hover:border-emerald-500/40 transition">
+        <div className="p-4 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.06] hover:border-emerald-500/40 transition">
           <span className="text-[10px] text-stone-500 dark:text-slate-400 uppercase font-mono font-bold block">Accepting Subsets</span>
           <div className="text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400 mt-1">{dfa.acceptStates.length}</div>
           <span className="text-[11px] text-stone-500 dark:text-slate-400 font-mono block mt-0.5 truncate">
@@ -80,7 +80,7 @@ export const AutomataStats: React.FC<AutomataStatsProps> = ({
           </span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950/70 border border-stone-300/80 dark:border-white/[0.06] hover:border-emerald-500/40 transition">
+        <div className="p-4 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.06] hover:border-emerald-500/40 transition">
           <span className="text-[10px] text-stone-500 dark:text-slate-400 uppercase font-mono font-bold block">Determinism</span>
           <div className="text-sm font-bold font-mono text-emerald-600 dark:text-emerald-300 flex items-center gap-1.5 mt-2">
             <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
@@ -92,9 +92,9 @@ export const AutomataStats: React.FC<AutomataStatsProps> = ({
 
       {/* DFA Transition Table (when active) */}
       {viewMode === 'table' && (
-        <div className="overflow-x-auto rounded-2xl border border-stone-300/80 dark:border-white/[0.08]">
+        <div className="overflow-x-auto rounded-2xl border border-stone-200/90 dark:border-white/[0.08]">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-[#ede7da]/90 dark:bg-slate-950 text-stone-700 dark:text-slate-300 uppercase text-[10px] tracking-wider border-b border-stone-300/80 dark:border-white/[0.08]">
+            <thead className="bg-[#f4efe8]/95 dark:bg-slate-950 text-stone-700 dark:text-slate-300 uppercase text-[10px] tracking-wider border-b border-stone-200/90 dark:border-white/[0.08]">
               <tr>
                 <th className="py-3 px-4 font-bold">DFA State (Subset)</th>
                 <th className="py-3 px-4 font-bold">Classification</th>
@@ -105,13 +105,13 @@ export const AutomataStats: React.FC<AutomataStatsProps> = ({
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-200 dark:divide-white/[0.04] bg-[#fffdf9] dark:bg-slate-950/60">
+            <tbody className="divide-y divide-stone-200 dark:divide-white/[0.04] bg-[#faf7f2] dark:bg-slate-950/60">
               {dfa.states.map((subset) => {
                 const isInit = subset === dfa.initialState;
                 const isAcc = dfa.acceptStates.includes(subset);
 
                 return (
-                  <tr key={subset} className="hover:bg-[#f8f5ee] dark:hover:bg-slate-900/50 transition">
+                  <tr key={subset} className="hover:bg-[#f4efe8]/50 dark:hover:bg-slate-900/50 transition">
                     <td className="py-3 px-4 font-bold text-stone-900 dark:text-slate-100 flex items-center gap-2">
                       {isInit && <span className="text-cyan-600 dark:text-cyan-400 text-xs">▶</span>}
                       <span>{subset}</span>

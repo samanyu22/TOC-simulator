@@ -55,7 +55,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
     <section className="space-y-10">
       {/* Section Header */}
       <div className="text-center space-y-3 max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#ede7da] dark:bg-slate-900 border border-stone-300 dark:border-white/10 text-xs font-mono text-cyan-700 dark:text-cyan-300 shadow-xs">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono text-cyan-800 dark:text-cyan-300 shadow-xs">
           <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
           <span>Interactive Virtual Workbenches</span>
         </div>
@@ -77,7 +77,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
           customSize={true}
           borderRadius={24}
           spotlightSize={340}
-          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-violet-900/20 p-7 sm:p-8 bg-[#fffdf9]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-stone-200/90 dark:border-transparent"
+          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-violet-900/20 p-7 sm:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-[#ded5c5] dark:border-transparent"
           onMouseEnter={() => setIsTmAuto(false)}
           onMouseLeave={() => setIsTmAuto(true)}
         >
@@ -88,12 +88,12 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
             <div className="space-y-4 relative z-10">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-violet-100 dark:bg-violet-950/80 border border-violet-300/80 dark:border-violet-500/40 text-violet-700 dark:text-violet-300 flex items-center justify-center shadow-xs">
+                  <div className="w-12 h-12 rounded-2xl bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/40 text-violet-800 dark:text-violet-300 flex items-center justify-center shadow-xs">
                     <Cpu className="w-6 h-6" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-violet-100 dark:bg-violet-500/20 text-violet-800 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30 tracking-wider uppercase">
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-violet-50 dark:bg-violet-500/20 text-violet-800 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30 tracking-wider uppercase">
                         Formal 7-Tuple
                       </span>
                       <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
@@ -114,18 +114,18 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
             </div>
 
             {/* Interactive Showcase: Virtual Tape Chassis */}
-            <div className="relative z-10 rounded-2xl p-4 bg-[#ede7da]/85 dark:bg-[#040713] border border-stone-300/80 dark:border-white/[0.07] space-y-3.5 transition-colors shadow-inner">
+            <div className="relative z-10 rounded-2xl p-4 bg-[#f4efe8]/90 dark:bg-[#040713] border border-stone-200/90 dark:border-white/[0.07] space-y-3.5 transition-colors shadow-inner">
               {/* Telemetry Bar */}
               <div className="flex items-center justify-between text-xs font-mono">
                 <div className="flex items-center gap-2">
                   <span className="text-stone-500 dark:text-slate-400 text-[11px]">Head State:</span>
-                  <span className="font-bold px-2 py-0.5 rounded-md bg-violet-100 dark:bg-violet-950 text-violet-900 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30">
+                  <span className="font-bold px-2 py-0.5 rounded-md bg-violet-50 dark:bg-violet-950 text-violet-900 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30">
                     {tmActiveState}
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-[11px] text-stone-500 dark:text-slate-400">
                   <span>Head: <strong className="text-violet-700 dark:text-violet-300">#{tmHead}</strong></span>
-                  <span>Scanned: <strong className="text-cyan-700 dark:text-cyan-300">'{tmActiveSymbol}'</strong></span>
+                  <span>Scanned: <strong className="text-teal-700 dark:text-cyan-300">'{tmActiveSymbol}'</strong></span>
                 </div>
               </div>
 
@@ -142,7 +142,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                       className={`relative flex-1 min-w-[42px] h-14 rounded-xl flex flex-col items-center justify-center font-mono select-none cursor-pointer transition-[transform,border-color,background-color] duration-150 transform-gpu ${
                         isCurrent
                           ? 'bg-gradient-to-b from-violet-600 to-indigo-700 text-white border-violet-400 shadow-md shadow-violet-500/30 z-10 scale-105 will-change-transform'
-                          : 'bg-[#fffdfa] dark:bg-slate-900/70 border-stone-300/80 dark:border-white/[0.06] text-stone-800 dark:text-slate-300 hover:border-violet-400/50 hover:bg-stone-50 dark:hover:bg-slate-900 shadow-xs'
+                          : 'bg-[#faf7f2] dark:bg-slate-900/70 border-stone-200/90 dark:border-white/[0.06] text-stone-800 dark:text-slate-300 hover:border-violet-400/50 hover:bg-[#f4efe8] dark:hover:bg-slate-900 shadow-xs'
                       }`}
                     >
                       {/* Active Optical Marker */}
@@ -162,7 +162,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
               </div>
 
               {/* Transition Rule Preview Banner */}
-              <div className="text-[11px] font-mono text-center text-stone-600 dark:text-slate-400 bg-[#fffdfa] dark:bg-slate-950/80 py-2 px-3 rounded-xl border border-stone-200/80 dark:border-white/[0.05] shadow-xs">
+              <div className="text-[11px] font-mono text-center text-stone-600 dark:text-slate-400 bg-[#faf7f2] dark:bg-slate-950/80 py-2 px-3 rounded-xl border border-stone-200/90 dark:border-white/[0.05] shadow-xs">
                 Active Rule: <span className="text-violet-700 dark:text-violet-300 font-bold">δ({tmActiveState}, '{tmActiveSymbol}')</span> → <span className="text-emerald-700 dark:text-emerald-400 font-bold">('{tmNextSymbol}', R, {tmNextState})</span>
               </div>
             </div>
@@ -186,7 +186,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
           customSize={true}
           borderRadius={24}
           spotlightSize={340}
-          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20 p-7 sm:p-8 bg-[#fffdf9]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-stone-200/90 dark:border-transparent"
+          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20 p-7 sm:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-[#ded5c5] dark:border-transparent"
           onMouseEnter={() => setIsNfaAuto(false)}
           onMouseLeave={() => setIsNfaAuto(true)}
         >
@@ -197,15 +197,15 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
             <div className="space-y-4 relative z-10">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-300/80 dark:border-cyan-500/40 text-cyan-700 dark:text-cyan-300 flex items-center justify-center shadow-xs">
+                  <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-cyan-950/80 border border-teal-200 dark:border-cyan-500/40 text-teal-800 dark:text-cyan-300 flex items-center justify-center shadow-xs">
                     <Network className="w-6 h-6" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30 tracking-wider uppercase">
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-teal-50 dark:bg-cyan-500/20 text-teal-800 dark:text-cyan-300 border border-teal-200 dark:border-cyan-500/30 tracking-wider uppercase">
                         Powerset Construction
                       </span>
-                      <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 font-semibold flex items-center gap-1">
+                      <span className="text-[10px] font-mono text-cyan-700 dark:text-cyan-400 font-semibold flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
                         ε-Closure Engine
                       </span>
@@ -223,18 +223,18 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
             </div>
 
             {/* Interactive Showcase: Mini Automata Network */}
-            <div className="relative z-10 rounded-2xl p-4 bg-[#ede7da]/85 dark:bg-[#040713] border border-stone-300/80 dark:border-white/[0.07] space-y-3.5 transition-colors shadow-inner">
+            <div className="relative z-10 rounded-2xl p-4 bg-[#f4efe8]/90 dark:bg-[#040713] border border-stone-200/90 dark:border-white/[0.07] space-y-3.5 transition-colors shadow-inner">
               {/* Telemetry Bar */}
               <div className="flex items-center justify-between text-xs font-mono">
                 <div className="flex items-center gap-2">
                   <span className="text-stone-500 dark:text-slate-400 text-[11px]">Subset Trace:</span>
-                  <span className="font-bold px-2 py-0.5 rounded-md bg-cyan-100 dark:bg-cyan-950 text-cyan-900 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30">
+                  <span className="font-bold px-2 py-0.5 rounded-md bg-teal-50 dark:bg-cyan-950 text-teal-900 dark:text-cyan-300 border border-teal-200 dark:border-cyan-500/30">
                     {currentSubset.subset}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   {currentSubset.isAccept ? (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/40">
                       ★ ACCEPTING SUBSET
                     </span>
                   ) : (
@@ -266,7 +266,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                   <path
                     d="M 68 40 Q 115 14 158 38"
                     fill="none"
-                    stroke={activeNfaIndex >= 1 ? '#06b6d4' : '#a89f8f'}
+                    stroke={activeNfaIndex >= 1 ? '#06b6d4' : '#ded5c5'}
                     strokeWidth="2"
                     className={activeNfaIndex >= 1 ? 'animate-dash-flow' : ''}
                     markerEnd="url(#card-arrow-flow)"
@@ -277,7 +277,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                   <path
                     d="M 182 40 Q 224 14 256 38"
                     fill="none"
-                    stroke={activeNfaIndex === 2 ? '#10b981' : '#a89f8f'}
+                    stroke={activeNfaIndex === 2 ? '#10b981' : '#ded5c5'}
                     strokeWidth="2"
                     className={activeNfaIndex === 2 ? 'animate-dash-flow' : ''}
                     markerEnd="url(#card-arrow-flow)"
@@ -293,8 +293,8 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                   >
                     <circle 
                       r="18" 
-                      fill={activeNfaIndex === 0 ? '#0891b2' : '#fffdf9'} 
-                      stroke={activeNfaIndex === 0 ? '#22d3ee' : '#a89f8f'} 
+                      fill={activeNfaIndex === 0 ? '#0891b2' : '#faf7f2'} 
+                      stroke={activeNfaIndex === 0 ? '#22d3ee' : '#ded5c5'} 
                       strokeWidth="2" 
                       className="dark:fill-[#0d1424] dark:stroke-slate-600 transition-colors"
                     />
@@ -310,8 +310,8 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                   >
                     <circle 
                       r="18" 
-                      fill={activeNfaIndex === 1 ? '#0891b2' : '#fffdf9'} 
-                      stroke={activeNfaIndex === 1 ? '#22d3ee' : '#a89f8f'} 
+                      fill={activeNfaIndex === 1 ? '#0891b2' : '#faf7f2'} 
+                      stroke={activeNfaIndex === 1 ? '#22d3ee' : '#ded5c5'} 
                       strokeWidth="2" 
                       className="dark:fill-[#0d1424] dark:stroke-slate-600 transition-colors"
                     />
@@ -327,7 +327,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                   >
                     <circle 
                       r="20" 
-                      fill={activeNfaIndex === 2 ? '#047857' : '#fffdf9'} 
+                      fill={activeNfaIndex === 2 ? '#047857' : '#faf7f2'} 
                       stroke={activeNfaIndex === 2 ? '#34d399' : '#059669'} 
                       strokeWidth="2" 
                       className="dark:fill-[#0d1424] dark:stroke-emerald-500 transition-colors"
@@ -345,8 +345,8 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
               </div>
 
               {/* Subset conversion equation badge */}
-              <div className="text-[11px] font-mono text-center text-stone-600 dark:text-slate-400 bg-[#fffdfa] dark:bg-slate-950/80 py-2 px-3 rounded-xl border border-stone-200/80 dark:border-white/[0.05] shadow-xs">
-                Subset: <span className="text-cyan-700 dark:text-cyan-300 font-bold">δ({'{'}q0{'}'}, '1')</span> → <span className="text-emerald-700 dark:text-emerald-400 font-bold">{'{'}q0, q1{'}'} (Accepting)</span>
+              <div className="text-[11px] font-mono text-center text-stone-600 dark:text-slate-400 bg-[#faf7f2] dark:bg-slate-950/80 py-2 px-3 rounded-xl border border-stone-200/90 dark:border-white/[0.05] shadow-xs">
+                Subset: <span className="text-teal-700 dark:text-cyan-300 font-bold">δ({'{'}q0{'}'}, '1')</span> → <span className="text-emerald-700 dark:text-emerald-400 font-bold">{'{'}q0, q1{'}'} (Accepting)</span>
               </div>
             </div>
 

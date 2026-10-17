@@ -16,7 +16,7 @@ export const TMHistory: React.FC<TMHistoryProps> = React.memo(({
   blankSymbol,
 }) => {
   return (
-    <div className="glass-panel rounded-3xl p-6 border border-stone-300/80 dark:border-white/[0.08] shadow-2xl space-y-4 bg-[#fffdf9]/95 dark:bg-slate-950/70">
+    <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 bg-[#faf7f2]/95 dark:bg-slate-950/70">
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b border-stone-200 dark:border-white/[0.07]">
         <div className="flex items-center gap-2.5">
@@ -34,7 +34,7 @@ export const TMHistory: React.FC<TMHistoryProps> = React.memo(({
         {inspectingStep !== null && (
           <button
             onClick={() => onInspectStep(null)}
-            className="flex items-center gap-1 text-xs font-mono font-bold text-cyan-800 dark:text-cyan-300 hover:text-cyan-900 dark:hover:text-white px-2.5 py-1 rounded-xl bg-cyan-100 dark:bg-cyan-950/70 border border-cyan-300 dark:border-cyan-500/40 shadow-xs transition"
+            className="flex items-center gap-1 text-xs font-mono font-bold text-teal-850 dark:text-cyan-300 hover:text-teal-950 dark:hover:text-white px-2.5 py-1 rounded-xl bg-teal-50 dark:bg-cyan-950/70 border border-teal-200 dark:border-cyan-500/40 shadow-xs transition"
           >
             <RotateCcw className="w-3 h-3" />
             <span>Return to Live</span>
@@ -61,7 +61,7 @@ export const TMHistory: React.FC<TMHistoryProps> = React.memo(({
       )}
 
       {/* Snapshot Logs List */}
-      <div className="overflow-y-auto max-h-72 rounded-2xl border border-stone-300/80 dark:border-white/[0.08] divide-y divide-stone-200 dark:divide-white/[0.04] bg-[#f8f5ee] dark:bg-slate-950/60 shadow-inner">
+      <div className="overflow-y-auto max-h-72 rounded-2xl border border-stone-200/90 dark:border-white/[0.08] divide-y divide-stone-200/90 dark:divide-white/[0.04] bg-[#f4efe6] dark:bg-slate-950/60 shadow-inner">
         {history.length === 0 ? (
           <div className="p-8 text-center text-xs text-stone-400 dark:text-slate-500 space-y-1">
             <AlertCircle className="w-5 h-5 mx-auto text-stone-400 dark:text-slate-600 mb-2" />
@@ -85,13 +85,13 @@ export const TMHistory: React.FC<TMHistoryProps> = React.memo(({
                 onClick={() => onInspectStep(entry.step)}
                 className={`p-3 text-xs font-mono cursor-pointer transition-all duration-150 flex items-center justify-between gap-3 ${
                   isSelected
-                    ? 'bg-amber-100 dark:bg-amber-950/60 border-l-4 border-amber-500 text-amber-900 dark:text-amber-200'
-                    : 'hover:bg-[#fffdf9] dark:hover:bg-slate-900/70 text-stone-700 dark:text-slate-300'
+                    ? 'bg-amber-500/10 dark:bg-amber-950/60 border-l-4 border-amber-500 text-amber-900 dark:text-amber-200'
+                    : 'hover:bg-[#faf7f2] dark:hover:bg-slate-900/70 text-stone-700 dark:text-slate-300'
                 }`}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
                   <span className="font-bold text-stone-400 dark:text-slate-400 w-10 shrink-0">#{entry.step}</span>
-                  <span className="px-2 py-0.5 rounded-lg bg-violet-100 dark:bg-violet-950/80 border border-violet-300 dark:border-violet-500/40 text-violet-800 dark:text-violet-300 font-bold shrink-0">
+                  <span className="px-2 py-0.5 rounded-lg bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/40 text-violet-800 dark:text-violet-300 font-bold shrink-0">
                     {entry.state}
                   </span>
                   <span className="text-stone-500 shrink-0 text-[11px]">pos:{entry.headPosition}</span>
@@ -110,7 +110,7 @@ export const TMHistory: React.FC<TMHistoryProps> = React.memo(({
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="hidden sm:inline font-mono text-[10px] text-stone-700 dark:text-slate-400 bg-[#fffdf9] dark:bg-slate-900 px-2 py-0.5 rounded-md border border-stone-300/80 dark:border-white/5 shadow-xs font-semibold">
+                  <span className="hidden sm:inline font-mono text-[10px] text-stone-700 dark:text-slate-400 bg-[#faf7f2] dark:bg-slate-900 px-2 py-0.5 rounded-md border border-stone-200/90 dark:border-white/5 shadow-xs font-semibold">
                     [{tapeSnippet}]
                   </span>
                   <Eye className={`w-3.5 h-3.5 ${isSelected ? 'text-amber-600 dark:text-amber-400' : 'text-stone-400 dark:text-slate-500 hover:text-stone-700 dark:hover:text-white'}`} />

@@ -5,11 +5,11 @@
 /* Base Tokens */
 @layer base {
   :root {
-    --bg-primary: #f6f3eb;
-    --bg-surface: #fffdf9;
-    --bg-card: rgba(255, 254, 250, 0.96);
-    --border-subtle: rgba(185, 170, 145, 0.35);
-    --border-glow: rgba(217, 119, 6, 0.18);
+    --bg-primary: #f5f0e6;
+    --bg-surface: #faf7f2;
+    --bg-card: rgba(250, 247, 242, 0.95);
+    --border-subtle: rgba(222, 213, 197, 0.7);
+    --border-glow: rgba(99, 102, 241, 0.18);
   }
 
   html.dark {
@@ -58,13 +58,13 @@
   contain: content;
 }
 
-/* Premium 120fps-Optimized Panels - Warm Beige Ivory in Light Mode */
+/* Premium 120fps-Optimized Panels - Soothing Cashmere & Warm Paper in Light Mode */
 .glass-panel {
-  background: rgba(255, 254, 250, 0.94);
-  border: 1px solid rgba(215, 203, 185, 0.7);
+  background: rgba(250, 247, 242, 0.94);
+  border: 1px solid rgba(222, 213, 197, 0.85);
   box-shadow: 
-    0 1px 3px 0 rgba(70, 55, 35, 0.04),
-    0 10px 25px -4px rgba(70, 55, 35, 0.05);
+    0 1px 3px 0 rgba(45, 35, 20, 0.03),
+    0 8px 24px -4px rgba(45, 35, 20, 0.04);
   transform: translateZ(0);
   backface-visibility: hidden;
   contain: layout style;
@@ -83,8 +83,8 @@
 
 /* Scoped blur on floating navigation bar where page content scrolls underneath */
 nav.glass-panel {
-  background: rgba(246, 243, 235, 0.90);
-  border-bottom: 1px solid rgba(215, 203, 185, 0.75);
+  background: rgba(246, 241, 233, 0.90);
+  border-bottom: 1px solid rgba(222, 213, 197, 0.80);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -105,10 +105,10 @@ nav.glass-panel {
 
 .glass-card-hover:hover {
   transform: translate3d(0, -3px, 0);
-  border-color: rgba(180, 130, 80, 0.45);
+  border-color: rgba(195, 175, 150, 0.7);
   box-shadow: 
-    0 16px 30px -8px rgba(180, 130, 80, 0.12),
-    0 4px 10px -2px rgba(70, 55, 35, 0.04);
+    0 16px 32px -8px rgba(40, 30, 20, 0.08),
+    0 2px 6px -1px rgba(40, 30, 20, 0.03);
 }
 
 .dark .glass-card-hover:hover {
@@ -146,7 +146,7 @@ nav.glass-panel {
 /* High-tech Grid Background */
 .bg-grid-pattern {
   background-image: 
-    radial-gradient(rgba(175, 155, 125, 0.28) 1px, transparent 1px);
+    radial-gradient(rgba(170, 150, 125, 0.18) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -155,13 +155,13 @@ nav.glass-panel {
     radial-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px);
 }
 
-/* Cybernetic Tape Drive Chassis - Warm Oat Beige in Light Mode */
+/* Cybernetic Tape Drive Chassis - Warm Oat & Soft Cashmere in Light Mode */
 .tape-chassis {
-  background: linear-gradient(180deg, #ede7da 0%, #e3dbcc 100%);
-  border: 1px solid #d4cabb;
+  background: linear-gradient(180deg, #f4efe8 0%, #ebe4d8 100%);
+  border: 1px solid #ded5c5;
   box-shadow: 
-    inset 0 2px 5px rgba(80, 60, 30, 0.07),
-    0 2px 4px rgba(80, 60, 30, 0.03);
+    inset 0 2px 6px rgba(45, 35, 20, 0.04),
+    0 1px 2px rgba(45, 35, 20, 0.02);
 }
 
 .dark .tape-chassis {
@@ -172,20 +172,87 @@ nav.glass-panel {
     0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Laser Scanline on active cell */
-.tape-head-beam {
+/* Hard Disk Drive Magnetic Read/Write Flux Field (replaces plain blue line) */
+.hdd-magnetic-field {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, #06b6d4, transparent);
-  box-shadow: 0 0 10px #06b6d4;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
   pointer-events: none;
+  z-index: 5;
 }
 
-.dark .tape-head-beam {
-  background: linear-gradient(to bottom, #22d3ee, transparent);
-  box-shadow: 0 0 12px #22d3ee;
+/* Dual microscopic magnetic flux guide rails */
+.hdd-magnetic-field::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  right: 6px;
+  border-left: 1px dashed rgba(14, 116, 144, 0.4);
+  border-right: 1px dashed rgba(14, 116, 144, 0.4);
+}
+
+.dark .hdd-magnetic-field::before {
+  border-left: 1px dashed rgba(34, 211, 238, 0.5);
+  border-right: 1px dashed rgba(34, 211, 238, 0.5);
+}
+
+/* Scanning magnetic flux beam across active recording cell */
+.hdd-magnetic-field::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(14, 116, 144, 0.6) 0%,
+    rgba(14, 116, 144, 0.2) 60%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px rgba(14, 116, 144, 0.4);
+  animation: hdd-flux-pulse 1.8s ease-in-out infinite alternate;
+}
+
+.dark .hdd-magnetic-field::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(34, 211, 238, 0.85) 0%,
+    rgba(6, 182, 212, 0.3) 60%,
+    transparent 100%
+  );
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.65);
+}
+
+@keyframes hdd-flux-pulse {
+  0% {
+    opacity: 0.55;
+    filter: drop-shadow(0 0 3px rgba(6, 182, 212, 0.3));
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.7));
+  }
+}
+
+/* Mechanical Hard Drive Voice Coil Actuator Head Seek Twitch */
+@keyframes hdd-seek {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-3deg) translateY(-1px); }
+  45% { transform: rotate(2.5deg); }
+  70% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+.hdd-head-seeking {
+  animation: hdd-seek 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: 23px 7px;
 }
 
 /* Custom Slick Scrollbars - Warm Linen in Light Mode */
@@ -195,7 +262,7 @@ nav.glass-panel {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(238, 232, 222, 0.85);
+  background: rgba(244, 239, 232, 0.7);
 }
 
 .dark ::-webkit-scrollbar-track {
@@ -203,7 +270,7 @@ nav.glass-panel {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(185, 170, 145, 0.45);
+  background: rgba(200, 190, 175, 0.5);
   border-radius: 9999px;
 }
 
@@ -212,7 +279,7 @@ nav.glass-panel {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(150, 130, 105, 0.65);
+  background: rgba(170, 155, 135, 0.7);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {

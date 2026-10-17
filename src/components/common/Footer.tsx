@@ -3,7 +3,7 @@ import { Cpu } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full border-t border-stone-300/80 dark:border-slate-800/80 bg-[#eee7da]/80 dark:bg-[#040711] py-12 px-4 sm:px-6 lg:px-8 mt-20 text-xs text-stone-600 dark:text-slate-400 transition-colors duration-200">
+    <footer className="w-full border-t border-stone-200/90 dark:border-slate-800/80 bg-[#f4efe8]/90 dark:bg-[#040711] py-12 px-4 sm:px-6 lg:px-8 mt-20 text-xs text-stone-600 dark:text-slate-400 transition-colors duration-200">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand */}
         <div className="space-y-3 md:col-span-1">
@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto pt-8 mt-8 border-t border-stone-300/70 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-stone-500 text-[11px]">
+      <div className="max-w-7xl mx-auto pt-8 mt-8 border-t border-stone-200/90 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-stone-500 text-[11px]">
         <div>© 2026 TOC LAB. Built for CS 301 / Theory of Computation.</div>
         <div className="flex items-center gap-4">
           <span>Deterministic Execution</span>

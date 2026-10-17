@@ -77,7 +77,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       {/* Hero Section */}
       <section className="relative text-center space-y-8 pt-6">
         {/* Futuristic Status Pill */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-panel border border-stone-300/80 dark:border-white/[0.08] shadow-sm backdrop-blur-xl">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-sm backdrop-blur-xl">
           <span className="flex h-2 w-2 relative">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500 dark:bg-cyan-400"></span>
@@ -115,7 +115,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
           <button
             onClick={() => onNavigate('nfa-dfa')}
-            className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#fffdf9] hover:bg-[#f6f2e8] dark:bg-white/[0.05] dark:hover:bg-white/[0.08] text-stone-800 dark:text-white font-semibold text-sm shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-stone-300 dark:border-white/[0.12]"
+            className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#faf7f2] hover:bg-[#f4efe6] dark:bg-white/[0.05] dark:hover:bg-white/[0.08] text-stone-800 dark:text-white font-semibold text-sm shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-stone-200/90 dark:border-white/[0.12]"
           >
             <Network className="w-4 h-4 text-violet-600 dark:text-cyan-400" />
             <span>Launch NFA → DFA Converter</span>
@@ -124,7 +124,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
         {/* Interactive Live Automata Preview Terminal */}
         <div className="pt-6 max-w-2xl mx-auto">
-          <div className="glass-panel rounded-3xl p-6 border border-stone-300/80 dark:border-white/[0.09] shadow-xl relative overflow-hidden bg-[#fffdfa]/95 dark:bg-slate-950/80">
+          <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.09] shadow-xl relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/80">
             {/* Header Terminal Bar */}
             <div className="flex items-center justify-between pb-4 mb-2 border-b border-stone-200 dark:border-white/[0.07] text-xs font-mono">
               <div className="flex items-center gap-2">
@@ -262,8 +262,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                           isCurrent
                             ? 'bg-cyan-500/20 border-cyan-500 text-cyan-900 dark:text-cyan-200 shadow-glow-cyan'
                             : isPassed
-                            ? 'bg-[#ede7da] dark:bg-slate-900 border-stone-300 dark:border-slate-700 text-stone-700 dark:text-slate-400'
-                            : 'bg-[#faf8f4] dark:bg-slate-950 border-stone-200 dark:border-slate-800 text-stone-400 dark:text-slate-600'
+                            ? 'bg-[#f4efe8] dark:bg-slate-900 border-stone-200 dark:border-slate-700 text-stone-700 dark:text-slate-400'
+                            : 'bg-[#fbfaf7] dark:bg-slate-950 border-stone-200 dark:border-slate-800 text-stone-400 dark:text-slate-600'
                         }`}
                       >
                         {char}
@@ -276,14 +276,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               <div className="flex items-center gap-2">
                 <span className={`px-2.5 py-0.5 rounded-full font-bold border ${
                   activeNode === 1
-                    ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/40 shadow-sm'
-                    : 'bg-stone-200 dark:bg-slate-900 text-stone-700 dark:text-slate-400 border-stone-300 dark:border-slate-700'
+                    ? 'bg-emerald-50 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/40 shadow-sm'
+                    : 'bg-[#f4efe8] dark:bg-slate-900 text-stone-700 dark:text-slate-400 border-stone-200 dark:border-slate-700'
                 }`}>
                   {activeNode === 1 ? 'ACCEPTED (Ends with 1)' : 'EVALUATING'}
                 </span>
                 <button
                   onClick={() => setPreviewPlaying(p => !p)}
-                  className="p-1 rounded-lg bg-[#ede7da] dark:bg-slate-800 hover:bg-[#e2dacb] dark:hover:bg-slate-700 text-stone-600 dark:text-slate-300 transition"
+                  className="p-1 rounded-lg bg-[#f4efe8] dark:bg-slate-800 hover:bg-[#ebe4d8] dark:hover:bg-slate-700 text-stone-600 dark:text-slate-300 transition"
                   title={previewPlaying ? 'Pause live preview' : 'Resume live preview'}
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
@@ -298,7 +298,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       <FeatureCards onNavigate={onNavigate} />
 
       {/* What is Theory of Computation? */}
-      <section className="glass-panel rounded-3xl p-8 sm:p-10 border border-stone-300/80 dark:border-white/[0.08] shadow-2xl space-y-8 bg-[#fffdf9]/95 dark:bg-slate-950/70">
+      <section className="glass-panel rounded-3xl p-8 sm:p-10 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-8 bg-[#faf7f2]/95 dark:bg-slate-950/70">
         <div className="space-y-2 max-w-2xl">
           <span className="text-xs font-mono uppercase tracking-wider text-violet-700 dark:text-violet-400 font-semibold flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5" />
@@ -313,7 +313,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="p-6 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950/60 border border-stone-200 dark:border-white/[0.06] hover:border-violet-500/40 transition duration-200 space-y-3 shadow-xs">
+          <div className="p-6 rounded-2xl bg-[#f4efe6] dark:bg-slate-950/60 border border-stone-200/90 dark:border-white/[0.06] hover:border-violet-500/40 transition duration-200 space-y-3 shadow-xs">
             <div className="p-2.5 rounded-xl bg-violet-500/15 text-violet-700 dark:bg-violet-600/20 dark:text-violet-400 w-fit">
               <Layers className="w-5 h-5" />
             </div>
@@ -323,7 +323,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950/60 border border-stone-200 dark:border-white/[0.06] hover:border-cyan-500/40 transition duration-200 space-y-3 shadow-xs">
+          <div className="p-6 rounded-2xl bg-[#f4efe6] dark:bg-slate-950/60 border border-stone-200/90 dark:border-white/[0.06] hover:border-cyan-500/40 transition duration-200 space-y-3 shadow-xs">
             <div className="p-2.5 rounded-xl bg-cyan-500/15 text-cyan-700 dark:bg-cyan-600/20 dark:text-cyan-400 w-fit">
               <Code2 className="w-5 h-5" />
             </div>
@@ -333,7 +333,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950/60 border border-stone-200 dark:border-white/[0.06] hover:border-emerald-500/40 transition duration-200 space-y-3 shadow-xs">
+          <div className="p-6 rounded-2xl bg-[#f4efe6] dark:bg-slate-950/60 border border-stone-200/90 dark:border-white/[0.06] hover:border-emerald-500/40 transition duration-200 space-y-3 shadow-xs">
             <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-700 dark:bg-emerald-600/20 dark:text-emerald-400 w-fit">
               <Compass className="w-5 h-5" />
             </div>
@@ -353,7 +353,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="glass-panel rounded-2xl p-6 border border-stone-300/80 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#fffdf9]/95 dark:bg-slate-950/60">
+          <div className="glass-panel rounded-2xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/60">
             <div className="text-3xl font-black font-mono text-violet-400/30 absolute top-4 right-4">01</div>
             <h4 className="text-base font-bold text-stone-900 dark:text-white">Configure or Load Model</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
@@ -361,7 +361,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          <div className="glass-panel rounded-2xl p-6 border border-stone-300/80 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#fffdf9]/95 dark:bg-slate-950/60">
+          <div className="glass-panel rounded-2xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/60">
             <div className="text-3xl font-black font-mono text-cyan-400/30 absolute top-4 right-4">02</div>
             <h4 className="text-base font-bold text-stone-900 dark:text-white">Inspect Every Single Step</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
@@ -369,7 +369,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          <div className="glass-panel rounded-2xl p-6 border border-stone-300/80 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#fffdf9]/95 dark:bg-slate-950/60">
+          <div className="glass-panel rounded-2xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/60">
             <div className="text-3xl font-black font-mono text-emerald-400/30 absolute top-4 right-4">03</div>
             <h4 className="text-base font-bold text-stone-900 dark:text-white">Verify Equivalence & Export</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">

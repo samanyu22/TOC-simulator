@@ -49,7 +49,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         "flex w-16 h-8 p-1 rounded-full cursor-pointer transition-all duration-300 select-none shadow-xs group",
         isDark 
           ? "bg-slate-950 border border-slate-800 hover:border-slate-700 shadow-inner" 
-          : "bg-[#ede7da] border border-stone-300/90 hover:border-stone-400 shadow-inner",
+          : "bg-[#f4efe8] border border-stone-200/90 hover:border-stone-300 shadow-inner",
         className
       )}
       onClick={toggleTheme}
@@ -66,7 +66,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
             "flex justify-center items-center w-6 h-6 rounded-full transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] shadow-xs",
             isDark 
               ? "transform translate-x-0 bg-slate-800 border border-slate-700/80 text-cyan-300 shadow-slate-950/50" 
-              : "transform translate-x-8 bg-[#fffdfa] border border-stone-300 text-amber-600 shadow-stone-400/30"
+              : "transform translate-x-8 bg-[#faf7f2] border border-stone-200/90 text-amber-600 shadow-stone-400/20"
           )}
         >
           {isDark ? (

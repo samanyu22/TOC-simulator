@@ -87,6 +87,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
 
   // Hover and Dragging state
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+  const [hoveredEdgeId, setHoveredEdgeId] = useState<string | null>(null);
   const [draggingNodeId, setDraggingNodeId] = useState<string | null>(null);
   const [isPanning, setIsPanning] = useState(false);
   const dragStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -456,7 +457,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
     >
       {/* Top Header Title Badge */}
       {title && (
-        <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5 px-3.5 py-1.5 rounded-2xl bg-[#fffdf9]/95 dark:bg-slate-950/85 backdrop-blur-md border border-stone-300/80 dark:border-white/10 shadow-lg transition-colors pointer-events-none">
+        <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5 px-3.5 py-1.5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/85 backdrop-blur-md border border-stone-200/90 dark:border-white/10 shadow-lg transition-colors pointer-events-none">
           <span className="w-2 h-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse"></span>
           <span className="text-xs font-bold text-stone-900 dark:text-white tracking-wide uppercase font-mono">{title}</span>
           <span className="text-xs text-stone-500 dark:text-slate-400 font-mono">({states.length} states)</span>
@@ -478,7 +479,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
       )}
 
       {/* Floating HUD Controls */}
-      <div className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#fffdf9]/95 dark:bg-slate-950/90 backdrop-blur-xl border border-stone-300/80 dark:border-white/10 shadow-2xl transition-colors">
+      <div className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/90 backdrop-blur-xl border border-stone-200/90 dark:border-white/10 shadow-2xl transition-colors">
         {isEditable && (
           <button
             onClick={() => {
@@ -580,20 +581,30 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
               he => he.from === edge.from && he.to === edge.to && (!he.symbol || edge.symbols.includes(he.symbol))
             );
 
+            const isEdgeHovered = isEditable && hoveredEdgeId === edge.id;
+
             const edgeStroke = isHighlighted
               ? (isDark ? '#22d3ee' : '#0891b2')
-              : (isDark ? '#475569' : '#a89f8f');
+              : isEdgeHovered
+              ? (isDark ? '#38bdf8' : '#0284c7')
+              : (isDark ? '#475569' : '#ded5c5');
 
             const pillFill = isHighlighted
               ? (isDark ? '#0e7490' : '#0891b2')
-              : (isDark ? '#0a0f1d' : '#fffdf9');
+              : isEdgeHovered
+              ? (isDark ? '#1e293b' : '#f0eae0')
+              : (isDark ? '#0a0f1d' : '#faf7f2');
 
             const pillStroke = isHighlighted
               ? (isDark ? '#22d3ee' : '#06b6d4')
-              : (isDark ? '#334155' : '#d5cbb8');
+              : isEdgeHovered
+              ? (isDark ? '#38bdf8' : '#0284c7')
+              : (isDark ? '#334155' : '#ded5c5');
 
             const pillText = isHighlighted
               ? '#ffffff'
+              : isEdgeHovered
+              ? (isDark ? '#38bdf8' : '#0284c7')
               : (isDark ? '#e2e8f0' : '#292524');
 
             return (
@@ -603,37 +614,60 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
                   d={path}
                   fill="none"
                   stroke={edgeStroke}
-                  strokeWidth={isHighlighted ? 3 : 2}
+                  strokeWidth={isHighlighted || isEdgeHovered ? 3 : 2}
                   strokeDasharray={isHighlighted ? '6 4' : 'none'}
                   markerEnd={isHighlighted ? 'url(#arrowhead-active)' : 'url(#arrowhead-normal)'}
-                  filter={isHighlighted ? 'url(#neon-glow)' : undefined}
+                  filter={isHighlighted || isEdgeHovered ? 'url(#neon-glow)' : undefined}
                 />
 
                 {/* Transition Symbols Pill Badge - clickable on right-click */}
                 <g 
                   transform={`translate(${labelPos.x}, ${labelPos.y})`}
                   onContextMenu={(e) => handleEdgeContextMenu(e, edge)}
-                  className={isEditable ? 'cursor-context-menu hover:scale-110 transition-transform' : 'pointer-events-none'}
+                  onMouseEnter={() => isEditable && setHoveredEdgeId(edge.id)}
+                  onMouseLeave={() => isEditable && setHoveredEdgeId(null)}
+                  className={isEditable ? 'cursor-context-menu select-none' : 'pointer-events-none'}
                 >
-                  <rect
-                    x={-14 * Math.max(1, edge.symbols.join(', ').length * 0.35)}
-                    y={-11}
-                    width={28 * Math.max(1, edge.symbols.join(', ').length * 0.35)}
-                    height={22}
-                    rx={7}
-                    fill={pillFill}
-                    stroke={pillStroke}
-                    strokeWidth={1.2}
-                    className="shadow-md"
-                  />
-                  <text
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill={pillText}
-                    className="font-mono text-xs font-bold select-none"
+                  {/* Stable generous hit area to prevent cursor flickering */}
+                  {isEditable && (
+                    <rect
+                      x={-14 * Math.max(1, edge.symbols.join(', ').length * 0.35) - 6}
+                      y={-15}
+                      width={28 * Math.max(1, edge.symbols.join(', ').length * 0.35) + 12}
+                      height={30}
+                      fill="transparent"
+                      pointerEvents="all"
+                    />
+                  )}
+
+                  {/* Inner graphics group with safe SVG scale (never overrides parent translate!) */}
+                  <g 
+                    transform={`scale(${isEdgeHovered ? 1.12 : 1})`}
+                    style={{ 
+                      transformOrigin: '0 0',
+                      transition: 'transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1)' 
+                    }}
                   >
-                    {edge.symbols.join(', ')}
-                  </text>
+                    <rect
+                      x={-14 * Math.max(1, edge.symbols.join(', ').length * 0.35)}
+                      y={-11}
+                      width={28 * Math.max(1, edge.symbols.join(', ').length * 0.35)}
+                      height={22}
+                      rx={7}
+                      fill={pillFill}
+                      stroke={pillStroke}
+                      strokeWidth={isHighlighted || isEdgeHovered ? 2 : 1.2}
+                      className="shadow-md"
+                    />
+                    <text
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fill={pillText}
+                      className="font-mono text-xs font-bold select-none"
+                    >
+                      {edge.symbols.join(', ')}
+                    </text>
+                  </g>
                 </g>
               </g>
             );
@@ -673,8 +707,8 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
               : isSelected
               ? (isDark ? '#1e1b4b' : '#ede9fe')
               : isHovered
-              ? (isDark ? '#111827' : '#f5eee1')
-              : (isDark ? '#080d1a' : '#fffdf9');
+              ? (isDark ? '#111827' : '#f4efe6')
+              : (isDark ? '#080d1a' : '#faf7f2');
 
             const nodeStroke = isConnectingTarget
               ? '#22d3ee'
@@ -686,7 +720,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
               ? (isDark ? '#38bdf8' : '#0284c7')
               : node.isAccept
               ? (isDark ? '#10b981' : '#059669')
-              : (isDark ? '#475569' : '#a89f8f');
+              : (isDark ? '#475569' : '#ded5c5');
 
             const textColor = isActive
               ? '#ffffff'
@@ -723,7 +757,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
                       width={38}
                       height={20}
                       rx={6}
-                      fill={isDark ? '#1e1b4b' : '#ede5d5'}
+                      fill={isDark ? '#1e1b4b' : '#f4efe8'}
                       stroke={isDark ? '#8b5cf6' : '#c4b5fd'}
                       strokeWidth={1}
                     />
@@ -732,7 +766,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
                       y={0}
                       textAnchor="middle"
                       dominantBaseline="central"
-                      fill={isDark ? '#c4b5fd' : '#5b21b6'}
+                      fill={isDark ? '#c4b5fd' : '#4338ca'}
                       className="text-[9px] font-mono font-black tracking-widest uppercase"
                     >
                       START
@@ -831,7 +865,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
       {contextMenu.isOpen && isEditable && (
         <div 
           ref={contextMenuRef}
-          className="absolute z-50 min-w-[220px] rounded-2xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 shadow-2xl p-1.5 animate-in fade-in zoom-in-95 duration-150 text-slate-800 dark:text-slate-100 font-sans"
+          className="absolute z-50 min-w-[220px] rounded-2xl bg-[#faf7f2]/98 dark:bg-slate-950/95 backdrop-blur-2xl border border-stone-200/90 dark:border-white/10 shadow-2xl p-1.5 animate-in fade-in zoom-in-95 duration-150 text-slate-800 dark:text-slate-100 font-sans"
           style={{
             left: Math.max(10, Math.min(contextMenu.x, dimensions.width - 240)),
             top: Math.max(10, Math.min(contextMenu.y, dimensions.height - 290)),
@@ -1070,7 +1104,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
           }}
         >
           <div 
-            className="w-full max-w-sm rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 shadow-2xl p-5 space-y-4 animate-in zoom-in-95 duration-150 text-slate-800 dark:text-slate-100 font-sans"
+            className="w-full max-w-sm rounded-3xl bg-[#faf7f2]/98 dark:bg-slate-950/95 backdrop-blur-2xl border border-stone-200/90 dark:border-white/10 shadow-2xl p-5 space-y-4 animate-in zoom-in-95 duration-150 text-slate-800 dark:text-slate-100 font-sans"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}

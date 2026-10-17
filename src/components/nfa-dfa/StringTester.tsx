@@ -7,7 +7,6 @@ import {
   RotateCcw, 
   CheckCircle2, 
   XCircle, 
-  AlertCircle,
   GitCompare
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -82,7 +81,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
   const isCompleted = simResult && currentStepIndex === simResult.steps.length;
 
   return (
-    <div className="glass-panel rounded-3xl p-6 border border-stone-300/80 dark:border-white/[0.08] shadow-2xl space-y-5 transition-colors duration-200">
+    <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-5 transition-colors duration-200">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-200 dark:border-white/[0.07]">
         <div className="flex items-center gap-2.5">
@@ -115,7 +114,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
               setCurrentStepIndex(0);
             }}
             placeholder="Type input string (e.g. 0101)"
-            className="w-full px-4 py-2.5 rounded-2xl bg-[#fffdf9] dark:bg-slate-950/90 border border-stone-300/90 dark:border-white/10 font-mono text-sm text-stone-900 dark:text-cyan-300 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition shadow-inner"
+            className="w-full px-4 py-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-950/90 border border-stone-200/90 dark:border-white/10 font-mono text-sm text-stone-900 dark:text-cyan-300 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition shadow-inner"
           />
         </div>
 
@@ -131,7 +130,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
           <button
             onClick={handleStepForward}
             disabled={Boolean(isCompleted)}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-[#fffdf9] dark:bg-slate-900 hover:bg-[#f6f2e8] dark:hover:bg-slate-800 disabled:opacity-40 text-stone-700 dark:text-slate-200 border border-stone-300/90 dark:border-white/10 text-xs font-semibold transition active:scale-95 shadow-xs"
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe8] dark:hover:bg-slate-800 disabled:opacity-40 text-stone-700 dark:text-slate-200 border border-stone-200/90 dark:border-white/10 text-xs font-semibold transition active:scale-95 shadow-xs"
           >
             <SkipForward className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Step Char</span>
@@ -139,7 +138,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
 
           <button
             onClick={handleReset}
-            className="p-2.5 rounded-2xl bg-[#fffdf9] dark:bg-slate-900 hover:bg-[#f6f2e8] dark:hover:bg-slate-800 text-stone-500 hover:text-stone-900 dark:text-slate-400 dark:hover:text-white border border-stone-300/90 dark:border-white/10 transition active:scale-95 shadow-xs"
+            className="p-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe8] dark:hover:bg-slate-800 text-stone-500 hover:text-stone-900 dark:text-slate-400 dark:hover:text-white border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
             title="Reset Tester"
           >
             <RotateCcw className="w-4 h-4" />
@@ -157,7 +156,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
               setTestString(p);
               handleRunAll(p);
             }}
-            className="px-2.5 py-1 rounded-lg bg-[#ede7da] dark:bg-slate-950/80 hover:bg-[#e3dbcc] dark:hover:bg-slate-800 text-xs font-mono text-stone-700 dark:text-slate-300 border border-stone-300/80 dark:border-white/[0.08] transition active:scale-95 shadow-xs"
+            className="px-2.5 py-1 rounded-lg bg-[#f4efe8] dark:bg-slate-950/80 hover:bg-[#ebe4d8] dark:hover:bg-slate-800 text-xs font-mono text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/[0.08] transition active:scale-95 shadow-xs"
           >
             {p === '' ? 'ε (empty string)' : `"${p}"`}
           </button>
@@ -166,7 +165,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
 
       {/* Interactive Tape Ribbon with Laser Cursor */}
       {testString.length > 0 && (
-        <div className="p-4 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950/80 border border-stone-300/80 dark:border-white/[0.08] space-y-2 transition-colors">
+        <div className="p-4 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/80 border border-stone-200/90 dark:border-white/[0.08] space-y-2 transition-colors">
           <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-stone-500 dark:text-slate-400 font-bold">
             <span>Input Ribbon:</span>
             <span>Position: {currentStepIndex} / {testString.length}</span>
@@ -183,8 +182,8 @@ export const StringTester: React.FC<StringTesterProps> = ({
                     isCurrent
                       ? 'bg-cyan-500/20 dark:bg-cyan-500/25 border-cyan-500 dark:border-cyan-400 text-cyan-950 dark:text-white shadow-xs dark:shadow-glow-cyan scale-110 z-10'
                       : isPast
-                      ? 'bg-[#ede7da] dark:bg-slate-900 border-stone-300 dark:border-slate-700 text-stone-800 dark:text-slate-300'
-                      : 'bg-[#fffdf9] dark:bg-slate-950 border-stone-300/70 dark:border-white/[0.06] text-stone-400 dark:text-slate-600'
+                      ? 'bg-[#ebe4d8] dark:bg-slate-900 border-stone-300/70 dark:border-slate-700 text-stone-800 dark:text-slate-300'
+                      : 'bg-[#faf7f2] dark:bg-slate-950 border border-stone-200/90 dark:border-white/[0.06] text-stone-400 dark:text-slate-600'
                   }`}
                 >
                   <span className="text-sm">{char}</span>
@@ -200,7 +199,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
       {simResult && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* NFA Trace Box */}
-          <div className="p-5 rounded-2xl bg-[#fffdf9] dark:bg-slate-950/80 border border-violet-200 dark:border-violet-500/40 shadow-sm dark:shadow-glow-violet space-y-3 transition-colors">
+          <div className="p-5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/80 border border-violet-200 dark:border-violet-500/40 shadow-sm dark:shadow-glow-violet space-y-3 transition-colors">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-violet-700 dark:text-violet-400 font-mono">
                 NFA State Superposition
@@ -227,7 +226,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
           </div>
 
           {/* DFA Trace Box */}
-          <div className="p-5 rounded-2xl bg-[#fffdf9] dark:bg-slate-950/80 border border-cyan-200 dark:border-cyan-500/40 shadow-sm dark:shadow-glow-cyan space-y-3 transition-colors">
+          <div className="p-5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/80 border border-cyan-200 dark:border-cyan-500/40 shadow-sm dark:shadow-glow-cyan space-y-3 transition-colors">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-400 font-mono">
                 DFA Current State
@@ -281,14 +280,6 @@ export const StringTester: React.FC<StringTesterProps> = ({
           </div>
         </div>
       )}
-
-      {/* Pedagogical Note */}
-      <div className="p-3.5 rounded-2xl bg-[#ede7da]/80 dark:bg-slate-950/60 border border-stone-300/80 dark:border-white/[0.06] text-[11px] text-stone-600 dark:text-slate-400 flex items-start gap-2.5">
-        <AlertCircle className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
-        <p className="leading-relaxed">
-          <strong>Academic Note:</strong> Testing sample strings empirically illustrates that both automata behave identically on tested inputs. Mathematical equivalence across all infinite strings in Σ* (Kleene star) is formally guaranteed by induction through the Subset Construction algorithm.
-        </p>
-      </div>
     </div>
   );
 };

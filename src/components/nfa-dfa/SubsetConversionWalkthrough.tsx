@@ -85,7 +85,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
   }, [isPlaying, speed, totalSteps, onStepChange]);
 
   return (
-    <div className="glass-panel rounded-3xl p-6 border border-stone-300/80 dark:border-white/[0.08] shadow-2xl space-y-5 transition-colors duration-200">
+    <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-5 transition-colors duration-200">
       {/* Header and Step Progress */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-200 dark:border-white/[0.07]">
         <div className="flex items-center gap-2.5">
@@ -101,7 +101,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
             </h3>
             <p className="text-xs text-stone-500 dark:text-slate-400 flex items-center gap-1.5 flex-wrap mt-0.5">
               <span>Interactive step-by-step determinization:</span>
-              <span className="font-mono text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#ede7da] dark:bg-slate-900 border border-stone-300 dark:border-white/10 text-cyan-700 dark:text-cyan-300">
+              <span className="font-mono text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-cyan-700 dark:text-cyan-300">
                 S' = ε-closure( ⋃ δ(q, a) )
               </span>
             </p>
@@ -110,7 +110,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
 
         {/* Step Indicator Badge */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-[#ede7da] dark:bg-slate-900 border border-stone-300 dark:border-white/10 font-mono text-xs">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 font-mono text-xs">
             <span className="text-stone-500 dark:text-slate-400">Step</span>
             <span className="font-black text-cyan-700 dark:text-cyan-300">{currentStepIndex}</span>
             <span className="text-stone-400 dark:text-slate-500">/</span>
@@ -127,7 +127,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full h-1.5 bg-stone-300 dark:bg-slate-900 rounded-full overflow-hidden border border-stone-300/40 dark:border-white/[0.04]">
+      <div className="w-full h-1.5 bg-stone-200 dark:bg-slate-900 rounded-full overflow-hidden border border-stone-200/40 dark:border-white/[0.04]">
         <div 
           className="h-full bg-gradient-to-r from-violet-500 to-cyan-500 dark:to-cyan-400 transition-all duration-300 shadow-glow-cyan"
           style={{ width: `${progressPercent}%` }}
@@ -135,7 +135,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
       </div>
 
       {/* Playback Controls Hub */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-[#ede7da]/80 dark:bg-slate-950/70 border border-stone-300/80 dark:border-white/[0.08] transition-colors">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.08] transition-colors">
         <div className="flex items-center gap-2">
           {isPlaying ? (
             <button
@@ -158,7 +158,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
           <button
             onClick={handlePrev}
             disabled={currentStepIndex <= 1 || isPlaying}
-            className="p-2 rounded-xl bg-[#fffdf9] dark:bg-slate-900 hover:bg-[#f6f2e8] dark:hover:bg-slate-800 disabled:opacity-30 text-stone-700 dark:text-slate-300 border border-stone-300/90 dark:border-white/10 transition active:scale-95 shadow-xs"
+            className="p-2 rounded-xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe8] dark:hover:bg-slate-800 disabled:opacity-30 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
             title="Step Back"
           >
             <SkipBack className="w-4 h-4" />
@@ -167,7 +167,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
           <button
             onClick={handleNext}
             disabled={isFinished || isPlaying}
-            className="p-2 rounded-xl bg-[#fffdf9] dark:bg-slate-900 hover:bg-[#f6f2e8] dark:hover:bg-slate-800 disabled:opacity-30 text-stone-700 dark:text-slate-300 border border-stone-300/90 dark:border-white/10 transition active:scale-95 shadow-xs"
+            className="p-2 rounded-xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe8] dark:hover:bg-slate-800 disabled:opacity-30 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
             title="Step Forward"
           >
             <SkipForward className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
@@ -175,7 +175,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
 
           <button
             onClick={onReset}
-            className="p-2 rounded-xl bg-[#fffdf9] dark:bg-slate-900 hover:bg-[#f6f2e8] dark:hover:bg-slate-800 text-stone-500 hover:text-stone-900 dark:text-slate-400 dark:hover:text-white border border-stone-300/90 dark:border-white/10 transition active:scale-95 shadow-xs"
+            className="p-2 rounded-xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe8] dark:hover:bg-slate-800 text-stone-500 hover:text-stone-900 dark:text-slate-400 dark:hover:text-white border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
             title="Reset to Step 1"
           >
             <RotateCcw className="w-4 h-4" />
@@ -192,7 +192,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
               className={`px-2.5 py-1 rounded-lg text-xs font-bold transition ${
                 speed === s 
                   ? 'bg-cyan-500/20 text-cyan-800 dark:text-cyan-200 border border-cyan-400 shadow-xs dark:shadow-glow-cyan' 
-                  : 'bg-[#fffdf9] dark:bg-slate-900 text-stone-600 hover:text-stone-900 dark:hover:text-slate-300 border border-stone-300/90 dark:border-white/5'
+                  : 'bg-[#faf7f2] dark:bg-slate-900 text-stone-600 hover:text-stone-900 dark:hover:text-slate-300 border border-stone-200/90 dark:border-white/5'
               }`}
             >
               {s}x
@@ -203,7 +203,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
 
       {/* Current Step Detailed Breakdown Card */}
       {currentStep ? (
-        <div className="p-5 rounded-2xl bg-[#fffdf9]/95 dark:bg-slate-900/90 border border-cyan-400/40 dark:border-cyan-500/30 shadow-md dark:shadow-glow-cyan space-y-4 transition-colors">
+        <div className="p-5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-900/90 border border-cyan-400/40 dark:border-cyan-500/30 shadow-md dark:shadow-glow-cyan space-y-4 transition-colors">
           <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
             {/* Source Subset */}
             <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/50 text-violet-900 dark:text-violet-200">
@@ -225,7 +225,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
             <div className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border ${
               currentStep.isNewSubset
                 ? 'bg-emerald-50 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-500/60 text-emerald-900 dark:text-emerald-200 shadow-xs dark:shadow-glow-emerald'
-                : 'bg-[#f8f5ee] dark:bg-slate-950 border-stone-300 dark:border-white/10 text-stone-800 dark:text-slate-200'
+                : 'bg-[#f4efe8] dark:bg-slate-950 border-stone-200/90 dark:border-white/10 text-stone-800 dark:text-slate-200'
             }`}>
               <span className="text-stone-500 dark:text-slate-400">Target:</span>
               <span className="font-black text-sm">{currentStep.targetSubsetName}</span>
@@ -238,7 +238,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
           </div>
 
           {/* Explanation in plain English */}
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-[#f8f5ee] dark:bg-slate-950/90 border border-stone-300/80 dark:border-white/10 text-xs text-stone-700 dark:text-slate-200 transition-colors">
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-[#f4efe8]/80 dark:bg-slate-950/90 border border-stone-200/90 dark:border-white/10 text-xs text-stone-700 dark:text-slate-200 transition-colors">
             <Info className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
             <p className="leading-relaxed font-sans">{currentStep.explanation}</p>
           </div>
@@ -261,7 +261,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
                         ? 'bg-cyan-500/25 text-cyan-950 dark:text-white border-cyan-400 font-black shadow-xs dark:shadow-glow-cyan scale-105'
                         : isAcc
                         ? 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-200 border-emerald-300 dark:border-emerald-500/50'
-                        : 'bg-[#fffdf9] dark:bg-slate-950 text-stone-700 dark:text-slate-300 border-stone-300 dark:border-white/10'
+                        : 'bg-[#faf7f2] dark:bg-slate-950 text-stone-700 dark:text-slate-300 border-stone-200/90 dark:border-white/10'
                     }`}
                   >
                     {sub} {isAcc && '★'}

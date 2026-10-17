@@ -156,7 +156,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 dark:bg-black/85 backdrop-blur-md animate-in fade-in transition-colors">
-      <div className="w-full max-w-xl rounded-3xl p-6 border border-stone-300/80 dark:border-white/10 shadow-2xl space-y-5 bg-[#fffdfa] dark:bg-[#070b18] text-stone-800 dark:text-slate-200 transition-colors">
+      <div className="w-full max-w-xl rounded-3xl p-6 border border-stone-200/90 dark:border-white/10 shadow-2xl space-y-5 bg-[#faf7f2] dark:bg-[#070b18] text-stone-800 dark:text-slate-200 transition-colors">
         {/* Modal Header */}
         <div className="flex items-center justify-between border-b border-stone-200 dark:border-white/[0.08] pb-4">
           <div className="flex items-center gap-2.5">
@@ -181,7 +181,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
           <button
             onClick={() => setActiveTab('export')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
-              activeTab === 'export' ? 'bg-cyan-600 text-white' : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#ede7da] dark:bg-slate-900/60'
+              activeTab === 'export' ? 'bg-cyan-600 text-white' : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#f4efe8] dark:bg-slate-900/60'
             }`}
           >
             Export Project
@@ -189,7 +189,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
           <button
             onClick={() => setActiveTab('import')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
-              activeTab === 'import' ? 'bg-cyan-600 text-white' : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#ede7da] dark:bg-slate-900/60'
+              activeTab === 'import' ? 'bg-cyan-600 text-white' : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#f4efe8] dark:bg-slate-900/60'
             }`}
           >
             Import JSON
@@ -206,7 +206,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
               <button
                 onClick={handleExportFullJSON}
-                className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950 hover:bg-[#ede7da] dark:hover:bg-slate-900 border border-stone-300/80 dark:border-white/10 hover:border-cyan-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
+                className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 hover:bg-[#ebe4d8] dark:hover:bg-slate-900 border border-stone-200/90 dark:border-white/10 hover:border-cyan-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
               >
                 <Download className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                 <span>Full Project (JSON)</span>
@@ -214,7 +214,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
 
               <button
                 onClick={handleCopyJSON}
-                className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950 hover:bg-[#ede7da] dark:hover:bg-slate-900 border border-stone-300/80 dark:border-white/10 hover:border-violet-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
+                className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 hover:bg-[#ebe4d8] dark:hover:bg-slate-900 border border-stone-200/90 dark:border-white/10 hover:border-violet-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
               >
                 <Copy className="w-4 h-4 text-violet-600 dark:text-violet-400" />
                 <span>{copied ? '✓ Copied to Clipboard!' : 'Copy to Clipboard'}</span>
@@ -223,7 +223,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
               {currentTM && (
                 <button
                   onClick={handleExportTMCSV}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950 hover:bg-[#ede7da] dark:hover:bg-slate-900 border border-stone-300/80 dark:border-white/10 hover:border-emerald-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
+                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 hover:bg-[#ebe4d8] dark:hover:bg-slate-900 border border-stone-200/90 dark:border-white/10 hover:border-emerald-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
                 >
                   <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>TM Transitions (CSV)</span>
@@ -233,7 +233,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
               {currentNFA && (
                 <button
                   onClick={handleExportNFACSV}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950 hover:bg-[#ede7da] dark:hover:bg-slate-900 border border-stone-300/80 dark:border-white/10 hover:border-emerald-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
+                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 hover:bg-[#ebe4d8] dark:hover:bg-slate-900 border border-stone-200/90 dark:border-white/10 hover:border-emerald-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
                 >
                   <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>NFA Transitions (CSV)</span>
@@ -255,7 +255,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
               value={jsonText}
               onChange={(e) => setJsonText(e.target.value)}
               placeholder="Paste Turing Machine or NFA JSON here..."
-              className="w-full p-3.5 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950 border border-stone-300/80 dark:border-white/10 font-mono text-xs text-stone-900 dark:text-cyan-300 focus:outline-none focus:border-cyan-500 shadow-inner"
+              className="w-full p-3.5 rounded-2xl bg-[#f4efe6] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 font-mono text-xs text-stone-900 dark:text-cyan-300 focus:outline-none focus:border-cyan-500 shadow-inner"
             />
 
             {importStatus && (
@@ -276,7 +276,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
             <div className="flex items-center justify-end gap-2.5 pt-2">
               <button
                 onClick={onClose}
-                className="px-4 py-2 rounded-xl bg-[#ede7da] dark:bg-slate-900 hover:bg-[#e4dcce] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 transition"
+                className="px-4 py-2 rounded-xl bg-[#f4efe8] dark:bg-slate-900 hover:bg-[#ebe4d8] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 transition"
               >
                 Close
               </button>

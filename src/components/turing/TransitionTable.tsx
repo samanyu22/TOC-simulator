@@ -69,7 +69,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
   );
 
   return (
-    <div className="glass-panel rounded-3xl p-6 border border-stone-300/80 dark:border-white/[0.08] shadow-2xl space-y-4 bg-[#fffdf9]/95 dark:bg-slate-950/70">
+    <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 bg-[#faf7f2]/95 dark:bg-slate-950/70">
       {/* Header and Filter */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-200 dark:border-white/[0.07]">
         <div className="flex items-center gap-2.5">
@@ -79,7 +79,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
           <div>
             <h3 className="font-bold text-stone-900 dark:text-white text-sm flex items-center gap-2">
               <span>Transition Function Matrix (δ)</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-200/70 dark:bg-slate-900 border border-stone-300 dark:border-white/10 text-stone-800 dark:text-cyan-300 font-bold shadow-xs">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-stone-800 dark:text-cyan-300 font-bold shadow-xs">
                 {transitions.length} rules
               </span>
             </h3>
@@ -96,14 +96,14 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             placeholder="Search state or symbol..."
-            className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-[#fffdf9] dark:bg-slate-950 border border-stone-300/90 dark:border-white/10 text-xs text-stone-800 dark:text-slate-200 focus:outline-none focus:border-cyan-500 shadow-xs"
+            className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 text-xs text-stone-800 dark:text-slate-200 focus:outline-none focus:border-cyan-500 shadow-xs"
           />
         </div>
       </div>
 
       {/* Add Transition Form (if not readOnly) */}
       {!readOnly && (
-        <form onSubmit={handleAdd} className="p-3.5 rounded-2xl bg-[#f8f5ee] dark:bg-slate-950/70 border border-stone-300/80 dark:border-white/[0.07] space-y-2">
+        <form onSubmit={handleAdd} className="p-3.5 rounded-2xl bg-[#f4efe8]/70 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.07] space-y-2">
           <div className="text-[11px] font-mono font-bold text-stone-600 dark:text-slate-400 uppercase tracking-wider">
             Define New Rule:
           </div>
@@ -112,7 +112,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
             <select
               value={newFromState}
               onChange={(e) => setNewFromState(e.target.value)}
-              className="px-2.5 py-1.5 rounded-xl bg-[#fffdf9] dark:bg-slate-900 border border-stone-300/90 dark:border-white/10 text-xs font-mono font-bold text-violet-700 dark:text-violet-300 focus:outline-none shadow-xs"
+              className="px-2.5 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono font-bold text-violet-700 dark:text-violet-300 focus:outline-none shadow-xs"
             >
               {states.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
@@ -126,7 +126,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
               value={newReadSymbol}
               onChange={(e) => setNewReadSymbol(e.target.value)}
               placeholder="sym"
-              className="w-14 px-2 py-1.5 rounded-xl bg-[#fffdf9] dark:bg-slate-900 border border-stone-300/90 dark:border-white/10 text-xs font-mono text-center font-bold text-cyan-700 dark:text-cyan-300 focus:outline-none shadow-xs"
+              className="w-14 px-2 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono text-center font-bold text-teal-700 dark:text-cyan-300 focus:outline-none shadow-xs"
             >
             </input>
 
@@ -136,7 +136,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
             <select
               value={newNextState}
               onChange={(e) => setNewNextState(e.target.value)}
-              className="px-2.5 py-1.5 rounded-xl bg-[#fffdf9] dark:bg-slate-900 border border-stone-300/90 dark:border-white/10 text-xs font-mono font-bold text-violet-700 dark:text-violet-300 focus:outline-none shadow-xs"
+              className="px-2.5 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono font-bold text-violet-700 dark:text-violet-300 focus:outline-none shadow-xs"
             >
               {states.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
@@ -150,7 +150,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
               value={newWriteSymbol}
               onChange={(e) => setNewWriteSymbol(e.target.value)}
               placeholder="sym"
-              className="w-14 px-2 py-1.5 rounded-xl bg-[#fffdf9] dark:bg-slate-900 border border-stone-300/90 dark:border-white/10 text-xs font-mono text-center font-bold text-emerald-700 dark:text-emerald-300 focus:outline-none shadow-xs"
+              className="w-14 px-2 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono text-center font-bold text-emerald-700 dark:text-emerald-300 focus:outline-none shadow-xs"
             >
             </input>
 
@@ -158,7 +158,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
             <select
               value={newDirection}
               onChange={(e) => setNewDirection(e.target.value as TMHeadDirection)}
-              className="px-2.5 py-1.5 rounded-xl bg-[#fffdf9] dark:bg-slate-900 border border-stone-300/90 dark:border-white/10 text-xs font-mono font-bold text-sky-700 dark:text-sky-300 focus:outline-none shadow-xs"
+              className="px-2.5 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono font-bold text-sky-700 dark:text-sky-300 focus:outline-none shadow-xs"
             >
               <option value="R">R (Right)</option>
               <option value="L">L (Left)</option>
@@ -179,9 +179,9 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
       )}
 
       {/* Table of Transitions */}
-      <div className="overflow-x-auto max-h-72 overflow-y-auto rounded-2xl border border-stone-300/80 dark:border-white/[0.08] shadow-xs">
+      <div className="overflow-x-auto max-h-72 overflow-y-auto rounded-2xl border border-stone-200/90 dark:border-white/[0.08] shadow-xs">
         <table className="w-full text-left text-xs font-mono">
-          <thead className="bg-[#ede7da]/90 dark:bg-slate-950 text-stone-700 dark:text-slate-400 uppercase text-[10px] tracking-wider sticky top-0 border-b border-stone-300/80 dark:border-white/[0.08] backdrop-blur-md">
+          <thead className="bg-[#f4efe8]/95 dark:bg-slate-950 text-stone-700 dark:text-slate-400 uppercase text-[10px] tracking-wider sticky top-0 border-b border-stone-200/90 dark:border-white/[0.08] backdrop-blur-md">
             <tr>
               <th className="py-2.5 px-4 font-bold">Current State</th>
               <th className="py-2.5 px-4 font-bold">Read Symbol</th>
@@ -191,7 +191,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
               {!readOnly && <th className="py-2.5 px-4 text-right font-bold">Action</th>}
             </tr>
           </thead>
-          <tbody className="divide-y divide-stone-200 dark:divide-white/[0.04] bg-[#fffdf9] dark:bg-slate-950/60">
+          <tbody className="divide-y divide-stone-200 dark:divide-white/[0.04] bg-[#faf7f2] dark:bg-slate-950/60">
             {filtered.length === 0 ? (
               <tr>
                 <td colSpan={6} className="py-8 text-center text-stone-400 dark:text-slate-500 font-sans text-xs">
@@ -207,13 +207,13 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
                     key={t.id}
                     className={`transition-colors duration-150 ${
                       isActive
-                        ? 'bg-amber-100/70 dark:bg-cyan-950/80 border-l-4 border-amber-600 dark:border-cyan-500 text-stone-900 dark:text-cyan-200 shadow-sm'
-                        : 'hover:bg-[#f8f5ee] dark:hover:bg-slate-900/60 text-stone-700 dark:text-slate-300'
+                        ? 'bg-amber-500/10 dark:bg-cyan-950/80 border-l-4 border-amber-600 dark:border-cyan-500 text-stone-900 dark:text-cyan-200 shadow-sm'
+                        : 'hover:bg-[#f4efe6] dark:hover:bg-slate-900/60 text-stone-700 dark:text-slate-300'
                     }`}
                   >
                     <td className="py-2.5 px-4 font-bold text-violet-700 dark:text-violet-300">{t.currentState}</td>
-                    <td className="py-2.5 px-4 font-bold text-cyan-800 dark:text-cyan-300">
-                      <span className="px-2 py-0.5 rounded bg-cyan-50 dark:bg-cyan-950/60 border border-cyan-200 dark:border-cyan-500/30">
+                    <td className="py-2.5 px-4 font-bold text-teal-800 dark:text-cyan-300">
+                      <span className="px-2 py-0.5 rounded bg-teal-50 dark:bg-cyan-950/60 border border-teal-200 dark:border-cyan-500/30">
                         '{t.readSymbol}'
                       </span>
                     </td>

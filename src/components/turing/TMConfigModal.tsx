@@ -64,7 +64,7 @@ export const TMConfigModal: React.FC<TMConfigModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in">
-      <div className="w-full max-w-lg glass-panel rounded-2xl p-6 border border-stone-300/80 dark:border-slate-700 shadow-2xl space-y-5 bg-[#fffdfa] dark:bg-slate-900">
+      <div className="w-full max-w-lg glass-panel rounded-2xl p-6 border border-stone-200/90 dark:border-slate-700 shadow-2xl space-y-5 bg-[#faf7f2] dark:bg-slate-900">
         <div className="flex items-center justify-between border-b border-stone-200 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2 text-violet-600 dark:text-violet-400">
             <Settings2 className="w-5 h-5" />
@@ -93,7 +93,7 @@ export const TMConfigModal: React.FC<TMConfigModalProps> = ({
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#f8f5ee] dark:bg-slate-950 border border-stone-300/90 dark:border-slate-700 text-stone-900 dark:text-slate-100 focus:outline-none focus:border-violet-500 font-sans shadow-xs"
+              className="w-full px-3 py-2 rounded-xl bg-[#f4efe6] dark:bg-slate-950 border border-stone-200/90 dark:border-slate-700 text-stone-900 dark:text-slate-100 focus:outline-none focus:border-violet-500 font-sans shadow-xs"
             />
           </div>
 
@@ -104,7 +104,7 @@ export const TMConfigModal: React.FC<TMConfigModalProps> = ({
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#f8f5ee] dark:bg-slate-950 border border-stone-300/90 dark:border-slate-700 text-stone-900 dark:text-slate-100 focus:outline-none focus:border-violet-500 font-sans shadow-xs"
+              className="w-full px-3 py-2 rounded-xl bg-[#f4efe6] dark:bg-slate-950 border border-stone-200/90 dark:border-slate-700 text-stone-900 dark:text-slate-100 focus:outline-none focus:border-violet-500 font-sans shadow-xs"
             />
           </div>
 
@@ -118,7 +118,7 @@ export const TMConfigModal: React.FC<TMConfigModalProps> = ({
               value={statesStr}
               onChange={(e) => setStatesStr(e.target.value)}
               placeholder="q0, q1, q_accept, q_reject"
-              className="w-full px-3 py-2 rounded-xl bg-[#f8f5ee] dark:bg-slate-950 border border-stone-300/90 dark:border-slate-700 text-cyan-700 dark:text-cyan-300 focus:outline-none focus:border-violet-500 shadow-xs font-semibold"
+              className="w-full px-3 py-2 rounded-xl bg-[#f4efe6] dark:bg-slate-950 border border-stone-200/90 dark:border-slate-700 text-teal-800 dark:text-cyan-300 focus:outline-none focus:border-violet-500 shadow-xs font-semibold"
             />
           </div>
 
@@ -129,7 +129,7 @@ export const TMConfigModal: React.FC<TMConfigModalProps> = ({
               <select
                 value={initialState}
                 onChange={(e) => setInitialState(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-[#f8f5ee] dark:bg-slate-950 border border-stone-300/90 dark:border-slate-700 text-stone-900 dark:text-slate-200 focus:outline-none focus:border-violet-500 shadow-xs font-semibold"
+                className="w-full px-3 py-2 rounded-xl bg-[#fbfaf7] dark:bg-slate-950 border border-stone-200/90 dark:border-slate-700 text-stone-900 dark:text-slate-200 focus:outline-none focus:border-violet-500 shadow-xs font-semibold"
               >
                 {parsedStates.map(s => (
                   <option key={s} value={s}>{s}</option>
@@ -145,7 +145,7 @@ export const TMConfigModal: React.FC<TMConfigModalProps> = ({
                 maxLength={1}
                 value={blankSymbol}
                 onChange={(e) => setBlankSymbol(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-[#f8f5ee] dark:bg-slate-950 border border-stone-300/90 dark:border-slate-700 text-center font-bold text-violet-700 dark:text-violet-300 focus:outline-none focus:border-violet-500 shadow-xs"
+                className="w-full px-3 py-2 rounded-xl bg-[#fbfaf7] dark:bg-slate-950 border border-stone-200/90 dark:border-slate-700 text-center font-bold text-violet-700 dark:text-violet-300 focus:outline-none focus:border-violet-500 shadow-xs"
               />
             </div>
           </div>
@@ -160,7 +160,7 @@ export const TMConfigModal: React.FC<TMConfigModalProps> = ({
               value={acceptStatesStr}
               onChange={(e) => setAcceptStatesStr(e.target.value)}
               placeholder="q_accept"
-              className="w-full px-3 py-2 rounded-xl bg-[#f8f5ee] dark:bg-slate-950 border border-stone-300/90 dark:border-slate-700 text-emerald-700 dark:text-emerald-400 focus:outline-none focus:border-violet-500 shadow-xs font-semibold"
+              className="w-full px-3 py-2 rounded-xl bg-[#fbfaf7] dark:bg-slate-950 border border-stone-200/90 dark:border-slate-700 text-emerald-700 dark:text-emerald-400 focus:outline-none focus:border-violet-500 shadow-xs font-semibold"
             />
           </div>
 
@@ -174,7 +174,7 @@ export const TMConfigModal: React.FC<TMConfigModalProps> = ({
               value={rejectStatesStr}
               onChange={(e) => setRejectStatesStr(e.target.value)}
               placeholder="q_reject"
-              className="w-full px-3 py-2 rounded-xl bg-[#f8f5ee] dark:bg-slate-950 border border-stone-300/90 dark:border-slate-700 text-rose-700 dark:text-rose-400 focus:outline-none focus:border-violet-500 shadow-xs font-semibold"
+              className="w-full px-3 py-2 rounded-xl bg-[#fbfaf7] dark:bg-slate-950 border border-stone-200/90 dark:border-slate-700 text-rose-700 dark:text-rose-400 focus:outline-none focus:border-violet-500 shadow-xs font-semibold"
             />
           </div>
 
@@ -183,7 +183,7 @@ export const TMConfigModal: React.FC<TMConfigModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-[#ede7da] hover:bg-[#e4dcce] dark:bg-slate-800 dark:hover:bg-slate-700 text-stone-700 dark:text-slate-300 font-sans text-xs font-semibold transition"
+              className="px-4 py-2 rounded-xl bg-[#f4efe8] hover:bg-[#ebe4d8] dark:bg-slate-800 dark:hover:bg-slate-700 text-stone-700 dark:text-slate-300 font-sans text-xs font-semibold transition"
             >
               Cancel
             </button>

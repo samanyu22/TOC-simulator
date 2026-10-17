@@ -59,7 +59,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f6f3eb] text-stone-800 dark:bg-[#070a13] dark:text-slate-100 font-sans selection:bg-amber-500/20 selection:text-amber-950 dark:selection:bg-violet-500/30 dark:selection:text-cyan-200 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#fbfaf7] text-stone-800 dark:bg-[#070a13] dark:text-slate-100 font-sans selection:bg-amber-500/20 selection:text-amber-950 dark:selection:bg-violet-500/30 dark:selection:text-cyan-200 transition-colors duration-200">
       {/* Top Navigation */}
       <Navbar
         currentView={currentView}
