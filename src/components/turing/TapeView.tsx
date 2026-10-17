@@ -8,7 +8,7 @@ interface TapeViewProps {
   onCellClick?: (index: number) => void;
 }
 
-export const TapeView: React.FC<TapeViewProps> = ({
+export const TapeView: React.FC<TapeViewProps> = React.memo(({
   state,
   blankSymbol,
   onCellClick,
@@ -219,4 +219,6 @@ export const TapeView: React.FC<TapeViewProps> = ({
       </div>
     </div>
   );
-};
+});
+
+TapeView.displayName = 'TapeView';

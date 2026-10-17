@@ -9,7 +9,7 @@ interface TMHistoryProps {
   blankSymbol: string;
 }
 
-export const TMHistory: React.FC<TMHistoryProps> = ({
+export const TMHistory: React.FC<TMHistoryProps> = React.memo(({
   history,
   inspectingStep,
   onInspectStep,
@@ -122,4 +122,6 @@ export const TMHistory: React.FC<TMHistoryProps> = ({
       </div>
     </div>
   );
-};
+});
+
+TMHistory.displayName = 'TMHistory';

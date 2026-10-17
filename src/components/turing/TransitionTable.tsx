@@ -11,7 +11,7 @@ interface TransitionTableProps {
   readOnly?: boolean;
 }
 
-export const TransitionTable: React.FC<TransitionTableProps> = ({
+export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
   transitions,
   states,
   activeTransition,
@@ -246,4 +246,6 @@ export const TransitionTable: React.FC<TransitionTableProps> = ({
       </div>
     </div>
   );
-};
+});
+
+TransitionTable.displayName = 'TransitionTable';

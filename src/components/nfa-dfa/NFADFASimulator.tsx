@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import type { NFADefinition } from '../../types/automata';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import type { NFADefinition, NFATransition } from '../../types/automata';
+import { EPSILON } from '../../types/automata';
 import { NFA_EXAMPLES } from '../../simulators/nfa-dfa/examples';
 import { convertNfaToDfa } from '../../simulators/nfa-dfa/subset-construction';
 import { AutomataGraph } from './AutomataGraph';
@@ -87,6 +88,106 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
       to: t.toSubset,
     }));
   }, [dfa.transitions]);
+
+  // --- NFA Graph Direct Manipulation Handlers ---
+  const handleAddState = useCallback((name: string, isAccept: boolean = false) => {
+    setCurrentNFA(prev => {
+      if (prev.states.includes(name)) return prev;
+      return {
+        ...prev,
+        states: [...prev.states, name],
+        acceptStates: isAccept ? [...prev.acceptStates, name] : prev.acceptStates,
+      };
+    });
+    setConversionStepIndex(1);
+  }, []);
+
+  const handleAddTransition = useCallback((from: string, symbol: string, to: string) => {
+    setCurrentNFA(prev => {
+      const exists = prev.transitions.some(
+        t => t.fromState === from && t.toState === to && t.symbol === symbol
+      );
+      if (exists) return prev;
+
+      const newTransition: NFATransition = {
+        id: `trans_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+        fromState: from,
+        symbol: symbol === 'eps' || symbol === 'e' ? EPSILON : symbol,
+        toState: to,
+      };
+
+      const updatedAlphabet = (symbol !== EPSILON && !prev.alphabet.includes(symbol))
+        ? [...prev.alphabet, symbol]
+        : prev.alphabet;
+
+      return {
+        ...prev,
+        alphabet: updatedAlphabet,
+        transitions: [...prev.transitions, newTransition],
+      };
+    });
+    setConversionStepIndex(1);
+  }, []);
+
+  const handleDeleteState = useCallback((stateId: string) => {
+    setCurrentNFA(prev => {
+      if (prev.states.length <= 1) return prev;
+      const remainingStates = prev.states.filter(s => s !== stateId);
+      const remainingAccept = prev.acceptStates.filter(s => s !== stateId);
+      const newInitial = prev.initialState === stateId ? (remainingStates[0] || 'q0') : prev.initialState;
+      const remainingTransitions = prev.transitions.filter(
+        t => t.fromState !== stateId && t.toState !== stateId
+      );
+
+      return {
+        ...prev,
+        states: remainingStates,
+        acceptStates: remainingAccept,
+        initialState: newInitial,
+        transitions: remainingTransitions,
+      };
+    });
+    setConversionStepIndex(1);
+  }, []);
+
+  const handleDeleteTransition = useCallback((from: string, to: string, symbol?: string) => {
+    setCurrentNFA(prev => {
+      const remainingTransitions = prev.transitions.filter(t => {
+        if (t.fromState === from && t.toState === to) {
+          if (symbol) return t.symbol !== symbol;
+          return false;
+        }
+        return true;
+      });
+
+      return {
+        ...prev,
+        transitions: remainingTransitions,
+      };
+    });
+    setConversionStepIndex(1);
+  }, []);
+
+  const handleToggleAcceptState = useCallback((stateId: string) => {
+    setCurrentNFA(prev => {
+      const isAcc = prev.acceptStates.includes(stateId);
+      return {
+        ...prev,
+        acceptStates: isAcc
+          ? prev.acceptStates.filter(s => s !== stateId)
+          : [...prev.acceptStates, stateId],
+      };
+    });
+    setConversionStepIndex(1);
+  }, []);
+
+  const handleSetInitialState = useCallback((stateId: string) => {
+    setCurrentNFA(prev => ({
+      ...prev,
+      initialState: stateId,
+    }));
+    setConversionStepIndex(1);
+  }, []);
 
   // Highlight elements during walkthrough
   const currentWalkthroughStep = steps[conversionStepIndex - 1];
@@ -193,6 +294,14 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
               acceptStates={currentNFA.acceptStates}
               transitions={nfaGraphTransitions}
               activeStates={highlightedNFAStates}
+              isEditable={true}
+              alphabet={currentNFA.alphabet}
+              onAddState={handleAddState}
+              onAddTransition={handleAddTransition}
+              onDeleteState={handleDeleteState}
+              onDeleteTransition={handleDeleteTransition}
+              onToggleAcceptState={handleToggleAcceptState}
+              onSetInitialState={handleSetInitialState}
             />
           </div>
 
@@ -245,6 +354,14 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
               acceptStates={currentNFA.acceptStates}
               transitions={nfaGraphTransitions}
               activeStates={highlightedNFAStates}
+              isEditable={true}
+              alphabet={currentNFA.alphabet}
+              onAddState={handleAddState}
+              onAddTransition={handleAddTransition}
+              onDeleteState={handleDeleteState}
+              onDeleteTransition={handleDeleteTransition}
+              onToggleAcceptState={handleToggleAcceptState}
+              onSetInitialState={handleSetInitialState}
             />
           ) : (
             <AutomataGraph

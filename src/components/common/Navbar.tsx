@@ -94,11 +94,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       id: 'examples', 
       label: 'Library', 
       icon: Layers, 
-      badge: '11 Presets',
+      badge: undefined,
       activeGradient: 'from-amber-600 to-orange-600',
       activeShadow: 'shadow-amber-600/30 border-amber-400/40',
       ambientGlow: 'bg-amber-500/20 dark:bg-amber-500/25',
-      badgeClass: 'bg-white/20 text-white border-white/30',
+      badgeClass: undefined,
       shortcut: '5',
     },
   ] as const;
@@ -235,7 +235,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               {/* Soft Translucent Hover Backdrop */}
               <div
-                className="absolute top-1 bottom-1 rounded-xl bg-slate-200/60 dark:bg-white/[0.06] transition-all duration-200 ease-out pointer-events-none transform-gpu will-change-[left,width]"
+                className="absolute top-1 bottom-1 rounded-xl bg-slate-200/60 dark:bg-white/[0.06] transition-[left,width,opacity,transform] duration-180 ease-out pointer-events-none transform-gpu will-change-[left,width,opacity]"
                 style={{
                   left: `${hoverIndicatorStyle.left}px`,
                   width: `${hoverIndicatorStyle.width}px`,
@@ -244,9 +244,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
               />
 
-              {/* Active Morphing Gradient Pill with Spring Physics */}
+              {/* Active Morphing Gradient Pill with 120fps Spring Physics */}
               <div
-                className={`absolute top-1 bottom-1 rounded-xl bg-gradient-to-r ${activeItem.activeGradient} shadow-md ${activeItem.activeShadow} border transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] pointer-events-none transform-gpu will-change-[left,width]`}
+                className={`absolute top-1 bottom-1 rounded-xl bg-gradient-to-r ${activeItem.activeGradient} shadow-md ${activeItem.activeShadow} border transition-[left,width,opacity] duration-220 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none transform-gpu will-change-[left,width,opacity]`}
                 style={{
                   left: `${indicatorStyle.left}px`,
                   width: `${indicatorStyle.width}px`,

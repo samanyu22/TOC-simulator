@@ -2,17 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { 
   Cpu, 
   Network, 
-  ArrowRight, 
-  Layers, 
-  Binary, 
-  Clock, 
-  Sparkles,
-  GitBranch,
-  ShieldCheck,
-  CheckCircle2,
-  Terminal,
-  Zap
+  ArrowRight
 } from 'lucide-react';
+import { GlowCard } from '../common/GlowCard';
 
 interface FeatureCardsProps {
   onNavigate: (view: 'tm' | 'nfa-dfa') => void;
@@ -80,15 +72,17 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
         {/* =========================================================
             CARD 1: TURING MACHINE SIMULATOR
             ========================================================= */}
-        <div 
-          className="group relative rounded-3xl p-[1px] bg-gradient-to-b from-violet-500/20 via-slate-200/50 to-transparent dark:from-violet-500/30 dark:via-white/[0.04] dark:to-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-violet-900/10 flex flex-col"
+        <GlowCard 
+          glowColor="purple"
+          customSize={true}
+          borderRadius={24}
+          spotlightSize={340}
+          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-violet-900/20 p-7 sm:p-8 bg-white/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden"
           onMouseEnter={() => setIsTmAuto(false)}
           onMouseLeave={() => setIsTmAuto(true)}
         >
-          {/* Card Body */}
-          <div className="relative rounded-[23px] p-7 sm:p-8 bg-white/95 dark:bg-[#080d1e]/95 border border-slate-200/90 dark:border-white/[0.08] backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden transition-colors">
-            {/* Ambient Lighting Glow */}
-            <div className="absolute top-0 right-0 w-72 h-72 bg-violet-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 group-hover:bg-violet-600/15 transition-colors duration-500" />
+          {/* Ambient Lighting Glow */}
+          <div className="absolute top-0 right-0 w-72 h-72 bg-violet-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 group-hover:bg-violet-600/15 transition-colors duration-500" />
 
             {/* Header */}
             <div className="space-y-4 relative z-10">
@@ -173,40 +167,6 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Spec Highlights Grid */}
-            <div className="grid grid-cols-2 gap-2.5 text-xs relative z-10">
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
-                <Binary className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Infinite Memory</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Bidirectional dynamic expansion</div>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
-                <Clock className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Time-Travel Audit</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Step undo, redo, and state rollback</div>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
-                <Terminal className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Custom 7-Tuple</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Editable δ matrix & validation</div>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
-                <Zap className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Verified Presets</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Binary addition, palindrome, increment</div>
-                </div>
-              </div>
-            </div>
 
             {/* Launch Button */}
             <button
@@ -216,21 +176,22 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
               <span>Launch Turing Machine Simulator</span>
               <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
             </button>
-          </div>
-        </div>
+        </GlowCard>
 
         {/* =========================================================
             CARD 2: NFA TO DFA CONVERTER
             ========================================================= */}
-        <div 
-          className="group relative rounded-3xl p-[1px] bg-gradient-to-b from-cyan-500/20 via-slate-200/50 to-transparent dark:from-cyan-500/30 dark:via-white/[0.04] dark:to-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/10 flex flex-col"
+        <GlowCard 
+          glowColor="blue"
+          customSize={true}
+          borderRadius={24}
+          spotlightSize={340}
+          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20 p-7 sm:p-8 bg-white/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden"
           onMouseEnter={() => setIsNfaAuto(false)}
           onMouseLeave={() => setIsNfaAuto(true)}
         >
-          {/* Card Body */}
-          <div className="relative rounded-[23px] p-7 sm:p-8 bg-white/95 dark:bg-[#080d1e]/95 border border-slate-200/90 dark:border-white/[0.08] backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden transition-colors">
-            {/* Ambient Lighting Glow */}
-            <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 group-hover:bg-cyan-600/15 transition-colors duration-500" />
+          {/* Ambient Lighting Glow */}
+          <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 group-hover:bg-cyan-600/15 transition-colors duration-500" />
 
             {/* Header */}
             <div className="space-y-4 relative z-10">
@@ -389,40 +350,6 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Spec Highlights Grid */}
-            <div className="grid grid-cols-2 gap-2.5 text-xs relative z-10">
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
-                <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Powerset Engine</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Strict 2^Q subset determinization</div>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
-                <GitBranch className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">ε-Closure Trace</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Recursive spontaneous moves</div>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
-                <ShieldCheck className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Dual Equivalence</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Parallel string validation</div>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-white/[0.06] flex items-center gap-2.5 transition">
-                <CheckCircle2 className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
-                <div>
-                  <div className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">Trap State Routing</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Automatic ∅ sink transition</div>
-                </div>
-              </div>
-            </div>
 
             {/* Launch Button */}
             <button
@@ -432,8 +359,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
               <span>Launch NFA → DFA Converter</span>
               <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
             </button>
-          </div>
-        </div>
+        </GlowCard>
       </div>
     </section>
   );
