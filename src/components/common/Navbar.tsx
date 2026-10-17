@@ -185,7 +185,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       />
 
       {/* Main Glass Navbar Bar */}
-      <nav className="relative w-full glass-panel border-b border-slate-200/80 dark:border-white/[0.08] backdrop-blur-xl shadow-xs transition-colors duration-200">
+      <nav className="relative w-full glass-panel border-b border-stone-300/70 dark:border-white/[0.08] backdrop-blur-xl shadow-xs transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             
@@ -199,7 +199,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {/* Multi-layered animated aura with smooth 500ms ease-out */}
                 <div className="absolute -inset-1.5 bg-gradient-to-r from-violet-600 via-cyan-500 to-indigo-600 rounded-2xl blur-md opacity-55 group-hover:opacity-95 group-hover:blur-xl transition-all duration-500 ease-out group-hover:scale-115"></div>
                 
-                <div className="relative p-2.5 rounded-2xl bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-200/90 dark:border-white/10 group-hover:border-violet-500/50 shadow-xs transition-all duration-400 ease-out group-hover:shadow-[0_0_20px_rgba(139,92,246,0.35)]">
+                <div className="relative p-2.5 rounded-2xl bg-[#fffdf9] dark:bg-slate-950 text-stone-900 dark:text-white border border-stone-300/80 dark:border-white/10 group-hover:border-violet-500/50 shadow-xs transition-all duration-400 ease-out group-hover:shadow-[0_0_20px_rgba(139,92,246,0.35)]">
                   <Cpu className="w-5 h-5 text-violet-600 dark:text-cyan-400 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300 ease-out" />
                 </div>
               </div>
@@ -218,7 +218,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </span>
                 </div>
 
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block -mt-0.5 tracking-wider uppercase font-semibold group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors duration-300">
+                <span className="text-[10px] text-stone-500 dark:text-slate-400 font-mono block -mt-0.5 tracking-wider uppercase font-semibold group-hover:text-stone-700 dark:group-hover:text-slate-300 transition-colors duration-300">
                   Theory Playground
                 </span>
               </div>
@@ -231,7 +231,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setHoveredTab(null);
                 setHoverIndicatorStyle(prev => ({ ...prev, opacity: 0 }));
               }}
-              className="hidden md:flex relative items-center p-1 rounded-2xl bg-slate-100/90 dark:bg-slate-950/80 border border-slate-200/80 dark:border-white/[0.08] shadow-inner transition-colors backdrop-blur-md"
+              className="hidden md:flex relative items-center p-1 rounded-2xl bg-[#eee8dc]/85 dark:bg-slate-950/80 border border-stone-300/80 dark:border-white/[0.08] shadow-inner transition-colors backdrop-blur-md"
             >
               {/* Soft Translucent Hover Backdrop */}
               <div
@@ -281,7 +281,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className={`relative z-10 flex items-center gap-2 px-3 lg:px-3.5 py-1.5 rounded-xl text-xs transition-colors duration-200 select-none group/tab ${
                       isActive
                         ? 'text-white font-bold'
-                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-slate-100 font-semibold'
+                        : 'text-stone-600 dark:text-slate-400 hover:text-stone-950 dark:hover:text-slate-100 font-semibold'
                     }`}
                   >
                     <Icon 
@@ -289,8 +289,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                         isActive 
                           ? 'text-white scale-110' 
                           : isHovered 
-                          ? 'text-slate-800 dark:text-slate-200 -translate-y-0.5' 
-                          : 'text-slate-500 dark:text-slate-400'
+                          ? 'text-stone-800 dark:text-slate-200 -translate-y-0.5' 
+                          : 'text-stone-500 dark:text-slate-400'
                       }`} 
                     />
                     
@@ -301,7 +301,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <span className={`hidden xl:inline-flex text-[9px] font-mono px-1.5 py-0.2 rounded-full font-bold transition-all duration-200 ${
                         isActive 
                           ? item.badgeClass
-                          : 'bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                          : 'bg-stone-200/80 dark:bg-slate-800 text-stone-600 dark:text-slate-400'
                       }`}>
                         {item.badge}
                       </span>
@@ -316,13 +316,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Import/Export Modal Button */}
               <button
                 onClick={onOpenIO}
-                className="group flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-white hover:bg-slate-50 dark:bg-slate-900/90 dark:hover:bg-slate-800/90 text-xs font-semibold text-slate-700 dark:text-slate-300 border border-slate-200/90 dark:border-white/[0.08] hover:border-violet-500/30 dark:hover:border-cyan-500/30 transition-all duration-200 shadow-xs hover:shadow-sm active:scale-95"
+                className="group flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-[#fffdf9] hover:bg-[#f6f2e8] dark:bg-slate-900/90 dark:hover:bg-slate-800/90 text-xs font-semibold text-stone-700 dark:text-slate-300 border border-stone-300/80 dark:border-white/[0.08] hover:border-amber-600/30 dark:hover:border-cyan-500/30 transition-all duration-200 shadow-xs hover:shadow-sm active:scale-95"
                 title="Import or Export Machine Configurations (Ctrl+I)"
               >
                 <FileDown className="w-3.5 h-3.5 text-violet-600 dark:text-cyan-400 group-hover:-translate-y-0.5 transition-transform" />
                 <span className="hidden lg:inline">Import / Export</span>
                 
-                <kbd className="inline-flex items-center text-[9px] font-mono px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-black/50 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10 font-bold shadow-2xs">
+                <kbd className="inline-flex items-center text-[9px] font-mono px-1.5 py-0.5 rounded-md bg-stone-200/80 dark:bg-black/50 text-stone-600 dark:text-slate-400 border border-stone-300/70 dark:border-white/10 font-bold shadow-2xs">
                   JSON
                 </kbd>
               </button>
@@ -331,7 +331,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={handleResetClick}
                 disabled={isResetting}
-                className="p-2 rounded-2xl bg-white hover:bg-slate-50 dark:bg-slate-900/90 dark:hover:bg-slate-800/90 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200/90 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/20 transition-all duration-200 active:scale-95 shadow-xs"
+                className="p-2 rounded-2xl bg-[#fffdf9] hover:bg-[#f6f2e8] dark:bg-slate-900/90 dark:hover:bg-slate-800/90 text-stone-500 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white border border-stone-300/80 dark:border-white/[0.08] hover:border-stone-400 dark:hover:border-white/20 transition-all duration-200 active:scale-95 shadow-xs"
                 title="Reset All Configurations to Defaults"
               >
                 <RotateCcw className={`w-3.5 h-3.5 transition-transform duration-300 ${isResetting ? 'rotate-180 text-violet-600 dark:text-cyan-400' : ''}`} />
@@ -348,7 +348,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Animated Morphing Hamburger Button */}
               <button
                 onClick={() => setMobileMenuOpen(prev => !prev)}
-                className="relative p-2.5 rounded-2xl bg-white dark:bg-slate-900/90 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 transition-all duration-200 active:scale-90 shadow-xs"
+                className="relative p-2.5 rounded-2xl bg-[#fffdf9] dark:bg-slate-900/90 text-stone-700 dark:text-slate-300 border border-stone-300/80 dark:border-white/10 hover:border-stone-400 dark:hover:border-white/20 transition-all duration-200 active:scale-90 shadow-xs"
                 aria-label="Toggle navigation menu"
                 aria-expanded={mobileMenuOpen}
               >
@@ -365,11 +365,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Fancy Mobile Drawer with Staggered Entrance & Frosted Glass */}
         <div 
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-slate-200/80 dark:border-white/[0.08] ${
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-stone-300/80 dark:border-white/[0.08] ${
             mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
           }`}
         >
-          <div className="p-4 space-y-2 bg-white/95 dark:bg-[#070b18]/95 backdrop-blur-2xl shadow-2xl">
+          <div className="p-4 space-y-2 bg-[#fcfaf5]/95 dark:bg-[#070b18]/95 backdrop-blur-2xl shadow-2xl">
             {navItems.map((item, index) => {
               const Icon = item.icon;
               const isActive = currentView === item.id;
@@ -382,11 +382,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-semibold transition-all duration-200 transform ${
                     isActive
                       ? `bg-gradient-to-r ${item.activeGradient} text-white shadow-md ${item.activeShadow} border scale-[1.01]`
-                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.04] active:scale-98'
+                      : 'text-stone-700 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-white/[0.04] active:scale-98'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`p-1.5 rounded-xl ${isActive ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}`}>
+                    <div className={`p-1.5 rounded-xl ${isActive ? 'bg-white/20 text-white' : 'bg-stone-100 dark:bg-slate-800 text-stone-600 dark:text-slate-400'}`}>
                       <Icon className="w-4 h-4" />
                     </div>
                     <span className="text-sm tracking-tight">{item.label}</span>
@@ -397,25 +397,25 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold ${
                         isActive
                           ? item.badgeClass
-                          : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+                          : 'bg-stone-200 dark:bg-slate-800 text-stone-700 dark:text-slate-300'
                       }`}>
                         {item.badge}
                       </span>
                     )}
-                    <ChevronRight className={`w-4 h-4 opacity-50 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                    <ChevronRight className={`w-4 h-4 opacity-50 ${isActive ? 'text-white' : 'text-stone-400'}`} />
                   </div>
                 </button>
               );
             })}
 
             {/* Mobile Quick Action Footer */}
-            <div className="pt-3 mt-2 border-t border-slate-200/80 dark:border-white/[0.08] flex items-center justify-between gap-3">
+            <div className="pt-3 mt-2 border-t border-stone-300/80 dark:border-white/[0.08] flex items-center justify-between gap-3">
               <button
                 onClick={() => {
                   onOpenIO();
                   setMobileMenuOpen(false);
                 }}
-                className="flex-1 flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900 text-xs font-semibold text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/[0.08] hover:bg-slate-200 dark:hover:bg-slate-800 transition active:scale-95 shadow-2xs"
+                className="flex-1 flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-2xl bg-[#ede7da] dark:bg-slate-900 text-xs font-semibold text-stone-800 dark:text-slate-200 border border-stone-300/80 dark:border-white/[0.08] hover:bg-[#e4dcce] dark:hover:bg-slate-800 transition active:scale-95 shadow-2xs"
               >
                 <FileDown className="w-4 h-4 text-violet-600 dark:text-cyan-400" />
                 <span>Import / Export</span>
@@ -426,7 +426,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   handleResetClick();
                   setMobileMenuOpen(false);
                 }}
-                className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900 text-xs font-semibold text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-white/[0.08] hover:text-slate-900 dark:hover:text-white transition active:scale-95 shadow-2xs"
+                className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-[#ede7da] dark:bg-slate-900 text-xs font-semibold text-stone-600 dark:text-slate-400 border border-stone-300/80 dark:border-white/[0.08] hover:text-stone-900 dark:hover:text-white transition active:scale-95 shadow-2xs"
                 title="Reset Defaults"
               >
                 <RotateCcw className="w-4 h-4" />

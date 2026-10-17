@@ -8,6 +8,19 @@ export default {
   theme: {
     extend: {
       colors: {
+        beige: {
+          50: '#fbf9f5',
+          100: '#f6f3eb',
+          200: '#eee8dc',
+          300: '#e1d7c5',
+          400: '#cbbda7',
+          500: '#b2a088',
+          600: '#96836c',
+          700: '#796854',
+          800: '#5e5041',
+          900: '#463a2f',
+          surface: '#fffdf9',
+        },
         background: {
           DEFAULT: '#070a13',
           card: '#0f172a',

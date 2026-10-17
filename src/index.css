@@ -5,11 +5,11 @@
 /* Base Tokens */
 @layer base {
   :root {
-    --bg-primary: #edf1f7;
-    --bg-surface: #ffffff;
-    --bg-card: rgba(255, 255, 255, 0.95);
-    --border-subtle: rgba(148, 163, 184, 0.28);
-    --border-glow: rgba(99, 102, 241, 0.25);
+    --bg-primary: #f6f3eb;
+    --bg-surface: #fffdf9;
+    --bg-card: rgba(255, 254, 250, 0.96);
+    --border-subtle: rgba(185, 170, 145, 0.35);
+    --border-glow: rgba(217, 119, 6, 0.18);
   }
 
   html.dark {
@@ -29,7 +29,7 @@
 
   body {
     background-color: var(--bg-primary);
-    color: #1e293b;
+    color: #292524;
     overflow-x: hidden;
     overscroll-behavior-y: none;
     -webkit-tap-highlight-color: transparent;
@@ -58,13 +58,13 @@
   contain: content;
 }
 
-/* Premium 120fps-Optimized Panels */
+/* Premium 120fps-Optimized Panels - Warm Beige Ivory in Light Mode */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(203, 213, 225, 0.8);
+  background: rgba(255, 254, 250, 0.94);
+  border: 1px solid rgba(215, 203, 185, 0.7);
   box-shadow: 
-    0 1px 3px 0 rgba(15, 23, 42, 0.04),
-    0 8px 24px -4px rgba(15, 23, 42, 0.05);
+    0 1px 3px 0 rgba(70, 55, 35, 0.04),
+    0 10px 25px -4px rgba(70, 55, 35, 0.05);
   transform: translateZ(0);
   backface-visibility: hidden;
   contain: layout style;
@@ -83,9 +83,10 @@
 
 /* Scoped blur on floating navigation bar where page content scrolls underneath */
 nav.glass-panel {
-  background: rgba(255, 255, 255, 0.86);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(246, 243, 235, 0.90);
+  border-bottom: 1px solid rgba(215, 203, 185, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .dark nav.glass-panel {
@@ -104,10 +105,10 @@ nav.glass-panel {
 
 .glass-card-hover:hover {
   transform: translate3d(0, -3px, 0);
-  border-color: rgba(99, 102, 241, 0.45);
+  border-color: rgba(180, 130, 80, 0.45);
   box-shadow: 
-    0 16px 30px -8px rgba(99, 102, 241, 0.12),
-    0 4px 10px -2px rgba(15, 23, 42, 0.04);
+    0 16px 30px -8px rgba(180, 130, 80, 0.12),
+    0 4px 10px -2px rgba(70, 55, 35, 0.04);
 }
 
 .dark .glass-card-hover:hover {
@@ -145,7 +146,7 @@ nav.glass-panel {
 /* High-tech Grid Background */
 .bg-grid-pattern {
   background-image: 
-    radial-gradient(rgba(148, 163, 184, 0.22) 1px, transparent 1px);
+    radial-gradient(rgba(175, 155, 125, 0.28) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -154,13 +155,13 @@ nav.glass-panel {
     radial-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px);
 }
 
-/* Cybernetic Tape Drive Chassis */
+/* Cybernetic Tape Drive Chassis - Warm Oat Beige in Light Mode */
 .tape-chassis {
-  background: linear-gradient(180deg, #e4eaf2 0%, #dae1eb 100%);
-  border: 1px solid #cbd5e1;
+  background: linear-gradient(180deg, #ede7da 0%, #e3dbcc 100%);
+  border: 1px solid #d4cabb;
   box-shadow: 
-    inset 0 2px 4px rgba(15, 23, 42, 0.06),
-    0 2px 4px rgba(15, 23, 42, 0.03);
+    inset 0 2px 5px rgba(80, 60, 30, 0.07),
+    0 2px 4px rgba(80, 60, 30, 0.03);
 }
 
 .dark .tape-chassis {
@@ -187,14 +188,14 @@ nav.glass-panel {
   box-shadow: 0 0 12px #22d3ee;
 }
 
-/* Custom Slick Scrollbars */
+/* Custom Slick Scrollbars - Warm Linen in Light Mode */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(241, 245, 249, 0.8);
+  background: rgba(238, 232, 222, 0.85);
 }
 
 .dark ::-webkit-scrollbar-track {
@@ -202,7 +203,7 @@ nav.glass-panel {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.35);
+  background: rgba(185, 170, 145, 0.45);
   border-radius: 9999px;
 }
 
@@ -211,7 +212,7 @@ nav.glass-panel {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.55);
+  background: rgba(150, 130, 105, 0.65);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {

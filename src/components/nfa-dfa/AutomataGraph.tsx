@@ -456,10 +456,10 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
     >
       {/* Top Header Title Badge */}
       {title && (
-        <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5 px-3.5 py-1.5 rounded-2xl bg-white/90 dark:bg-slate-950/85 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-lg transition-colors pointer-events-none">
-          <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse"></span>
-          <span className="text-xs font-bold text-slate-800 dark:text-white tracking-wide uppercase font-mono">{title}</span>
-          <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">({states.length} states)</span>
+        <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5 px-3.5 py-1.5 rounded-2xl bg-[#fffdf9]/95 dark:bg-slate-950/85 backdrop-blur-md border border-stone-300/80 dark:border-white/10 shadow-lg transition-colors pointer-events-none">
+          <span className="w-2 h-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse"></span>
+          <span className="text-xs font-bold text-stone-900 dark:text-white tracking-wide uppercase font-mono">{title}</span>
+          <span className="text-xs text-stone-500 dark:text-slate-400 font-mono">({states.length} states)</span>
         </div>
       )}
 
@@ -478,7 +478,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
       )}
 
       {/* Floating HUD Controls */}
-      <div className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 p-1.5 rounded-2xl bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-2xl transition-colors">
+      <div className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#fffdf9]/95 dark:bg-slate-950/90 backdrop-blur-xl border border-stone-300/80 dark:border-white/10 shadow-2xl transition-colors">
         {isEditable && (
           <button
             onClick={() => {
@@ -490,7 +490,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
               if (onAddState) onAddState(name);
             }}
             title="Quick Add State (Center)"
-            className="p-2 rounded-xl text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/60 transition active:scale-95"
+            className="p-2 rounded-xl text-cyan-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/60 transition active:scale-95"
           >
             <Plus className="w-4 h-4" />
           </button>
@@ -498,28 +498,28 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
         <button 
           onClick={() => handleZoom(0.15)} 
           title="Zoom In (+)"
-          className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition active:scale-95"
+          className="p-2 rounded-xl text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition active:scale-95"
         >
           <ZoomIn className="w-4 h-4" />
         </button>
         <button 
           onClick={() => handleZoom(-0.15)} 
           title="Zoom Out (-)"
-          className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition active:scale-95"
+          className="p-2 rounded-xl text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition active:scale-95"
         >
           <ZoomOut className="w-4 h-4" />
         </button>
         <button 
           onClick={resetView} 
           title="Reset Graph Layout & Zoom"
-          className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition active:scale-95"
+          className="p-2 rounded-xl text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition active:scale-95"
         >
           <Maximize2 className="w-4 h-4" />
         </button>
       </div>
 
       {/* Drag & Pan & Right-Click Hint */}
-      <div className="absolute bottom-4 left-4 z-10 text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 pointer-events-none opacity-80">
+      <div className="absolute bottom-4 left-4 z-10 text-[11px] text-stone-500 dark:text-slate-400 font-mono flex items-center gap-1.5 pointer-events-none opacity-80">
         <Move className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
         <span>{isEditable ? 'Right-click canvas or node to edit • Drag nodes' : 'Drag nodes • Pan canvas'}</span>
       </div>
@@ -582,19 +582,19 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
 
             const edgeStroke = isHighlighted
               ? (isDark ? '#22d3ee' : '#0891b2')
-              : (isDark ? '#475569' : '#94a3b8');
+              : (isDark ? '#475569' : '#a89f8f');
 
             const pillFill = isHighlighted
               ? (isDark ? '#0e7490' : '#0891b2')
-              : (isDark ? '#0a0f1d' : '#ffffff');
+              : (isDark ? '#0a0f1d' : '#fffdf9');
 
             const pillStroke = isHighlighted
               ? (isDark ? '#22d3ee' : '#06b6d4')
-              : (isDark ? '#334155' : '#cbd5e1');
+              : (isDark ? '#334155' : '#d5cbb8');
 
             const pillText = isHighlighted
               ? '#ffffff'
-              : (isDark ? '#e2e8f0' : '#1e293b');
+              : (isDark ? '#e2e8f0' : '#292524');
 
             return (
               <g key={edge.id}>
@@ -673,8 +673,8 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
               : isSelected
               ? (isDark ? '#1e1b4b' : '#ede9fe')
               : isHovered
-              ? (isDark ? '#111827' : '#f1f5f9')
-              : (isDark ? '#080d1a' : '#ffffff');
+              ? (isDark ? '#111827' : '#f5eee1')
+              : (isDark ? '#080d1a' : '#fffdf9');
 
             const nodeStroke = isConnectingTarget
               ? '#22d3ee'
@@ -686,11 +686,11 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
               ? (isDark ? '#38bdf8' : '#0284c7')
               : node.isAccept
               ? (isDark ? '#10b981' : '#059669')
-              : (isDark ? '#475569' : '#94a3b8');
+              : (isDark ? '#475569' : '#a89f8f');
 
             const textColor = isActive
               ? '#ffffff'
-              : (isDark ? '#f8fafc' : '#0f172a');
+              : (isDark ? '#f8fafc' : '#1c1917');
 
             return (
               <g
@@ -723,8 +723,8 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
                       width={38}
                       height={20}
                       rx={6}
-                      fill={isDark ? '#1e1b4b' : '#ede9fe'}
-                      stroke={isDark ? '#8b5cf6' : '#a78bfa'}
+                      fill={isDark ? '#1e1b4b' : '#ede5d5'}
+                      stroke={isDark ? '#8b5cf6' : '#c4b5fd'}
                       strokeWidth={1}
                     />
                     <text

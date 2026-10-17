@@ -86,14 +86,14 @@ export const TransitionTableEditor: React.FC<TransitionTableEditorProps> = ({
   };
 
   return (
-    <div className="glass-panel rounded-2xl p-5 border border-slate-200/80 dark:border-slate-700/60 shadow-xl space-y-5 transition-colors duration-200">
+    <div className="glass-panel rounded-2xl p-5 border border-stone-300/80 dark:border-slate-700/60 shadow-xl space-y-5 transition-colors duration-200">
       {/* State Badges & Management */}
       <div>
         <div className="flex items-center justify-between mb-2">
-          <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+          <label className="text-xs font-semibold text-stone-700 dark:text-slate-300 uppercase tracking-wider">
             States ({nfa.states.length}):
           </label>
-          <span className="text-[11px] text-slate-500 dark:text-slate-400">Click shield to toggle Accepting state</span>
+          <span className="text-[11px] text-stone-500 dark:text-slate-400">Click shield to toggle Accepting state</span>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {nfa.states.map((st) => {
@@ -106,14 +106,14 @@ export const TransitionTableEditor: React.FC<TransitionTableEditorProps> = ({
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-xs font-mono border transition ${
                   isInit
                     ? 'bg-violet-100 dark:bg-violet-950/70 border-violet-300 dark:border-violet-500 text-violet-900 dark:text-violet-200 shadow-xs dark:shadow-glow-violet'
-                    : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-300'
+                    : 'bg-[#fffdf9] dark:bg-slate-900 border-stone-300/80 dark:border-slate-700 text-stone-800 dark:text-slate-300'
                 }`}
               >
                 {/* Initial button */}
                 <button
                   onClick={() => handleSetInitial(st)}
                   title={isInit ? 'Current initial state' : 'Set as initial state'}
-                  className={`p-0.5 rounded transition ${isInit ? 'text-violet-600 dark:text-violet-400' : 'text-slate-400 hover:text-slate-700 dark:hover:text-white'}`}
+                  className={`p-0.5 rounded transition ${isInit ? 'text-violet-600 dark:text-violet-400' : 'text-stone-400 hover:text-stone-700 dark:hover:text-white'}`}
                 >
                   <Flag className="w-3.5 h-3.5 fill-current" />
                 </button>
@@ -124,7 +124,7 @@ export const TransitionTableEditor: React.FC<TransitionTableEditorProps> = ({
                 <button
                   onClick={() => handleToggleAccept(st)}
                   title={isAcc ? 'Accepting State (double circle)' : 'Mark as accepting state'}
-                  className={`p-0.5 rounded transition ${isAcc ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-slate-400 hover:text-slate-700 dark:hover:text-white'}`}
+                  className={`p-0.5 rounded transition ${isAcc ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-stone-400 hover:text-stone-700 dark:hover:text-white'}`}
                 >
                   <ShieldCheck className="w-3.5 h-3.5" />
                 </button>
@@ -139,11 +139,11 @@ export const TransitionTableEditor: React.FC<TransitionTableEditorProps> = ({
               value={newStateName}
               onChange={(e) => setNewStateName(e.target.value)}
               placeholder="e.g. q3"
-              className="w-16 px-2 py-1 rounded-lg bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-900 dark:text-cyan-300 focus:outline-none focus:border-cyan-500"
+              className="w-16 px-2 py-1 rounded-lg bg-[#fffdf9] dark:bg-slate-950 border border-stone-300/90 dark:border-slate-700 text-xs font-mono text-stone-900 dark:text-cyan-300 focus:outline-none focus:border-cyan-500"
             />
             <button
               type="submit"
-              className="p-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs transition border border-slate-200 dark:border-transparent"
+              className="p-1 rounded-lg bg-[#ede7da] dark:bg-slate-800 hover:bg-[#e3dbcc] dark:hover:bg-slate-700 text-stone-700 dark:text-slate-300 text-xs transition border border-stone-300/80 dark:border-transparent"
               title="Add State"
             >
               <Plus className="w-3.5 h-3.5" />
@@ -154,7 +154,7 @@ export const TransitionTableEditor: React.FC<TransitionTableEditorProps> = ({
 
       {/* Alphabet symbols */}
       <div>
-        <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider block mb-1.5">
+        <label className="text-xs font-semibold text-stone-700 dark:text-slate-300 uppercase tracking-wider block mb-1.5">
           Input Alphabet (Σ):
         </label>
         <div className="flex flex-wrap items-center gap-2">
@@ -177,11 +177,11 @@ export const TransitionTableEditor: React.FC<TransitionTableEditorProps> = ({
               value={newAlphabetChar}
               onChange={(e) => setNewAlphabetChar(e.target.value)}
               placeholder="+"
-              className="w-10 px-2 py-1 rounded-lg bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs font-mono text-center text-slate-900 dark:text-cyan-300 focus:outline-none focus:border-cyan-500"
+              className="w-10 px-2 py-1 rounded-lg bg-[#fffdf9] dark:bg-slate-950 border border-stone-300/90 dark:border-slate-700 text-xs font-mono text-center text-stone-900 dark:text-cyan-300 focus:outline-none focus:border-cyan-500"
             />
             <button
               type="submit"
-              className="p-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs transition border border-slate-200 dark:border-transparent"
+              className="p-1 rounded-lg bg-[#ede7da] dark:bg-slate-800 hover:bg-[#e3dbcc] dark:hover:bg-slate-700 text-stone-700 dark:text-slate-300 text-xs transition border border-stone-300/80 dark:border-transparent"
               title="Add Symbol to Alphabet"
             >
               <Plus className="w-3.5 h-3.5" />
@@ -191,25 +191,25 @@ export const TransitionTableEditor: React.FC<TransitionTableEditorProps> = ({
       </div>
 
       {/* Add Transition Form */}
-      <form onSubmit={handleAddTransition} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 space-y-2 transition-colors">
-        <div className="text-xs font-medium text-slate-700 dark:text-slate-300">Add NFA Transition:</div>
+      <form onSubmit={handleAddTransition} className="p-3.5 rounded-xl bg-[#f8f5ee] dark:bg-slate-950/70 border border-stone-300/80 dark:border-slate-800 space-y-2 transition-colors">
+        <div className="text-xs font-medium text-stone-700 dark:text-slate-300">Add NFA Transition:</div>
         <div className="flex flex-wrap items-center gap-2">
           {/* From */}
           <select
             value={fromState}
             onChange={(e) => setFromState(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none shadow-xs"
+            className="px-2.5 py-1.5 rounded-lg bg-[#fffdf9] dark:bg-slate-900 border border-stone-300/90 dark:border-slate-700 text-xs font-mono text-stone-800 dark:text-slate-200 focus:outline-none shadow-xs"
           >
             {nfa.states.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
 
-          <span className="text-slate-400 font-mono text-xs">on</span>
+          <span className="text-stone-400 font-mono text-xs">on</span>
 
           {/* Symbol */}
           <select
             value={symbol}
             onChange={(e) => setSymbol(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-mono text-cyan-700 dark:text-cyan-300 focus:outline-none shadow-xs"
+            className="px-2.5 py-1.5 rounded-lg bg-[#fffdf9] dark:bg-slate-900 border border-stone-300/90 dark:border-slate-700 text-xs font-mono text-cyan-700 dark:text-cyan-300 focus:outline-none shadow-xs"
           >
             {nfa.alphabet.map(sym => (
               <option key={sym} value={sym}>{sym}</option>
@@ -217,13 +217,13 @@ export const TransitionTableEditor: React.FC<TransitionTableEditorProps> = ({
             <option value={EPSILON}>{EPSILON} (epsilon)</option>
           </select>
 
-          <ArrowRight className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+          <ArrowRight className="w-4 h-4 text-stone-400 dark:text-slate-500" />
 
           {/* To */}
           <select
             value={toState}
             onChange={(e) => setToState(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none shadow-xs"
+            className="px-2.5 py-1.5 rounded-lg bg-[#fffdf9] dark:bg-slate-900 border border-stone-300/90 dark:border-slate-700 text-xs font-mono text-stone-800 dark:text-slate-200 focus:outline-none shadow-xs"
           >
             {nfa.states.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
@@ -239,26 +239,26 @@ export const TransitionTableEditor: React.FC<TransitionTableEditorProps> = ({
       </form>
 
       {/* Transition List */}
-      <div className="overflow-y-auto max-h-56 rounded-xl border border-slate-200 dark:border-slate-800 divide-y divide-slate-100 dark:divide-slate-800/60 bg-white dark:bg-slate-950/40">
+      <div className="overflow-y-auto max-h-56 rounded-xl border border-stone-300/80 dark:border-slate-800 divide-y divide-stone-200 dark:divide-slate-800/60 bg-[#fffdf9] dark:bg-slate-950/40">
         {nfa.transitions.length === 0 ? (
-          <div className="p-4 text-center text-xs text-slate-400">No transitions defined.</div>
+          <div className="p-4 text-center text-xs text-stone-400">No transitions defined.</div>
         ) : (
           nfa.transitions.map((t) => (
             <div
               key={t.id}
-              className="flex items-center justify-between p-2.5 text-xs font-mono hover:bg-slate-50 dark:hover:bg-slate-900/40 transition"
+              className="flex items-center justify-between p-2.5 text-xs font-mono hover:bg-[#f8f5ee] dark:hover:bg-slate-900/40 transition"
             >
               <div className="flex items-center gap-2">
                 <span className="font-bold text-violet-700 dark:text-violet-400">{t.fromState}</span>
-                <span className="text-slate-400">--[</span>
+                <span className="text-stone-400">--[</span>
                 <span className="font-bold text-cyan-700 dark:text-cyan-400">{t.symbol}</span>
-                <span className="text-slate-400">]--&gt;</span>
+                <span className="text-stone-400">]--&gt;</span>
                 <span className="font-bold text-emerald-700 dark:text-emerald-400">{t.toState}</span>
               </div>
 
               <button
                 onClick={() => handleDeleteTransition(t.id)}
-                className="p-1 rounded text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                className="p-1 rounded text-stone-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-slate-800 transition"
                 title="Delete Transition"
               >
                 <Trash2 className="w-3.5 h-3.5" />
