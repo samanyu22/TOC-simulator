@@ -96,18 +96,18 @@ export const LearnAcademy: React.FC = () => {
   }).length;
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <div className="space-y-6 sm:space-y-8 max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
       {/* Academy Banner */}
-      <div className="p-8 rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 relative overflow-hidden transition-colors">
+      <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3.5 sm:space-y-4 relative overflow-hidden transition-colors">
         <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-violet-500/35 via-purple-500/20 to-transparent dark:from-violet-600/10 dark:to-transparent rounded-full blur-3xl pointer-events-none -mr-16 -mt-16" />
         <div className="absolute top-0 right-0 w-44 h-44 bg-violet-400/25 dark:bg-transparent rounded-full blur-2xl pointer-events-none -mr-8 -mt-8" />
 
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-500 text-white shadow-md">
-            <GraduationCap className="w-6 h-6" />
+          <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-500 text-white shadow-md shrink-0">
+            <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-white tracking-tight">
+            <h1 className="text-xl sm:text-3xl font-extrabold text-stone-900 dark:text-white tracking-tight">
               Theory of Computation Academy
             </h1>
             <p className="text-xs text-stone-500 dark:text-slate-400 font-mono mt-0.5">
@@ -116,15 +116,15 @@ export const LearnAcademy: React.FC = () => {
           </div>
         </div>
 
-        <p className="text-sm text-stone-600 dark:text-slate-300 leading-relaxed max-w-3xl font-sans">
+        <p className="text-xs sm:text-sm text-stone-600 dark:text-slate-300 leading-relaxed max-w-3xl font-sans">
           Master formal languages, finite automata, subset construction, and Turing machine mechanics through interactive explanations, visual guides, and practice challenges.
         </p>
 
         {/* Section Tabs */}
-        <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-stone-200 dark:border-white/[0.08]">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-3 sm:pt-4 border-t border-stone-200 dark:border-white/[0.08]">
           <button
             onClick={() => setActiveSection('concepts')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
+            className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
               activeSection === 'concepts'
                 ? 'bg-violet-600 text-white shadow-violet-900/20'
                 : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#faf7f2] dark:bg-slate-900/80 border border-stone-200/90 dark:border-white/5'
@@ -134,7 +134,7 @@ export const LearnAcademy: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveSection('tutorials')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
+            className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
               activeSection === 'tutorials'
                 ? 'bg-cyan-600 text-white shadow-cyan-900/20'
                 : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#faf7f2] dark:bg-slate-900/80 border border-stone-200/90 dark:border-white/5'
@@ -144,13 +144,13 @@ export const LearnAcademy: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveSection('quiz')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
               activeSection === 'quiz'
                 ? 'bg-emerald-600 text-white shadow-emerald-900/20'
                 : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#faf7f2] dark:bg-slate-900/80 border border-stone-200/90 dark:border-white/5'
             }`}
           >
-            <Award className="w-3.5 h-3.5" />
+            <Award className="w-3.5 h-3.5 shrink-0" />
             <span>Practice Quiz ({score}/{QUIZ_QUESTIONS.length})</span>
           </button>
         </div>
@@ -158,40 +158,40 @@ export const LearnAcademy: React.FC = () => {
 
       {/* Concept Breakdown Section */}
       {activeSection === 'concepts' && (
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           {/* Concept 1: Automata & Subset Construction */}
-          <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 transition-colors">
+          <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 sm:space-y-4 transition-colors">
             <button
               onClick={() => setExpandedConcept(prev => prev === 'subset-construction' ? null : 'subset-construction')}
-              className="w-full flex items-center justify-between text-left"
+              className="w-full flex items-center justify-between text-left gap-2"
             >
-              <div className="flex items-center gap-3.5">
-                <div className="p-2.5 rounded-2xl bg-cyan-600/15 dark:bg-cyan-600/20 text-cyan-700 dark:text-cyan-400 border border-cyan-500/30">
-                  <Network className="w-5 h-5" />
+              <div className="flex items-center gap-3 sm:gap-3.5">
+                <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-cyan-600/15 dark:bg-cyan-600/20 text-cyan-700 dark:text-cyan-400 border border-cyan-500/30 shrink-0">
+                  <Network className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-stone-900 dark:text-white tracking-tight">
+                  <h3 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white tracking-tight">
                     Nondeterminism & The Subset Construction Algorithm
                   </h3>
-                  <p className="text-xs text-stone-500 dark:text-slate-400 font-mono">
+                  <p className="text-[11px] sm:text-xs text-stone-500 dark:text-slate-400 font-mono">
                     Why NFAs and DFAs have identical language recognition power
                   </p>
                 </div>
               </div>
-              {expandedConcept === 'subset-construction' ? <ChevronUp className="w-5 h-5 text-stone-400" /> : <ChevronDown className="w-5 h-5 text-stone-400" />}
+              {expandedConcept === 'subset-construction' ? <ChevronUp className="w-5 h-5 text-stone-400 shrink-0" /> : <ChevronDown className="w-5 h-5 text-stone-400 shrink-0" />}
             </button>
 
             {expandedConcept === 'subset-construction' && (
-              <div className="pt-4 border-t border-stone-200 dark:border-white/[0.08] space-y-4 text-xs leading-relaxed text-stone-700 dark:text-slate-300">
+              <div className="pt-3 sm:pt-4 border-t border-stone-200 dark:border-white/[0.08] space-y-3 sm:space-y-4 text-xs leading-relaxed text-stone-700 dark:text-slate-300">
                 <p>
                   A <strong>Deterministic Finite Automaton (DFA)</strong> has exactly one valid transition for each state and alphabet symbol. A <strong>Nondeterministic Finite Automaton (NFA)</strong> relaxes this restriction: it can transition to zero, one, or multiple states on a symbol, or even jump spontaneously across <strong>epsilon (ε) transitions</strong> without consuming any input.
                 </p>
-                <div className="p-4 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 font-mono space-y-2 text-stone-800 dark:text-slate-300 shadow-inner">
+                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 font-mono space-y-2 text-stone-800 dark:text-slate-300 shadow-inner break-words">
                   <div className="font-bold text-cyan-700 dark:text-cyan-300">The 4-Step Subset Construction Algorithm:</div>
                   <div>1. Compute initial DFA state: <span className="text-violet-700 dark:text-violet-300 font-bold">S₀ = ε-closure({'{'}q₀{'}'})</span>.</div>
                   <div>2. For every unexpanded DFA subset S and alphabet symbol a ∈ Σ:</div>
-                  <div className="pl-4">Compute target subset: <span className="text-emerald-700 dark:text-emerald-300 font-bold">T = ε-closure( ⋃_(q ∈ S) δ_NFA(q, a) )</span>.</div>
-                  <div className="pl-4">If T is empty, route to dead/trap state <span className="text-rose-600 dark:text-rose-400 font-bold">∅</span> with self-loops.</div>
+                  <div className="pl-3 sm:pl-4">Compute target subset: <span className="text-emerald-700 dark:text-emerald-300 font-bold">T = ε-closure( ⋃_(q ∈ S) δ_NFA(q, a) )</span>.</div>
+                  <div className="pl-3 sm:pl-4">If T is empty, route to dead/trap state <span className="text-rose-600 dark:text-rose-400 font-bold">∅</span> with self-loops.</div>
                   <div>3. Repeat until no newly discovered subsets remain.</div>
                   <div>4. Mark any DFA subset S as accepting iff <span className="text-emerald-700 dark:text-emerald-300 font-bold">S ∩ F_NFA ≠ ∅</span>.</div>
                 </div>
@@ -200,33 +200,33 @@ export const LearnAcademy: React.FC = () => {
           </div>
 
           {/* Concept 2: Turing Machines & Computation */}
-          <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 transition-colors">
+          <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 sm:space-y-4 transition-colors">
             <button
               onClick={() => setExpandedConcept(prev => prev === 'turing-machines' ? null : 'turing-machines')}
-              className="w-full flex items-center justify-between text-left"
+              className="w-full flex items-center justify-between text-left gap-2"
             >
-              <div className="flex items-center gap-3.5">
-                <div className="p-2.5 rounded-2xl bg-violet-600/15 dark:bg-violet-600/20 text-violet-700 dark:text-violet-400 border border-violet-500/30">
-                  <Cpu className="w-5 h-5" />
+              <div className="flex items-center gap-3 sm:gap-3.5">
+                <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-violet-600/15 dark:bg-violet-600/20 text-violet-700 dark:text-violet-400 border border-violet-500/30 shrink-0">
+                  <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-stone-900 dark:text-white tracking-tight">
+                  <h3 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white tracking-tight">
                     Turing Machines & The Church-Turing Thesis
                   </h3>
-                  <p className="text-xs text-stone-500 dark:text-slate-400 font-mono">
+                  <p className="text-[11px] sm:text-xs text-stone-500 dark:text-slate-400 font-mono">
                     The mathematical foundation of general-purpose algorithmic computers
                   </p>
                 </div>
               </div>
-              {expandedConcept === 'turing-machines' ? <ChevronUp className="w-5 h-5 text-stone-400" /> : <ChevronDown className="w-5 h-5 text-stone-400" />}
+              {expandedConcept === 'turing-machines' ? <ChevronUp className="w-5 h-5 text-stone-400 shrink-0" /> : <ChevronDown className="w-5 h-5 text-stone-400 shrink-0" />}
             </button>
 
             {expandedConcept === 'turing-machines' && (
-              <div className="pt-4 border-t border-stone-200 dark:border-white/[0.08] space-y-4 text-xs leading-relaxed text-stone-700 dark:text-slate-300">
+              <div className="pt-3 sm:pt-4 border-t border-stone-200 dark:border-white/[0.08] space-y-3 sm:space-y-4 text-xs leading-relaxed text-stone-700 dark:text-slate-300">
                 <p>
                   Formulated by Alan Turing in 1936, a Turing machine extends a finite control with an <strong>infinite memory tape</strong> and a movable read/write head. The formal transition function is:
                 </p>
-                <div className="p-3 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 font-mono text-cyan-800 dark:text-cyan-300 border border-stone-200/90 dark:border-white/10 text-center font-bold text-sm shadow-inner">
+                <div className="p-3 rounded-xl sm:rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 font-mono text-cyan-800 dark:text-cyan-300 border border-stone-200/90 dark:border-white/10 text-center font-bold text-sm shadow-inner break-words">
                   δ : Q × Γ → Q × Γ × {'{'}L, R, S{'}'}
                 </div>
                 <p>
@@ -242,10 +242,10 @@ export const LearnAcademy: React.FC = () => {
           </div>
 
           {/* Common Mistakes & Debugging Tips */}
-          <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 transition-colors">
+          <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 sm:space-y-4 transition-colors">
             <div className="flex items-center gap-2.5 text-amber-600 dark:text-amber-400">
-              <AlertTriangle className="w-5 h-5" />
-              <h3 className="text-sm font-bold text-stone-900 dark:text-white uppercase tracking-wider">
+              <AlertTriangle className="w-5 h-5 shrink-0" />
+              <h3 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white uppercase tracking-wider">
                 Common TOC Pitfalls & Debugging Tips
               </h3>
             </div>
@@ -284,10 +284,10 @@ export const LearnAcademy: React.FC = () => {
 
       {/* Guided Simulator Tutorials */}
       {activeSection === 'tutorials' && (
-        <div className="space-y-5">
-          <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 transition-colors">
+        <div className="space-y-4 sm:space-y-5">
+          <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 transition-colors">
             <div className="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400">
-              <Lightbulb className="w-5 h-5" />
+              <Lightbulb className="w-5 h-5 shrink-0" />
               <h3 className="font-bold text-stone-900 dark:text-white text-sm">
                 Tutorial 1: Step-by-Step Subset Construction
               </h3>
@@ -302,9 +302,9 @@ export const LearnAcademy: React.FC = () => {
             </ol>
           </div>
 
-          <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 transition-colors">
+          <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 transition-colors">
             <div className="flex items-center gap-2.5 text-violet-600 dark:text-violet-400">
-              <Lightbulb className="w-5 h-5" />
+              <Lightbulb className="w-5 h-5 shrink-0" />
               <h3 className="font-bold text-stone-900 dark:text-white text-sm">
                 Tutorial 2: Simulating Unary Increment on a Turing Machine
               </h3>
@@ -322,7 +322,7 @@ export const LearnAcademy: React.FC = () => {
 
       {/* Practice Quiz */}
       {activeSection === 'quiz' && (
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           {QUIZ_QUESTIONS.map((q) => {
             const selected = selectedAnswers[q.id];
             const isAnswered = selected !== undefined;
@@ -331,16 +331,16 @@ export const LearnAcademy: React.FC = () => {
             return (
               <div
                 key={q.id}
-                className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 transition-colors"
+                className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3.5 sm:space-y-4 transition-colors"
               >
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-2.5 sm:gap-3">
                   <span className="px-2.5 py-1 rounded-xl bg-violet-100 dark:bg-violet-950 text-violet-800 dark:text-violet-300 font-mono text-xs font-bold shrink-0 border border-violet-300 dark:border-violet-500/40">
                     Q{q.id}
                   </span>
-                  <h4 className="text-sm font-bold text-stone-900 dark:text-white leading-snug">{q.question}</h4>
+                  <h4 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white leading-snug">{q.question}</h4>
                 </div>
 
-                <div className="space-y-2.5 pt-1">
+                <div className="space-y-2 sm:space-y-2.5 pt-1">
                   {q.options.map((opt, optIdx) => {
                     let btnStyle = 'bg-[#faf7f2] dark:bg-slate-900/80 border-stone-200/90 dark:border-white/[0.08] text-stone-700 dark:text-slate-300 hover:border-stone-400 dark:hover:border-white/20 hover:bg-[#f4efe8] dark:hover:bg-slate-900';
                     if (isAnswered) {
@@ -358,9 +358,9 @@ export const LearnAcademy: React.FC = () => {
                         key={optIdx}
                         disabled={isAnswered}
                         onClick={() => handleSelectOption(q.id, optIdx)}
-                        className={`w-full text-left p-3.5 rounded-2xl border text-xs transition-all duration-150 flex items-center justify-between ${btnStyle}`}
+                        className={`w-full text-left p-3 sm:p-3.5 rounded-xl sm:rounded-2xl border text-xs transition-all duration-150 flex items-center justify-between ${btnStyle}`}
                       >
-                        <span>{opt}</span>
+                        <span className="pr-2">{opt}</span>
                         {isAnswered && optIdx === q.correctIndex && (
                           <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 ml-2" />
                         )}
@@ -373,7 +373,7 @@ export const LearnAcademy: React.FC = () => {
                 </div>
 
                 {showExplanations[q.id] && (
-                  <div className={`p-4 rounded-2xl text-xs flex items-start gap-3 ${
+                  <div className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl text-xs flex items-start gap-2.5 sm:gap-3 ${
                     isCorrect
                       ? 'bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-500/40 text-emerald-900 dark:text-emerald-300'
                       : 'bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-500/40 text-amber-900 dark:text-amber-300'

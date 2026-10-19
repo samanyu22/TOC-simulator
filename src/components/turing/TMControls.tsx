@@ -55,7 +55,7 @@ export const TMControls: React.FC<TMControlsProps> = ({
     <div className="w-full space-y-4">
       {/* Telemetry Status Banner */}
       <div
-        className={`flex items-center justify-between p-4 rounded-2xl border backdrop-blur-xl transition-all duration-300 shadow-md ${
+        className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border backdrop-blur-xl transition-all duration-300 shadow-md ${
           status === 'accepted'
             ? 'bg-emerald-50 border-emerald-400 text-emerald-900 dark:bg-emerald-950/70 dark:border-emerald-500/50 dark:text-emerald-200 dark:shadow-glow-emerald'
             : status === 'rejected'
@@ -69,7 +69,7 @@ export const TMControls: React.FC<TMControlsProps> = ({
             : 'glass-panel border-stone-200/90 dark:border-white/[0.08] text-stone-700 dark:text-slate-300 bg-[#faf7f2]/95 dark:bg-slate-950/70'
         }`}
       >
-        <div className="flex items-center gap-3.5">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
           <div className="p-2 rounded-xl bg-black/5 dark:bg-black/30 border border-black/10 dark:border-white/10 shrink-0">
             {status === 'accepted' ? (
               <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 animate-bounce" />
@@ -86,35 +86,35 @@ export const TMControls: React.FC<TMControlsProps> = ({
             )}
           </div>
 
-          <div>
-            <div className="font-semibold text-sm flex items-center gap-2">
-              <span className="uppercase tracking-widest text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#f4efe8] dark:bg-black/40 border border-stone-200/90 dark:border-white/10 font-bold">
+          <div className="min-w-0 flex-1">
+            <div className="font-semibold text-xs sm:text-sm flex items-center gap-2 flex-wrap">
+              <span className="uppercase tracking-widest text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#f4efe8] dark:bg-black/40 border border-stone-200/90 dark:border-white/10 font-bold shrink-0">
                 {status.replace(/_/g, ' ')}
               </span>
-              <span className="text-stone-900 dark:text-white font-medium">{statusMessage}</span>
+              <span className="text-stone-900 dark:text-white font-medium break-words">{statusMessage}</span>
             </div>
-            <div className="text-xs text-stone-500 dark:text-slate-400 mt-0.5 font-mono">
+            <div className="text-[11px] sm:text-xs text-stone-500 dark:text-slate-400 mt-0.5 font-mono">
               Transitions fired: <span className="font-bold text-stone-800 dark:text-slate-200">{stepCount}</span>
             </div>
           </div>
         </div>
 
         {status === 'accepted' && (
-          <span className="text-xs font-mono font-black px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/50 shadow-xs">
+          <span className="text-xs font-mono font-black px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/50 shadow-xs shrink-0 self-start sm:self-auto">
             ✓ ACCEPTED
           </span>
         )}
         {status === 'rejected' && (
-          <span className="text-xs font-mono font-black px-3.5 py-1 rounded-full bg-rose-50 text-rose-800 border border-rose-200 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/50 shadow-xs">
+          <span className="text-xs font-mono font-black px-3 py-1 rounded-full bg-rose-50 text-rose-800 border border-rose-200 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/50 shadow-xs shrink-0 self-start sm:self-auto">
             ✕ REJECTED
           </span>
         )}
       </div>
 
       {/* Main Execution Controls Deck */}
-      <div className="glass-panel rounded-3xl p-5 border border-stone-200/90 dark:border-white/[0.08] shadow-xl bg-[#faf7f2]/95 dark:bg-slate-950/70 flex flex-col lg:flex-row items-center justify-between gap-5">
+      <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-stone-200/90 dark:border-white/[0.08] shadow-xl bg-[#faf7f2]/95 dark:bg-slate-950/70 flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-5">
         {/* Input String Deck */}
-        <div className="flex items-center gap-2.5 w-full lg:w-auto">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
           <label className="text-xs font-mono font-bold text-stone-600 dark:text-slate-400 uppercase tracking-wider whitespace-nowrap">
             Input Tape:
           </label>
@@ -138,11 +138,11 @@ export const TMControls: React.FC<TMControlsProps> = ({
         </div>
 
         {/* Playback Controls Hub */}
-        <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
+        <div className="flex items-center gap-2 sm:gap-2.5 w-full sm:w-auto justify-between sm:justify-start">
           {isRunning ? (
             <button
               onClick={onPause}
-              className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-2xl bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-white font-bold text-sm transition shadow-lg shadow-amber-900/30 active:scale-95 whitespace-nowrap shrink-0 min-w-[144px]"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-3.5 sm:px-6 py-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-white font-bold text-xs sm:text-sm transition shadow-lg shadow-amber-900/30 active:scale-95 whitespace-nowrap min-w-0 sm:min-w-[144px]"
             >
               <Pause className="w-4 h-4 shrink-0" />
               <span className="whitespace-nowrap">Pause</span>
@@ -151,7 +151,7 @@ export const TMControls: React.FC<TMControlsProps> = ({
             <button
               onClick={onRun}
               disabled={isHalted}
-              className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-2xl font-bold text-sm transition active:scale-95 shadow-md whitespace-nowrap shrink-0 min-w-[144px] ${
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-3.5 sm:px-6 py-2.5 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm transition active:scale-95 shadow-md whitespace-nowrap min-w-0 sm:min-w-[144px] ${
                 isHalted
                   ? 'bg-stone-100 dark:bg-slate-900 text-stone-400 dark:text-slate-600 border border-stone-200 dark:border-white/[0.04] cursor-not-allowed'
                   : 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white shadow-violet-600/25 border border-violet-500/30'
@@ -166,7 +166,7 @@ export const TMControls: React.FC<TMControlsProps> = ({
             onClick={onStepForward}
             disabled={isRunning || isHalted}
             title="Execute single transition"
-            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-2xl border text-sm font-semibold transition active:scale-95 shadow-xs whitespace-nowrap shrink-0 ${
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl sm:rounded-2xl border text-xs sm:text-sm font-semibold transition active:scale-95 shadow-xs whitespace-nowrap ${
               isRunning || isHalted
                 ? 'bg-stone-100 dark:bg-slate-950 text-stone-400 dark:text-slate-600 border-stone-200 dark:border-white/[0.04] cursor-not-allowed'
                 : 'bg-[#faf7f2] hover:bg-[#f4efe6] dark:bg-slate-900/90 dark:hover:bg-slate-800 text-stone-800 dark:text-slate-200 border-stone-200/90 dark:border-white/[0.1] hover:border-stone-400 dark:hover:border-white/20'
@@ -179,7 +179,7 @@ export const TMControls: React.FC<TMControlsProps> = ({
           <button
             onClick={onReset}
             title="Reset tape to initial configuration"
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-[#faf7f2] hover:bg-[#f4efe6] dark:bg-slate-900/90 dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/[0.1] hover:border-stone-400 dark:hover:border-white/20 text-sm font-semibold transition active:scale-95 shadow-xs whitespace-nowrap shrink-0"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl sm:rounded-2xl bg-[#faf7f2] hover:bg-[#f4efe6] dark:bg-slate-900/90 dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/[0.1] hover:border-stone-400 dark:hover:border-white/20 text-xs sm:text-sm font-semibold transition active:scale-95 shadow-xs whitespace-nowrap"
           >
             <RotateCcw className="w-4 h-4 text-stone-500 dark:text-slate-400 shrink-0" />
             <span className="whitespace-nowrap">Reset</span>
@@ -187,10 +187,10 @@ export const TMControls: React.FC<TMControlsProps> = ({
         </div>
 
         {/* Speed & Execution Limit Settings */}
-        <div className="flex items-center gap-6 w-full lg:w-auto justify-end">
+        <div className="flex flex-wrap sm:flex-nowrap items-center justify-between sm:justify-end gap-3 sm:gap-6 w-full lg:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-stone-200/80 dark:border-white/10">
           {/* Speed slider with custom gradient accent */}
-          <div className="flex items-center gap-2.5">
-            <Gauge className="w-4 h-4 text-stone-500 dark:text-slate-400" />
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <Gauge className="w-4 h-4 text-stone-500 dark:text-slate-400 shrink-0" />
             <span className="text-xs font-mono text-stone-600 dark:text-slate-400 font-semibold">Speed:</span>
             <input
               type="range"
@@ -198,7 +198,7 @@ export const TMControls: React.FC<TMControlsProps> = ({
               max="10"
               value={speed}
               onChange={(e) => onSpeedChange(Number(e.target.value))}
-              className="w-24 accent-cyan-500 cursor-pointer h-1.5 rounded-lg bg-stone-300 dark:bg-slate-800"
+              className="w-20 sm:w-24 accent-cyan-500 cursor-pointer h-1.5 rounded-lg bg-stone-300 dark:bg-slate-800"
             />
             <span className="text-xs font-mono font-bold text-teal-800 dark:text-cyan-300 px-2 py-0.5 rounded bg-[#f4efe8] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 shadow-xs">
               {speed}x
@@ -207,17 +207,17 @@ export const TMControls: React.FC<TMControlsProps> = ({
 
           {/* Safety Step Limit Selector */}
           <div className="flex items-center gap-2">
-            <Sliders className="w-3.5 h-3.5 text-stone-500 dark:text-slate-400" />
+            <Sliders className="w-3.5 h-3.5 text-stone-500 dark:text-slate-400 shrink-0" />
             <span className="text-xs font-mono text-stone-600 dark:text-slate-400 font-semibold">Limit:</span>
             <select
               value={stepLimit}
               onChange={(e) => onStepLimitChange(Number(e.target.value))}
               className="px-2.5 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 text-xs font-mono text-stone-800 dark:text-slate-200 focus:outline-none focus:border-cyan-500 cursor-pointer shadow-xs"
             >
-              <option value={500}>500 steps</option>
-              <option value={1000}>1,000 steps</option>
-              <option value={2000}>2,000 steps</option>
-              <option value={5000}>5,000 steps</option>
+              <option value={500}>500</option>
+              <option value={1000}>1,000</option>
+              <option value={2000}>2,000</option>
+              <option value={5000}>5,000</option>
             </select>
           </div>
         </div>

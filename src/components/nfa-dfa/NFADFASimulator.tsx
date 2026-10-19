@@ -202,32 +202,32 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
   return (
     <div className="space-y-6 max-w-7xl mx-auto px-4 sm:px-6 py-6">
       {/* Header and Example Picker */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 p-6 rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-xl bg-[#faf7f2]/95 dark:bg-slate-950/70 relative overflow-hidden">
-        <div className="space-y-1.5">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-600 text-white shadow-md shadow-cyan-600/30">
-              <Network className="w-5 h-5 text-cyan-200" />
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-5 p-4 sm:p-6 rounded-2xl sm:rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-xl bg-[#faf7f2]/95 dark:bg-slate-950/70 relative overflow-hidden">
+        <div className="space-y-1.5 w-full md:w-auto">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-600 text-white shadow-md shadow-cyan-600/30 shrink-0">
+              <Network className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-200" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-stone-900 dark:text-white flex items-center gap-2.5">
-                <span>{currentNFA.name}</span>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-cyan-950/80 border border-teal-200 dark:border-cyan-500/40 text-teal-800 dark:text-cyan-300">
-                  NFA → DFA Converter
+            <div className="min-w-0 flex-1">
+              <h1 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-white flex items-center gap-2 flex-wrap">
+                <span className="truncate">{currentNFA.name}</span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-teal-50 dark:bg-cyan-950/80 border border-teal-200 dark:border-cyan-500/40 text-teal-800 dark:text-cyan-300 shrink-0">
+                  NFA → DFA
                 </span>
               </h1>
-              <p className="text-xs text-stone-600 dark:text-slate-400 mt-0.5 font-sans leading-relaxed">{currentNFA.description}</p>
+              <p className="text-xs text-stone-600 dark:text-slate-400 mt-0.5 font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">{currentNFA.description}</p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 w-full md:w-auto justify-between sm:justify-start">
           {/* Example Selector */}
-          <div className="flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+          <div className="flex items-center gap-1.5 flex-1 sm:flex-initial min-w-[140px]">
+            <BookOpen className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
             <select
               value={currentNFA.id}
               onChange={(e) => handleSelectExample(e.target.value)}
-              className="px-3.5 py-2 rounded-2xl bg-[#faf7f2] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 text-xs font-semibold text-stone-800 dark:text-slate-200 focus:outline-none focus:border-cyan-500 cursor-pointer shadow-xs"
+              className="w-full sm:w-auto px-3 py-2 rounded-xl sm:rounded-2xl bg-[#faf7f2] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 text-xs font-semibold text-stone-800 dark:text-slate-200 focus:outline-none focus:border-cyan-500 cursor-pointer shadow-xs truncate"
             >
               {NFA_EXAMPLES.map(ex => (
                 <option key={ex.id} value={ex.id}>{ex.name}</option>
@@ -261,9 +261,9 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
           <button
             onClick={handleExportJSON}
             title="Export Automata JSON"
-            className="p-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
+            className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
 
           {/* Reset */}
@@ -274,9 +274,9 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
               setActiveDFAState('');
             }}
             title="Reset simulation"
-            className="p-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
+            className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
       </div>

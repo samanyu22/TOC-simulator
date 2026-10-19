@@ -155,8 +155,8 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 dark:bg-black/85 backdrop-blur-md animate-in fade-in transition-colors">
-      <div className="w-full max-w-xl rounded-3xl p-6 border border-stone-200/90 dark:border-white/10 shadow-2xl space-y-5 bg-[#faf7f2] dark:bg-[#070b18] text-stone-800 dark:text-slate-200 transition-colors">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-900/60 dark:bg-black/85 backdrop-blur-md animate-in fade-in transition-colors">
+      <div className="w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/10 shadow-2xl space-y-4 sm:space-y-5 bg-[#faf7f2] dark:bg-[#070b18] text-stone-800 dark:text-slate-200 transition-colors">
         {/* Modal Header */}
         <div className="flex items-center justify-between border-b border-stone-200 dark:border-white/[0.08] pb-4">
           <div className="flex items-center gap-2.5">
@@ -273,18 +273,18 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
               </div>
             )}
 
-            <div className="flex items-center justify-end gap-2.5 pt-2">
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 pt-2">
               <button
                 onClick={onClose}
-                className="px-4 py-2 rounded-xl bg-[#f4efe8] dark:bg-slate-900 hover:bg-[#ebe4d8] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 transition"
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-[#f4efe8] dark:bg-slate-900 hover:bg-[#ebe4d8] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 transition text-center"
               >
                 Close
               </button>
               <button
                 onClick={handleImportJSON}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold transition shadow-md shadow-cyan-950/20 active:scale-95"
+                className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold transition shadow-md shadow-cyan-950/20 active:scale-95 text-center"
               >
-                <FileUp className="w-4 h-4" />
+                <FileUp className="w-4 h-4 shrink-0" />
                 <span>Validate & Import</span>
               </button>
             </div>

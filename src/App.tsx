@@ -59,7 +59,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fbfaf7] text-stone-800 dark:bg-[#070a13] dark:text-slate-100 font-sans selection:bg-amber-500/20 selection:text-amber-950 dark:selection:bg-violet-500/30 dark:selection:text-cyan-200 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#fbfaf7] text-stone-800 dark:bg-[#070a13] dark:text-slate-100 font-sans selection:bg-amber-500/20 selection:text-amber-950 dark:selection:bg-violet-500/30 dark:selection:text-cyan-200 transition-colors duration-200 overflow-x-hidden w-full max-w-[100vw]">
       {/* Top Navigation */}
       <Navbar
         currentView={currentView}
@@ -69,7 +69,7 @@ export function App() {
       />
 
       {/* Main Content View Switcher */}
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-[100vw] overflow-x-hidden">
         {currentView === 'home' && (
           <LandingPage onNavigate={setCurrentView} />
         )}

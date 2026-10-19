@@ -81,7 +81,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
           customSize={true}
           borderRadius={24}
           spotlightSize={380}
-          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/20 dark:hover:shadow-violet-900/20 p-7 sm:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-[#ded5c5] hover:border-violet-400/50 dark:hover:border-transparent dark:border-transparent"
+          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/20 dark:hover:shadow-violet-900/20 p-4 sm:p-7 md:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-5 sm:space-y-6 overflow-hidden border border-[#ded5c5] hover:border-violet-400/50 dark:hover:border-transparent dark:border-transparent rounded-2xl sm:rounded-3xl"
           onMouseEnter={() => setIsTmAuto(false)}
           onMouseLeave={() => setIsTmAuto(true)}
         >
@@ -91,14 +91,14 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
           <div className="absolute top-0 right-0 w-44 h-[2px] bg-gradient-to-l from-violet-500/70 via-purple-400/40 to-transparent dark:from-violet-400/20 dark:to-transparent pointer-events-none" />
 
             {/* Header */}
-            <div className="space-y-4 relative z-10">
+            <div className="space-y-3 sm:space-y-4 relative z-10">
               <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/40 text-violet-800 dark:text-violet-300 flex items-center justify-center shadow-xs">
-                    <Cpu className="w-6 h-6" />
+                <div className="flex items-center gap-3 sm:gap-3.5">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/40 text-violet-800 dark:text-violet-300 flex items-center justify-center shadow-xs shrink-0">
+                    <Cpu className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                       <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-violet-50 dark:bg-violet-500/20 text-violet-800 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30 tracking-wider uppercase">
                         Formal 7-Tuple
                       </span>
@@ -107,7 +107,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                         Deterministic
                       </span>
                     </div>
-                    <h3 className="text-2xl font-extrabold text-stone-900 dark:text-white tracking-tight mt-1">
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-stone-900 dark:text-white tracking-tight mt-1">
                       Turing Machine Simulator
                     </h3>
                   </div>
@@ -120,16 +120,16 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
             </div>
 
             {/* Interactive Showcase: Virtual Tape Chassis */}
-            <div className="relative z-10 rounded-2xl p-4 bg-[#f4efe8]/90 dark:bg-[#040713] border border-stone-200/90 dark:border-white/[0.07] space-y-3.5 transition-colors shadow-inner">
+            <div className="relative z-10 rounded-xl sm:rounded-2xl p-3 sm:p-4 bg-[#f4efe8]/90 dark:bg-[#040713] border border-stone-200/90 dark:border-white/[0.07] space-y-3 sm:space-y-3.5 transition-colors shadow-inner">
               {/* Telemetry Bar */}
-              <div className="flex items-center justify-between text-xs font-mono">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                 <div className="flex items-center gap-2">
                   <span className="text-stone-500 dark:text-slate-400 text-[11px]">Head State:</span>
                   <span className="font-bold px-2 py-0.5 rounded-md bg-violet-50 dark:bg-violet-950 text-violet-900 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30">
                     {tmActiveState}
                   </span>
                 </div>
-                <div className="flex items-center gap-3 text-[11px] text-stone-500 dark:text-slate-400">
+                <div className="flex items-center gap-2.5 sm:gap-3 text-[11px] text-stone-500 dark:text-slate-400">
                   <span>Head: <strong className="text-violet-700 dark:text-violet-300">#{tmHead}</strong></span>
                   <span>Scanned: <strong className="text-teal-700 dark:text-cyan-300">'{tmActiveSymbol}'</strong></span>
                 </div>
@@ -145,7 +145,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                       key={idx}
                       onClick={() => setTmHead(idx)}
                       onMouseEnter={() => setTmHead(idx)}
-                      className={`relative flex-1 min-w-[42px] h-14 rounded-xl flex flex-col items-center justify-center font-mono select-none cursor-pointer transition-[transform,border-color,background-color] duration-150 transform-gpu ${
+                      className={`relative flex-1 min-w-[36px] sm:min-w-[42px] h-12 sm:h-14 rounded-xl flex flex-col items-center justify-center font-mono select-none cursor-pointer transition-[transform,border-color,background-color] duration-150 transform-gpu shrink-0 ${
                         isCurrent
                           ? 'bg-gradient-to-b from-violet-600 to-indigo-700 text-white border-violet-400 shadow-md shadow-violet-500/30 z-10 scale-105 will-change-transform'
                           : 'bg-[#faf7f2] dark:bg-slate-900/70 border-stone-200/90 dark:border-white/[0.06] text-stone-800 dark:text-slate-300 hover:border-violet-400/50 hover:bg-[#f4efe8] dark:hover:bg-slate-900 shadow-xs'
@@ -168,19 +168,18 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
               </div>
 
               {/* Transition Rule Preview Banner */}
-              <div className="text-[11px] font-mono text-center text-stone-600 dark:text-slate-400 bg-[#faf7f2] dark:bg-slate-950/80 py-2 px-3 rounded-xl border border-stone-200/90 dark:border-white/[0.05] shadow-xs">
+              <div className="text-[10px] sm:text-[11px] font-mono text-center text-stone-600 dark:text-slate-400 bg-[#faf7f2] dark:bg-slate-950/80 py-2 px-2.5 sm:px-3 rounded-xl border border-stone-200/90 dark:border-white/[0.05] shadow-xs truncate">
                 Active Rule: <span className="text-violet-700 dark:text-violet-300 font-bold">δ({tmActiveState}, '{tmActiveSymbol}')</span> → <span className="text-emerald-700 dark:text-emerald-400 font-bold">('{tmNextSymbol}', R, {tmNextState})</span>
               </div>
             </div>
 
-
             {/* Launch Button */}
             <button
               onClick={() => onNavigate('tm')}
-              className="relative w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold text-xs tracking-wide shadow-md shadow-violet-900/20 active:scale-[0.99] transition-all group/btn"
+              className="relative w-full flex items-center justify-center gap-2 py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold text-xs tracking-wide shadow-md shadow-violet-900/20 active:scale-[0.99] transition-all group/btn"
             >
               <span>Launch Turing Machine Simulator</span>
-              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform shrink-0" />
             </button>
         </GlowCard>
 
@@ -192,7 +191,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
           customSize={true}
           borderRadius={24}
           spotlightSize={380}
-          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 dark:hover:shadow-cyan-900/20 p-7 sm:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-6 overflow-hidden border border-[#ded5c5] hover:border-cyan-400/50 dark:hover:border-transparent dark:border-transparent"
+          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 dark:hover:shadow-cyan-900/20 p-4 sm:p-7 md:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-5 sm:space-y-6 overflow-hidden border border-[#ded5c5] hover:border-cyan-400/50 dark:hover:border-transparent dark:border-transparent rounded-2xl sm:rounded-3xl"
           onMouseEnter={() => setIsNfaAuto(false)}
           onMouseLeave={() => setIsNfaAuto(true)}
         >
@@ -202,14 +201,14 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
           <div className="absolute top-0 right-0 w-44 h-[2px] bg-gradient-to-l from-cyan-500/70 via-teal-400/40 to-transparent dark:from-cyan-400/20 dark:to-transparent pointer-events-none" />
 
             {/* Header */}
-            <div className="space-y-4 relative z-10">
+            <div className="space-y-3 sm:space-y-4 relative z-10">
               <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-cyan-950/80 border border-teal-200 dark:border-cyan-500/40 text-teal-800 dark:text-cyan-300 flex items-center justify-center shadow-xs">
-                    <Network className="w-6 h-6" />
+                <div className="flex items-center gap-3 sm:gap-3.5">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-teal-50 dark:bg-cyan-950/80 border border-teal-200 dark:border-cyan-500/40 text-teal-800 dark:text-cyan-300 flex items-center justify-center shadow-xs shrink-0">
+                    <Network className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                       <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-teal-50 dark:bg-cyan-500/20 text-teal-800 dark:text-cyan-300 border border-teal-200 dark:border-cyan-500/30 tracking-wider uppercase">
                         Powerset Construction
                       </span>
@@ -218,7 +217,7 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
                         ε-Closure Engine
                       </span>
                     </div>
-                    <h3 className="text-2xl font-extrabold text-stone-900 dark:text-white tracking-tight mt-1">
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-stone-900 dark:text-white tracking-tight mt-1">
                       NFA → DFA Converter
                     </h3>
                   </div>
@@ -231,9 +230,9 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
             </div>
 
             {/* Interactive Showcase: Mini Automata Network */}
-            <div className="relative z-10 rounded-2xl p-4 bg-[#f4efe8]/90 dark:bg-[#040713] border border-stone-200/90 dark:border-white/[0.07] space-y-3.5 transition-colors shadow-inner">
+            <div className="relative z-10 rounded-xl sm:rounded-2xl p-3 sm:p-4 bg-[#f4efe8]/90 dark:bg-[#040713] border border-stone-200/90 dark:border-white/[0.07] space-y-3 sm:space-y-3.5 transition-colors shadow-inner">
               {/* Telemetry Bar */}
-              <div className="flex items-center justify-between text-xs font-mono">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                 <div className="flex items-center gap-2">
                   <span className="text-stone-500 dark:text-slate-400 text-[11px]">Subset Trace:</span>
                   <span className="font-bold px-2 py-0.5 rounded-md bg-teal-50 dark:bg-cyan-950 text-teal-900 dark:text-cyan-300 border border-teal-200 dark:border-cyan-500/30">
@@ -353,19 +352,18 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
               </div>
 
               {/* Subset conversion equation badge */}
-              <div className="text-[11px] font-mono text-center text-stone-600 dark:text-slate-400 bg-[#faf7f2] dark:bg-slate-950/80 py-2 px-3 rounded-xl border border-stone-200/90 dark:border-white/[0.05] shadow-xs">
+              <div className="text-[10px] sm:text-[11px] font-mono text-center text-stone-600 dark:text-slate-400 bg-[#faf7f2] dark:bg-slate-950/80 py-2 px-2.5 sm:px-3 rounded-xl border border-stone-200/90 dark:border-white/[0.05] shadow-xs truncate">
                 Subset: <span className="text-teal-700 dark:text-cyan-300 font-bold">δ({'{'}q0{'}'}, '1')</span> → <span className="text-emerald-700 dark:text-emerald-400 font-bold">{'{'}q0, q1{'}'} (Accepting)</span>
               </div>
             </div>
 
-
             {/* Launch Button */}
             <button
               onClick={() => onNavigate('nfa-dfa')}
-              className="relative w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs tracking-wide shadow-md shadow-cyan-900/20 active:scale-[0.99] transition-all group/btn"
+              className="relative w-full flex items-center justify-center gap-2 py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs tracking-wide shadow-md shadow-cyan-900/20 active:scale-[0.99] transition-all group/btn"
             >
               <span>Launch NFA → DFA Converter</span>
-              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform shrink-0" />
             </button>
         </GlowCard>
       </div>

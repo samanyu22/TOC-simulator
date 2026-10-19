@@ -81,15 +81,15 @@ export const StringTester: React.FC<StringTesterProps> = ({
   const isCompleted = simResult && currentStepIndex === simResult.steps.length;
 
   return (
-    <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-5 transition-colors duration-200">
+    <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 sm:space-y-5 transition-colors duration-200">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-200 dark:border-white/[0.07]">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-xl bg-cyan-600/15 dark:bg-cyan-600/20 text-cyan-700 dark:text-cyan-400 border border-cyan-500/30">
+          <div className="p-2 rounded-xl bg-cyan-600/15 dark:bg-cyan-600/20 text-cyan-700 dark:text-cyan-400 border border-cyan-500/30 shrink-0">
             <GitCompare className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-bold text-stone-900 dark:text-white text-sm flex items-center gap-2">
+            <h3 className="font-bold text-stone-900 dark:text-white text-sm flex flex-wrap items-center gap-2">
               <span>Dual String Simulator & Equivalence Tester</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-300 dark:border-cyan-500/40 text-cyan-800 dark:text-cyan-300 font-bold">
                 NFA ⟷ DFA
@@ -103,8 +103,8 @@ export const StringTester: React.FC<StringTesterProps> = ({
       </div>
 
       {/* Input String and Execution Hub */}
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="flex-1 min-w-[220px]">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div className="flex-1 w-full sm:min-w-[220px]">
           <input
             type="text"
             value={testString}
@@ -118,10 +118,10 @@ export const StringTester: React.FC<StringTesterProps> = ({
           />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={() => handleRunAll()}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold shadow-md shadow-cyan-900/30 transition active:scale-95"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold shadow-md shadow-cyan-900/30 transition active:scale-95 whitespace-nowrap"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>Test String</span>
@@ -130,7 +130,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
           <button
             onClick={handleStepForward}
             disabled={Boolean(isCompleted)}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe8] dark:hover:bg-slate-800 disabled:opacity-40 text-stone-700 dark:text-slate-200 border border-stone-200/90 dark:border-white/10 text-xs font-semibold transition active:scale-95 shadow-xs"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe8] dark:hover:bg-slate-800 disabled:opacity-40 text-stone-700 dark:text-slate-200 border border-stone-200/90 dark:border-white/10 text-xs font-semibold transition active:scale-95 shadow-xs whitespace-nowrap"
           >
             <SkipForward className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Step Char</span>
@@ -138,7 +138,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
 
           <button
             onClick={handleReset}
-            className="p-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe8] dark:hover:bg-slate-800 text-stone-500 hover:text-stone-900 dark:text-slate-400 dark:hover:text-white border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
+            className="p-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe8] dark:hover:bg-slate-800 text-stone-500 hover:text-stone-900 dark:text-slate-400 dark:hover:text-white border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs shrink-0"
             title="Reset Tester"
           >
             <RotateCcw className="w-4 h-4" />
@@ -165,7 +165,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
 
       {/* Interactive Tape Ribbon with Laser Cursor */}
       {testString.length > 0 && (
-        <div className="p-4 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/80 border border-stone-200/90 dark:border-white/[0.08] space-y-2 transition-colors">
+        <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/80 border border-stone-200/90 dark:border-white/[0.08] space-y-2 transition-colors">
           <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-stone-500 dark:text-slate-400 font-bold">
             <span>Input Ribbon:</span>
             <span>Position: {currentStepIndex} / {testString.length}</span>
@@ -178,7 +178,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
               return (
                 <div
                   key={idx}
-                  className={`w-9 h-11 rounded-xl flex flex-col items-center justify-center font-black border transition-all duration-200 ${
+                  className={`w-9 h-11 shrink-0 rounded-xl flex flex-col items-center justify-center font-black border transition-all duration-200 ${
                     isCurrent
                       ? 'bg-cyan-500/20 dark:bg-cyan-500/25 border-cyan-500 dark:border-cyan-400 text-cyan-950 dark:text-white shadow-xs dark:shadow-glow-cyan scale-110 z-10'
                       : isPast
@@ -197,9 +197,9 @@ export const StringTester: React.FC<StringTesterProps> = ({
 
       {/* Dual Simulation Display Cards */}
       {simResult && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
           {/* NFA Trace Box */}
-          <div className="p-5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/80 border border-violet-200 dark:border-violet-500/40 shadow-sm dark:shadow-glow-violet space-y-3 transition-colors">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/80 border border-violet-200 dark:border-violet-500/40 shadow-sm dark:shadow-glow-violet space-y-3 transition-colors">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-violet-700 dark:text-violet-400 font-mono">
                 NFA State Superposition
@@ -215,7 +215,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
               )}
             </div>
 
-            <div className="p-3 rounded-xl bg-violet-50 dark:bg-slate-900 font-mono text-base font-black text-violet-900 dark:text-violet-200 border border-violet-200 dark:border-white/10 shadow-inner">
+            <div className="p-3 rounded-xl bg-violet-50 dark:bg-slate-900 font-mono text-base font-black text-violet-900 dark:text-violet-200 border border-violet-200 dark:border-white/10 shadow-inner break-words">
               {currentStep
                 ? `{${currentStep.nfaNextActiveStates.join(', ') || '∅'}}`
                 : `{${nfa.initialState}} (start)`}
@@ -226,7 +226,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
           </div>
 
           {/* DFA Trace Box */}
-          <div className="p-5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/80 border border-cyan-200 dark:border-cyan-500/40 shadow-sm dark:shadow-glow-cyan space-y-3 transition-colors">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/80 border border-cyan-200 dark:border-cyan-500/40 shadow-sm dark:shadow-glow-cyan space-y-3 transition-colors">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-400 font-mono">
                 DFA Current State
@@ -242,7 +242,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
               )}
             </div>
 
-            <div className="p-3 rounded-xl bg-cyan-50 dark:bg-slate-900 font-mono text-base font-black text-cyan-900 dark:text-cyan-200 border border-cyan-200 dark:border-white/10 shadow-inner">
+            <div className="p-3 rounded-xl bg-cyan-50 dark:bg-slate-900 font-mono text-base font-black text-cyan-900 dark:text-cyan-200 border border-cyan-200 dark:border-white/10 shadow-inner break-words">
               {currentStep ? currentStep.dfaNextState : dfa.initialState}
             </div>
             <p className="text-[11px] text-stone-500 dark:text-slate-400 leading-relaxed font-sans">
@@ -254,14 +254,14 @@ export const StringTester: React.FC<StringTesterProps> = ({
 
       {/* Equivalence Result Banner */}
       {isCompleted && (
-        <div className={`p-5 rounded-2xl border flex items-center justify-between gap-4 shadow-md transition-colors ${
+        <div className={`p-4 sm:p-5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 shadow-md transition-colors ${
           simResult.equivalent
             ? 'bg-emerald-50 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-500/50 text-emerald-900 dark:text-emerald-200'
             : 'bg-rose-50 dark:bg-rose-950/80 border-rose-300 dark:border-rose-500/50 text-rose-900 dark:text-rose-200'
         }`}>
           <div className="flex items-center gap-3">
             {simResult.equivalent ? (
-              <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400 shrink-0 animate-bounce" />
+              <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400 shrink-0" />
             ) : (
               <XCircle className="w-6 h-6 text-rose-600 dark:text-rose-400 shrink-0" />
             )}

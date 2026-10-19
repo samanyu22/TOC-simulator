@@ -206,23 +206,23 @@ export const TapeView: React.FC<TapeViewProps> = React.memo(({
   const currentReadSymbol = state.tape[state.headPosition] ?? blankSymbol;
 
   return (
-    <div className="w-full glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl overflow-hidden relative bg-[#faf7f2]/95 dark:bg-slate-950/70">
+    <div className="w-full glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl overflow-hidden relative bg-[#faf7f2]/95 dark:bg-slate-950/70">
       {/* Top Holographic Telemetry Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-5 mb-4 border-b border-stone-200 dark:border-white/[0.07]">
-        <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-5 mb-4 border-b border-stone-200 dark:border-white/[0.07]">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {/* Current State Badge */}
-          <div className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-2xl bg-violet-50 dark:bg-violet-950/70 border border-violet-200 dark:border-violet-500/40 shadow-sm backdrop-blur">
-            <span className="w-2.5 h-2.5 rounded-full bg-violet-600 dark:bg-violet-400 animate-pulse"></span>
-            <span className="text-[11px] uppercase font-bold text-violet-800 dark:text-violet-300 tracking-wider">Current State</span>
-            <span className="px-2 py-0.5 rounded-lg bg-violet-600 dark:bg-violet-500/30 font-mono font-black text-white text-sm">
+          <div className="flex items-center gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-violet-50 dark:bg-violet-950/70 border border-violet-200 dark:border-violet-500/40 shadow-sm backdrop-blur">
+            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-violet-600 dark:bg-violet-400 animate-pulse"></span>
+            <span className="text-[10px] sm:text-[11px] uppercase font-bold text-violet-800 dark:text-violet-300 tracking-wider">State</span>
+            <span className="px-1.5 sm:px-2 py-0.5 rounded-lg bg-violet-600 dark:bg-violet-500/30 font-mono font-black text-white text-xs sm:text-sm">
               {state.currentState}
             </span>
           </div>
 
           {/* Read Symbol */}
-          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-teal-50 dark:bg-cyan-950/70 border border-teal-200 dark:border-cyan-500/40 shadow-sm backdrop-blur">
-            <span className="text-[11px] uppercase font-bold text-teal-800 dark:text-cyan-300 tracking-wider">Scanned Symbol</span>
-            <span className="px-2.5 py-0.5 rounded-lg bg-teal-600 dark:bg-cyan-500/30 font-mono font-black text-white dark:text-cyan-100 text-sm">
+          <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-teal-50 dark:bg-cyan-950/70 border border-teal-200 dark:border-cyan-500/40 shadow-sm backdrop-blur">
+            <span className="text-[10px] sm:text-[11px] uppercase font-bold text-teal-800 dark:text-cyan-300 tracking-wider">Scanned</span>
+            <span className="px-2 sm:px-2.5 py-0.5 rounded-lg bg-teal-600 dark:bg-cyan-500/30 font-mono font-black text-white dark:text-cyan-100 text-xs sm:text-sm">
               {currentReadSymbol === blankSymbol ? `${blankSymbol} (blank)` : `'${currentReadSymbol}'`}
             </span>
           </div>
@@ -247,28 +247,29 @@ export const TapeView: React.FC<TapeViewProps> = React.memo(({
         </div>
 
         {/* Telemetry Numbers & Center Head Action */}
-        <div className="flex items-center gap-3 text-xs font-mono">
+        <div className="flex items-center justify-between sm:justify-start gap-2 sm:gap-3 w-full sm:w-auto text-xs font-mono">
           <button
             onClick={handleCenterHead}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#faf7f2] hover:bg-[#f4efe6] dark:bg-slate-900 dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 hover:border-stone-400 dark:hover:border-white/20 transition active:scale-95 text-xs shadow-xs"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-[#faf7f2] hover:bg-[#f4efe6] dark:bg-slate-900 dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 hover:border-stone-400 dark:hover:border-white/20 transition active:scale-95 text-xs shadow-xs"
             title="Center tape on head"
           >
             <LocateFixed className="w-3.5 h-3.5 text-violet-600 dark:text-cyan-400" />
-            <span>Center Head</span>
+            <span className="hidden xs:inline">Center Head</span>
+            <span className="xs:hidden">Center</span>
           </button>
 
-          <div className="px-3 py-1.5 rounded-xl bg-[#f4efe8] dark:bg-slate-900/90 border border-stone-200/90 dark:border-white/10 text-stone-700 dark:text-slate-300 font-semibold">
+          <div className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-[#f4efe8] dark:bg-slate-900/90 border border-stone-200/90 dark:border-white/10 text-stone-700 dark:text-slate-300 font-semibold">
             Head: <span className="font-bold text-violet-700 dark:text-cyan-300">{state.headPosition}</span>
           </div>
 
-          <div className="px-3.5 py-1.5 rounded-xl bg-[#f4efe8] dark:bg-slate-900/90 border border-stone-200/90 dark:border-white/10 text-stone-700 dark:text-slate-300 font-semibold">
-            Step: <span className="font-black text-teal-700 dark:text-cyan-400 text-sm">{state.stepCount}</span>
+          <div className="px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-[#f4efe8] dark:bg-slate-900/90 border border-stone-200/90 dark:border-white/10 text-stone-700 dark:text-slate-300 font-semibold">
+            Step: <span className="font-black text-teal-700 dark:text-cyan-400 text-xs sm:text-sm">{state.stepCount}</span>
           </div>
         </div>
       </div>
 
       {/* Cybernetic Tape Drive Chassis Container */}
-      <div className="tape-chassis rounded-2xl p-4 border border-stone-200/90 dark:border-white/[0.08] relative shadow-inner">
+      <div className="tape-chassis rounded-xl sm:rounded-2xl p-2.5 sm:p-4 border border-stone-200/90 dark:border-white/[0.08] relative shadow-inner">
         {/* Animated HDD Actuator Head Status Reticle */}
         <div className="relative w-full h-8 flex items-center justify-center pointer-events-none mb-2">
           <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider">
@@ -362,14 +363,15 @@ export const TapeView: React.FC<TapeViewProps> = React.memo(({
 
         {/* Dynamic Navigation Cues */}
         <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-3 px-2">
-          <span className="flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-300 transition">
+          <span className="hidden md:flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-300 transition">
             ◀ Dynamic Blank Tape Left
           </span>
-          <span className="text-slate-600 dark:text-slate-400 flex items-center gap-1.5 font-medium">
-            <Eye className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
-            <span>Click any cell to inspect • Infinite bidirectional tape</span>
+          <span className="text-slate-600 dark:text-slate-400 flex items-center justify-center gap-1.5 font-medium mx-auto md:mx-0 text-center w-full md:w-auto">
+            <Eye className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
+            <span className="hidden sm:inline">Click any cell to inspect • Infinite bidirectional tape</span>
+            <span className="sm:hidden">Swipe or click cells • Infinite tape</span>
           </span>
-          <span className="flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-300 transition">
+          <span className="hidden md:flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-300 transition">
             Dynamic Blank Tape Right ▶
           </span>
         </div>

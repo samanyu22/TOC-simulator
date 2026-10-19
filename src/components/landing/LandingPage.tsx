@@ -59,7 +59,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   }, [previewPlaying, previewInput]);
 
   return (
-    <div className="space-y-28 py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+    <div className="space-y-16 sm:space-y-24 lg:space-y-28 py-6 sm:py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
       {/* Background Ambient Mathematics & Lights */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[850px] h-[480px] bg-gradient-to-tr from-violet-500/22 via-cyan-400/20 dark:from-violet-600/15 dark:via-cyan-500/15 to-transparent rounded-full blur-[110px] pointer-events-none -z-10" />
 
@@ -75,69 +75,69 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative text-center space-y-8 pt-6">
+      <section className="relative text-center space-y-6 sm:space-y-8 pt-2 sm:pt-6">
         {/* Futuristic Status Pill */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-sm backdrop-blur-xl">
-          <span className="flex h-2 w-2 relative">
+        <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-sm backdrop-blur-xl max-w-full">
+          <span className="flex h-2 w-2 relative shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500 dark:bg-cyan-400"></span>
           </span>
-          <span className="text-xs font-mono font-medium text-stone-700 dark:text-slate-300">
-            Interactive Theoretical Computer Science Lab
+          <span className="text-xs font-mono font-medium text-stone-700 dark:text-slate-300 truncate">
+            Interactive Theoretical CS Lab
           </span>
-          <span className="text-stone-400 dark:text-slate-600">•</span>
-          <span className="text-[11px] font-mono text-cyan-700 dark:text-cyan-400 font-semibold">100% Client-Side Engine</span>
+          <span className="text-stone-400 dark:text-slate-600 hidden sm:inline">•</span>
+          <span className="text-[11px] font-mono text-cyan-700 dark:text-cyan-400 font-semibold hidden sm:inline">100% Client-Side Engine</span>
         </div>
 
         {/* Hero Headline */}
-        <div className="space-y-4 max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-stone-900 dark:text-white leading-[1.1]">
+        <div className="space-y-3 sm:space-y-4 max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-stone-900 dark:text-white leading-[1.15] sm:leading-[1.1]">
             Explore the Mathematics <br className="hidden sm:inline" />
             <span className="gradient-text-brand">
               Behind Computation.
             </span>
           </h1>
-          <p className="text-base sm:text-xl text-stone-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-xl text-stone-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Build machines, visualize automata, and understand computation one transition at a time with mathematically rigorous, 60fps interactive simulations.
           </p>
         </div>
 
         {/* Action CTAs */}
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 w-full max-w-sm sm:max-w-none mx-auto">
           <button
             onClick={() => onNavigate('tm')}
-            className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-xl shadow-violet-900/20 transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-violet-500/30"
+            className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-xl shadow-violet-900/20 transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-violet-500/30"
           >
-            <Cpu className="w-4 h-4 text-cyan-300" />
+            <Cpu className="w-4 h-4 text-cyan-300 shrink-0" />
             <span>Launch Turing Machine</span>
-            <ArrowRight className="w-4 h-4 ml-1" />
+            <ArrowRight className="w-4 h-4 ml-1 shrink-0" />
           </button>
 
           <button
             onClick={() => onNavigate('nfa-dfa')}
-            className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#faf7f2] hover:bg-[#f4efe6] dark:bg-white/[0.05] dark:hover:bg-white/[0.08] text-stone-800 dark:text-white font-semibold text-sm shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-stone-200/90 dark:border-white/[0.12]"
+            className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#faf7f2] hover:bg-[#f4efe6] dark:bg-white/[0.05] dark:hover:bg-white/[0.08] text-stone-800 dark:text-white font-semibold text-sm shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-stone-200/90 dark:border-white/[0.12]"
           >
-            <Network className="w-4 h-4 text-violet-600 dark:text-cyan-400" />
+            <Network className="w-4 h-4 text-violet-600 dark:text-cyan-400 shrink-0" />
             <span>Launch NFA → DFA Converter</span>
           </button>
         </div>
 
         {/* Interactive Live Automata Preview Terminal */}
-        <div className="pt-6 max-w-2xl mx-auto">
-          <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.09] shadow-xl relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/80">
+        <div className="pt-4 sm:pt-6 max-w-2xl mx-auto">
+          <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.09] shadow-xl relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/80">
             {/* Header Terminal Bar */}
-            <div className="flex items-center justify-between pb-4 mb-2 border-b border-stone-200 dark:border-white/[0.07] text-xs font-mono">
+            <div className="flex items-center justify-between pb-3 sm:pb-4 mb-2 border-b border-stone-200 dark:border-white/[0.07] text-xs font-mono">
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
                 </div>
-                <span className="text-stone-600 dark:text-slate-400 ml-2 font-semibold">automata-runtime.wasm</span>
+                <span className="text-stone-600 dark:text-slate-400 ml-2 font-semibold truncate">automata-runtime.wasm</span>
               </div>
-              <div className="flex items-center gap-2 text-cyan-700 dark:text-cyan-400 font-semibold">
+              <div className="flex items-center gap-1.5 text-cyan-700 dark:text-cyan-400 font-semibold shrink-0">
                 <Sparkles className="w-3.5 h-3.5 animate-spin" />
-                <span>Live State Machine</span>
+                <span className="hidden xs:inline">Live State Machine</span>
               </div>
             </div>
 
@@ -247,8 +247,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Input Tape & Execution Status Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-200 dark:border-white/[0.07] text-xs font-mono">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 sm:pt-4 border-t border-stone-200 dark:border-white/[0.07] text-xs font-mono">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-stone-600 dark:text-slate-400 font-semibold">Tape Input:</span>
                 <div className="flex items-center gap-1">
                   {previewInput.split('').map((char, idx) => {
@@ -273,8 +273,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <span className={`px-2.5 py-0.5 rounded-full font-bold border ${
+              <div className="flex items-center justify-between sm:justify-start w-full sm:w-auto gap-2">
+                <span className={`px-2.5 py-0.5 rounded-full font-bold border text-[11px] sm:text-xs truncate ${
                   activeNode === 1
                     ? 'bg-emerald-50 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/40 shadow-sm'
                     : 'bg-[#f4efe8] dark:bg-slate-900 text-stone-700 dark:text-slate-400 border-stone-200 dark:border-slate-700'
@@ -283,7 +283,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 </span>
                 <button
                   onClick={() => setPreviewPlaying(p => !p)}
-                  className="p-1 rounded-lg bg-[#f4efe8] dark:bg-slate-800 hover:bg-[#ebe4d8] dark:hover:bg-slate-700 text-stone-600 dark:text-slate-300 transition"
+                  className="p-1 rounded-lg bg-[#f4efe8] dark:bg-slate-800 hover:bg-[#ebe4d8] dark:hover:bg-slate-700 text-stone-600 dark:text-slate-300 transition shrink-0"
                   title={previewPlaying ? 'Pause live preview' : 'Resume live preview'}
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
@@ -298,46 +298,46 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       <FeatureCards onNavigate={onNavigate} />
 
       {/* What is Theory of Computation? */}
-      <section className="glass-panel rounded-3xl p-8 sm:p-10 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-8 bg-[#faf7f2]/95 dark:bg-slate-950/70">
+      <section className="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-6 sm:space-y-8 bg-[#faf7f2]/95 dark:bg-slate-950/70">
         <div className="space-y-2 max-w-2xl">
           <span className="text-xs font-mono uppercase tracking-wider text-violet-700 dark:text-violet-400 font-semibold flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5" />
             Theoretical Foundations
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 dark:text-white tracking-tight">
+          <h2 className="text-xl sm:text-3xl font-bold text-stone-900 dark:text-white tracking-tight">
             What is Theory of Computation?
           </h2>
-          <p className="text-sm text-stone-600 dark:text-slate-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-stone-600 dark:text-slate-300 leading-relaxed">
             Theory of Computation is the mathematical foundation of computer science. It investigates what problems can be solved algorithmically, how efficiently they can be computed, and the fundamental theoretical limits of all computing machines.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="p-6 rounded-2xl bg-[#f4efe6] dark:bg-slate-950/60 border border-stone-200/90 dark:border-white/[0.06] hover:border-violet-500/40 transition duration-200 space-y-3 shadow-xs">
-            <div className="p-2.5 rounded-xl bg-violet-500/15 text-violet-700 dark:bg-violet-600/20 dark:text-violet-400 w-fit">
-              <Layers className="w-5 h-5" />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <div className="p-4 sm:p-6 rounded-2xl bg-[#f4efe6] dark:bg-slate-950/60 border border-stone-200/90 dark:border-white/[0.06] hover:border-violet-500/40 transition duration-200 space-y-2.5 sm:space-y-3 shadow-xs">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-violet-500/15 text-violet-700 dark:bg-violet-600/20 dark:text-violet-400 w-fit">
+              <Layers className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h4 className="font-bold text-stone-900 dark:text-white text-base">Automata Theory</h4>
+            <h4 className="font-bold text-stone-900 dark:text-white text-sm sm:text-base">Automata Theory</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
               Mathematical models of abstract computing devices, from simple finite state automata to pushdown automata and universal Turing machines.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#f4efe6] dark:bg-slate-950/60 border border-stone-200/90 dark:border-white/[0.06] hover:border-cyan-500/40 transition duration-200 space-y-3 shadow-xs">
-            <div className="p-2.5 rounded-xl bg-cyan-500/15 text-cyan-700 dark:bg-cyan-600/20 dark:text-cyan-400 w-fit">
-              <Code2 className="w-5 h-5" />
+          <div className="p-4 sm:p-6 rounded-2xl bg-[#f4efe6] dark:bg-slate-950/60 border border-stone-200/90 dark:border-white/[0.06] hover:border-cyan-500/40 transition duration-200 space-y-2.5 sm:space-y-3 shadow-xs">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-cyan-500/15 text-cyan-700 dark:bg-cyan-600/20 dark:text-cyan-400 w-fit">
+              <Code2 className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h4 className="font-bold text-stone-900 dark:text-white text-base">Formal Languages</h4>
+            <h4 className="font-bold text-stone-900 dark:text-white text-sm sm:text-base">Formal Languages</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
               The Chomsky hierarchy: regular languages (DFA/NFA), context-free languages, and recursively enumerable languages recognized by Turing machines.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#f4efe6] dark:bg-slate-950/60 border border-stone-200/90 dark:border-white/[0.06] hover:border-emerald-500/40 transition duration-200 space-y-3 shadow-xs">
-            <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-700 dark:bg-emerald-600/20 dark:text-emerald-400 w-fit">
-              <Compass className="w-5 h-5" />
+          <div className="p-4 sm:p-6 rounded-2xl bg-[#f4efe6] dark:bg-slate-950/60 border border-stone-200/90 dark:border-white/[0.06] hover:border-emerald-500/40 transition duration-200 space-y-2.5 sm:space-y-3 shadow-xs">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-emerald-500/15 text-emerald-700 dark:bg-emerald-600/20 dark:text-emerald-400 w-fit">
+              <Compass className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h4 className="font-bold text-stone-900 dark:text-white text-base">Computability & Limits</h4>
+            <h4 className="font-bold text-stone-900 dark:text-white text-sm sm:text-base">Computability & Limits</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
               Decidability, the Church-Turing thesis, and the famous Halting Problem proving that certain mathematical questions can never be resolved by any algorithm.
             </p>
@@ -348,30 +348,30 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       {/* How the Simulators Work Walkthrough */}
       <section className="space-y-6">
         <div className="text-center space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 dark:text-white tracking-tight">How the Simulators Work</h2>
-          <p className="text-sm text-stone-600 dark:text-slate-400">Engineered for pedagogical transparency and academic rigor</p>
+          <h2 className="text-xl sm:text-3xl font-bold text-stone-900 dark:text-white tracking-tight">How the Simulators Work</h2>
+          <p className="text-xs sm:text-sm text-stone-600 dark:text-slate-400">Engineered for pedagogical transparency and academic rigor</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="glass-panel rounded-2xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/60">
-            <div className="text-3xl font-black font-mono text-violet-400/30 absolute top-4 right-4">01</div>
-            <h4 className="text-base font-bold text-stone-900 dark:text-white">Configure or Load Model</h4>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/60">
+            <div className="text-2xl sm:text-3xl font-black font-mono text-violet-400/30 absolute top-4 right-4">01</div>
+            <h4 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white">Configure or Load Model</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
               Choose from pre-tested academic presets or specify your own alphabet, states, transitions, and acceptance criteria in the visual editor.
             </p>
           </div>
 
-          <div className="glass-panel rounded-2xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/60">
-            <div className="text-3xl font-black font-mono text-cyan-400/30 absolute top-4 right-4">02</div>
-            <h4 className="text-base font-bold text-stone-900 dark:text-white">Inspect Every Single Step</h4>
+          <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/60">
+            <div className="text-2xl sm:text-3xl font-black font-mono text-cyan-400/30 absolute top-4 right-4">02</div>
+            <h4 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white">Inspect Every Single Step</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
               Step forward one symbol at a time. Watch the tape head shift, observe subset creation, and read human-friendly transition explanations.
             </p>
           </div>
 
-          <div className="glass-panel rounded-2xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/60">
-            <div className="text-3xl font-black font-mono text-emerald-400/30 absolute top-4 right-4">03</div>
-            <h4 className="text-base font-bold text-stone-900 dark:text-white">Verify Equivalence & Export</h4>
+          <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-sm space-y-3 relative overflow-hidden bg-[#faf7f2]/95 dark:bg-slate-950/60">
+            <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400/30 absolute top-4 right-4">03</div>
+            <h4 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white">Verify Equivalence & Export</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
               Test strings synchronously across machines. Review complete transition matrices and save your work as standard JSON or CSV files.
             </p>

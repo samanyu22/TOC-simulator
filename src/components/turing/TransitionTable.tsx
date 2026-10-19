@@ -69,7 +69,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
   );
 
   return (
-    <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 bg-[#faf7f2]/95 dark:bg-slate-950/70">
+    <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 bg-[#faf7f2]/95 dark:bg-slate-950/70">
       {/* Header and Filter */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-200 dark:border-white/[0.07]">
         <div className="flex items-center gap-2.5">
@@ -103,7 +103,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
 
       {/* Add Transition Form (if not readOnly) */}
       {!readOnly && (
-        <form onSubmit={handleAdd} className="p-3.5 rounded-2xl bg-[#f4efe8]/70 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.07] space-y-2">
+        <form onSubmit={handleAdd} className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#f4efe8]/70 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.07] space-y-2.5">
           <div className="text-[11px] font-mono font-bold text-stone-600 dark:text-slate-400 uppercase tracking-wider">
             Define New Rule:
           </div>
@@ -126,7 +126,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
               value={newReadSymbol}
               onChange={(e) => setNewReadSymbol(e.target.value)}
               placeholder="sym"
-              className="w-14 px-2 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono text-center font-bold text-teal-700 dark:text-cyan-300 focus:outline-none shadow-xs"
+              className="w-12 sm:w-14 px-2 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono text-center font-bold text-teal-700 dark:text-cyan-300 focus:outline-none shadow-xs"
             >
             </input>
 
@@ -150,7 +150,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
               value={newWriteSymbol}
               onChange={(e) => setNewWriteSymbol(e.target.value)}
               placeholder="sym"
-              className="w-14 px-2 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono text-center font-bold text-emerald-700 dark:text-emerald-300 focus:outline-none shadow-xs"
+              className="w-12 sm:w-14 px-2 py-1.5 rounded-xl bg-[#faf7f2] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono text-center font-bold text-emerald-700 dark:text-emerald-300 focus:outline-none shadow-xs"
             >
             </input>
 
@@ -167,7 +167,7 @@ export const TransitionTable: React.FC<TransitionTableProps> = React.memo(({
 
             <button
               type="submit"
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-xs font-semibold text-white transition ml-auto shadow-md shadow-violet-600/30"
+              className="w-full sm:w-auto sm:ml-auto flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-xs font-semibold text-white transition shadow-md shadow-violet-600/30"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Rule</span>

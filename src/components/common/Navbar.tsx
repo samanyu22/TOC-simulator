@@ -366,7 +366,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Fancy Mobile Drawer with Staggered Entrance & Frosted Glass */}
         <div 
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-stone-200/90 dark:border-white/[0.08] ${
-            mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+            mobileMenuOpen ? 'max-h-[85vh] overflow-y-auto opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
           }`}
         >
           <div className="p-4 space-y-2 bg-[#fbfaf7]/98 dark:bg-[#070b18]/95 backdrop-blur-2xl shadow-2xl">

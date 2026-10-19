@@ -26,15 +26,15 @@ interface TMCardProps {
 
 const TMCard: React.FC<TMCardProps> = ({ tm, onLoad }) => {
   return (
-    <div className="glass-panel glass-card-hover rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-xl flex flex-col justify-between space-y-6 transition-all">
-      <div className="space-y-4">
+    <div className="glass-panel glass-card-hover rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-xl flex flex-col justify-between space-y-4 sm:space-y-6 transition-all">
+      <div className="space-y-3 sm:space-y-4">
         {/* Header Tags */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-violet-100 dark:bg-violet-950/80 border border-violet-300 dark:border-violet-500/40 text-violet-800 dark:text-violet-300 font-mono text-xs font-bold shadow-2xs">
-            <Cpu className="w-3.5 h-3.5" />
+            <Cpu className="w-3.5 h-3.5 shrink-0" />
             Turing Machine
           </span>
-          <span className="text-[11px] font-mono text-stone-600 dark:text-slate-400 font-bold px-2.5 py-0.5 rounded-full bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-white/5">
+          <span className="text-[11px] font-mono text-stone-600 dark:text-slate-400 font-bold px-2.5 py-0.5 rounded-full bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-white/5 truncate">
             {tm.states.length} states • {tm.transitions.length} rules
           </span>
         </div>
@@ -70,7 +70,7 @@ const TMCard: React.FC<TMCardProps> = ({ tm, onLoad }) => {
         className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-violet-600/15 hover:bg-violet-600 text-violet-800 hover:text-white dark:bg-violet-600/30 dark:hover:bg-violet-600 dark:text-violet-200 border border-violet-400/40 dark:border-violet-500/40 text-xs font-bold transition-all duration-150 active:scale-95 shadow-xs group/btn cursor-pointer"
       >
         <span>Open in TM Simulator</span>
-        <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+        <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform shrink-0" />
       </button>
     </div>
   );
@@ -86,15 +86,15 @@ interface NFACardProps {
 
 const NFACard: React.FC<NFACardProps> = ({ nfa, onLoad }) => {
   return (
-    <div className="glass-panel glass-card-hover rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-xl flex flex-col justify-between space-y-6 transition-all">
-      <div className="space-y-4">
+    <div className="glass-panel glass-card-hover rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-xl flex flex-col justify-between space-y-4 sm:space-y-6 transition-all">
+      <div className="space-y-3 sm:space-y-4">
         {/* Header Tags */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-300 dark:border-cyan-500/40 text-cyan-800 dark:text-cyan-300 font-mono text-xs font-bold shadow-2xs">
-            <Network className="w-3.5 h-3.5" />
+            <Network className="w-3.5 h-3.5 shrink-0" />
             NFA Automaton
           </span>
-          <span className="text-[11px] font-mono text-stone-600 dark:text-slate-400 font-bold px-2.5 py-0.5 rounded-full bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-white/5">
+          <span className="text-[11px] font-mono text-stone-600 dark:text-slate-400 font-bold px-2.5 py-0.5 rounded-full bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-white/5 truncate">
             {nfa.states.length} states • {nfa.transitions.length} rules
           </span>
         </div>
@@ -132,7 +132,7 @@ const NFACard: React.FC<NFACardProps> = ({ nfa, onLoad }) => {
         className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-cyan-600/15 hover:bg-cyan-600 text-cyan-800 hover:text-white dark:bg-cyan-600/30 dark:hover:bg-cyan-600 dark:text-cyan-200 border border-cyan-400/40 dark:border-cyan-500/40 text-xs font-bold transition-all duration-150 active:scale-95 shadow-xs group/btn cursor-pointer"
       >
         <span>Open in NFA Converter</span>
-        <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+        <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform shrink-0" />
       </button>
     </div>
   );
@@ -169,15 +169,15 @@ export const ExampleLibrary: React.FC<ExampleLibraryProps> = ({
   const totalCount = filteredTMs.length + filteredNFAs.length;
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <div className="space-y-6 sm:space-y-8 max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 p-8 rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-2xl relative overflow-hidden transition-colors">
-        <div className="space-y-2">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-5 p-4 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-2xl relative overflow-hidden transition-colors">
+        <div className="space-y-1.5 sm:space-y-2">
           <div className="flex items-center gap-2.5">
-            <span className="p-2.5 rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-500 text-white shadow-md">
-              <Layers className="w-5 h-5" />
+            <span className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-500 text-white shadow-md shrink-0">
+              <Layers className="w-4 h-4 sm:w-5 sm:h-5" />
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-white tracking-tight">
+            <h1 className="text-xl sm:text-3xl font-extrabold text-stone-900 dark:text-white tracking-tight">
               Predefined Machine Library
             </h1>
           </div>
@@ -187,12 +187,12 @@ export const ExampleLibrary: React.FC<ExampleLibraryProps> = ({
         </div>
 
         {/* Filter and Search Bar */}
-        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full md:w-auto">
           {/* Filter Pills */}
-          <div className="flex items-center gap-1 p-1 rounded-2xl bg-[#f4efe8] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10">
+          <div className="flex items-center justify-between sm:justify-start gap-1 p-1 rounded-2xl bg-[#f4efe8] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 w-full sm:w-auto">
             <button
               onClick={() => setFilterType('all')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer ${
+              className={`flex-1 sm:flex-initial px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer text-center ${
                 filterType === 'all' 
                   ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow' 
                   : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white'
@@ -202,7 +202,7 @@ export const ExampleLibrary: React.FC<ExampleLibraryProps> = ({
             </button>
             <button
               onClick={() => setFilterType('tm')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer ${
+              className={`flex-1 sm:flex-initial px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer text-center ${
                 filterType === 'tm' 
                   ? 'bg-violet-600 text-white shadow-violet-900/20' 
                   : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white'
@@ -212,7 +212,7 @@ export const ExampleLibrary: React.FC<ExampleLibraryProps> = ({
             </button>
             <button
               onClick={() => setFilterType('nfa')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer ${
+              className={`flex-1 sm:flex-initial px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer text-center ${
                 filterType === 'nfa' 
                   ? 'bg-cyan-600 text-white shadow-cyan-900/20' 
                   : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white'

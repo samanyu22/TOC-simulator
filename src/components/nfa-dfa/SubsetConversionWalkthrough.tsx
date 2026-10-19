@@ -85,7 +85,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
   }, [isPlaying, speed, totalSteps, onStepChange]);
 
   return (
-    <div className="glass-panel rounded-3xl p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-5 transition-colors duration-200">
+    <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-4 sm:space-y-5 transition-colors duration-200">
       {/* Header and Step Progress */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-200 dark:border-white/[0.07]">
         <div className="flex items-center gap-2.5">
@@ -135,7 +135,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
       </div>
 
       {/* Playback Controls Hub */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.08] transition-colors">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.08] transition-colors">
         <div className="flex items-center gap-2">
           {isPlaying ? (
             <button
@@ -151,7 +151,7 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
               className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-bold transition shadow-md shadow-violet-900/20 active:scale-95"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
-              <span>{isFinished ? 'Replay' : 'Play Walkthrough'}</span>
+              <span>{isFinished ? 'Replay' : 'Play'}</span>
             </button>
           )}
 
@@ -203,35 +203,35 @@ export const SubsetConversionWalkthrough: React.FC<SubsetConversionWalkthroughPr
 
       {/* Current Step Detailed Breakdown Card */}
       {currentStep ? (
-        <div className="p-5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-900/90 border border-cyan-400/40 dark:border-cyan-500/30 shadow-md dark:shadow-glow-cyan space-y-4 transition-colors">
-          <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
+        <div className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-900/90 border border-cyan-400/40 dark:border-cyan-500/30 shadow-md dark:shadow-glow-cyan space-y-3.5 sm:space-y-4 transition-colors">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono">
             {/* Source Subset */}
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/50 text-violet-900 dark:text-violet-200">
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/50 text-violet-900 dark:text-violet-200">
               <span className="text-stone-500 dark:text-slate-400">Source:</span>
-              <span className="font-black text-sm">{currentStep.currentSubset}</span>
+              <span className="font-black text-xs sm:text-sm">{currentStep.currentSubset}</span>
             </div>
 
-            <ArrowRight className="w-4 h-4 text-stone-400 dark:text-slate-500" />
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-400 dark:text-slate-500 shrink-0" />
 
             {/* Read Symbol */}
-            <div className="px-3 py-2 rounded-xl bg-cyan-50 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-500/50 text-cyan-900 dark:text-cyan-200">
+            <div className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-cyan-50 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-500/50 text-cyan-900 dark:text-cyan-200">
               <span className="text-stone-500 dark:text-slate-400">Read: </span>
-              <span className="font-black text-sm">'{currentStep.symbol}'</span>
+              <span className="font-black text-xs sm:text-sm">'{currentStep.symbol}'</span>
             </div>
 
-            <ArrowRight className="w-4 h-4 text-stone-400 dark:text-slate-500" />
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-400 dark:text-slate-500 shrink-0" />
 
             {/* Target Subset */}
-            <div className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border ${
+            <div className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl border ${
               currentStep.isNewSubset
                 ? 'bg-emerald-50 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-500/60 text-emerald-900 dark:text-emerald-200 shadow-xs dark:shadow-glow-emerald'
                 : 'bg-[#f4efe8] dark:bg-slate-950 border-stone-200/90 dark:border-white/10 text-stone-800 dark:text-slate-200'
             }`}>
               <span className="text-stone-500 dark:text-slate-400">Target:</span>
-              <span className="font-black text-sm">{currentStep.targetSubsetName}</span>
+              <span className="font-black text-xs sm:text-sm">{currentStep.targetSubsetName}</span>
               {currentStep.isNewSubset && (
                 <span className="text-[9px] bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 px-1.5 py-0.5 rounded uppercase font-black tracking-wide border border-emerald-500/40">
-                  NEW STATE
+                  NEW
                 </span>
               )}
             </div>

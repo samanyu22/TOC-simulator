@@ -188,32 +188,32 @@ export const TMSimulator: React.FC<TMSimulatorProps> = ({
   return (
     <div className="space-y-6 max-w-7xl mx-auto px-4 sm:px-6 py-6">
       {/* Top Banner & Example Picker */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 p-6 rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-xl bg-[#faf7f2]/95 dark:bg-slate-950/70 relative overflow-hidden">
-        <div className="space-y-1.5">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-600/30">
-              <Cpu className="w-5 h-5 text-cyan-200" />
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-5 p-4 sm:p-6 rounded-2xl sm:rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-xl bg-[#faf7f2]/95 dark:bg-slate-950/70 relative overflow-hidden">
+        <div className="space-y-1.5 w-full md:w-auto">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-600/30 shrink-0">
+              <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-200" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-stone-900 dark:text-white flex items-center gap-2.5">
-                <span>{currentMachine.name}</span>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/40 text-violet-800 dark:text-violet-300">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-white flex items-center gap-2 flex-wrap">
+                <span className="truncate">{currentMachine.name}</span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/40 text-violet-800 dark:text-violet-300 shrink-0">
                   Turing Machine
                 </span>
               </h1>
-              <p className="text-xs text-stone-600 dark:text-stone-400 mt-0.5 font-sans leading-relaxed">{currentMachine.description}</p>
+              <p className="text-xs text-stone-600 dark:text-stone-400 mt-0.5 font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">{currentMachine.description}</p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 w-full md:w-auto justify-between sm:justify-start">
           {/* Example Picker */}
-          <div className="flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-violet-600 dark:text-cyan-400" />
+          <div className="flex items-center gap-1.5 flex-1 sm:flex-initial min-w-[140px]">
+            <BookOpen className="w-4 h-4 text-violet-600 dark:text-cyan-400 shrink-0" />
             <select
               value={currentMachine.id}
               onChange={(e) => handleSelectExample(e.target.value)}
-              className="px-3.5 py-2 rounded-2xl bg-[#faf7f2] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 text-xs font-semibold text-stone-800 dark:text-slate-200 focus:outline-none focus:border-cyan-500 cursor-pointer shadow-xs"
+              className="w-full sm:w-auto px-3 py-2 rounded-xl sm:rounded-2xl bg-[#faf7f2] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 text-xs font-semibold text-stone-800 dark:text-slate-200 focus:outline-none focus:border-cyan-500 cursor-pointer shadow-xs truncate"
             >
               {TM_EXAMPLES.map(ex => (
                 <option key={ex.id} value={ex.id}>{ex.name}</option>
@@ -224,28 +224,29 @@ export const TMSimulator: React.FC<TMSimulatorProps> = ({
           {/* Machine Formal Config Button */}
           <button
             onClick={() => setIsConfigOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-800 dark:text-slate-200 border border-stone-200/90 dark:border-white/10 text-xs font-semibold transition active:scale-95 shadow-xs"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl sm:rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-800 dark:text-slate-200 border border-stone-200/90 dark:border-white/10 text-xs font-semibold transition active:scale-95 shadow-xs"
           >
-            <Settings2 className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400" />
-            <span>Edit Model</span>
+            <Settings2 className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400 shrink-0" />
+            <span className="hidden xs:inline">Edit Model</span>
+            <span className="xs:hidden">Edit</span>
           </button>
 
           {/* Export Machine JSON */}
           <button
             onClick={handleExportJSON}
             title="Export Turing Machine configuration as JSON"
-            className="p-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
+            className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
 
           {/* Reset */}
           <button
             onClick={handleReset}
             title="Reset to initial state"
-            className="p-2.5 rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
+            className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-[#faf7f2] dark:bg-slate-900 hover:bg-[#f4efe6] dark:hover:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200/90 dark:border-white/10 transition active:scale-95 shadow-xs"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
       </div>

@@ -372,6 +372,63 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
     setIsPanning(false);
   };
 
+  // Mobile Touch Gestures for graph navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      setIsPanning(true);
+      panStartRef.current = { x: touch.clientX - pan.x, y: touch.clientY - pan.y };
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      if (draggingNodeId) {
+        const dx = (touch.clientX - dragStartRef.current.x) / zoom;
+        const dy = (touch.clientY - dragStartRef.current.y) / zoom;
+        setNodes(prev => prev.map(n => {
+          if (n.id === draggingNodeId) {
+            const updated = { ...n, x: n.x + dx, y: n.y + dy };
+            customPositionsRef.current.set(n.id, { x: updated.x, y: updated.y });
+            return updated;
+          }
+          return n;
+        }));
+        dragStartRef.current = { x: touch.clientX, y: touch.clientY };
+      } else if (isPanning) {
+        setPan({
+          x: touch.clientX - panStartRef.current.x,
+          y: touch.clientY - panStartRef.current.y,
+        });
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setDraggingNodeId(null);
+    setIsPanning(false);
+  };
+
+  const handleNodeTouchStart = (e: React.TouchEvent, nodeId: string) => {
+    e.stopPropagation();
+    if (e.touches.length === 1) {
+      if (connectingFrom) {
+        setTransitionModal({
+          isOpen: true,
+          fromState: connectingFrom,
+          toState: nodeId,
+          symbol: availableSymbols[0] || '0',
+        });
+        setConnectingFrom(null);
+        return;
+      }
+      setDraggingNodeId(nodeId);
+      dragStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      if (onSelectState) onSelectState(nodeId);
+    }
+  };
+
   // Zoom helpers
   const handleZoom = (delta: number) => {
     setZoom(prev => Math.min(Math.max(0.4, prev + delta), 2.5));
@@ -447,31 +504,35 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
   return (
     <div 
       ref={containerRef}
-      className={`relative w-full h-[450px] rounded-3xl overflow-hidden glass-panel border border-slate-200/80 dark:border-white/[0.08] shadow-2xl select-none transition-colors duration-200 ${className}`}
+      className={`relative w-full h-[360px] sm:h-[450px] rounded-2xl sm:rounded-3xl overflow-hidden glass-panel border border-slate-200/80 dark:border-white/[0.08] shadow-2xl select-none transition-colors duration-200 touch-none ${className}`}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
       onMouseDown={handleCanvasMouseDown}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
       onContextMenu={handleCanvasContextMenu}
       style={{ cursor: isPanning ? 'grabbing' : connectingFrom ? 'crosshair' : 'grab' }}
     >
       {/* Top Header Title Badge */}
       {title && (
-        <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5 px-3.5 py-1.5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/85 backdrop-blur-md border border-stone-200/90 dark:border-white/10 shadow-lg transition-colors pointer-events-none">
-          <span className="w-2 h-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse"></span>
-          <span className="text-xs font-bold text-stone-900 dark:text-white tracking-wide uppercase font-mono">{title}</span>
-          <span className="text-xs text-stone-500 dark:text-slate-400 font-mono">({states.length} states)</span>
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/85 backdrop-blur-md border border-stone-200/90 dark:border-white/10 shadow-lg transition-colors pointer-events-none max-w-[calc(100%-24px)] truncate">
+          <span className="w-2 h-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse shrink-0"></span>
+          <span className="text-[11px] sm:text-xs font-bold text-stone-900 dark:text-white tracking-wide uppercase font-mono truncate">{title}</span>
+          <span className="text-[10px] sm:text-xs text-stone-500 dark:text-slate-400 font-mono shrink-0">({states.length})</span>
         </div>
       )}
 
       {/* Interactive Connecting Banner */}
       {connectingFrom && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-xl text-xs font-bold font-mono animate-in fade-in slide-in-from-top-2 duration-150">
-          <span className="w-2 h-2 rounded-full bg-white animate-ping" />
-          <span>Connect from state "{connectingFrom}": Click target node (Esc to cancel)</span>
+        <div className="absolute top-12 sm:top-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-xl text-xs font-bold font-mono animate-in fade-in slide-in-from-top-2 duration-150 max-w-[95%] sm:max-w-none text-center justify-between">
+          <span className="w-2 h-2 rounded-full bg-white animate-ping shrink-0" />
+          <span className="truncate">Connect "{connectingFrom}": Click target</span>
           <button
             onClick={() => setConnectingFrom(null)}
-            className="p-1 rounded-lg hover:bg-white/20 transition"
+            className="p-1 rounded-lg hover:bg-white/20 transition shrink-0"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -479,7 +540,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
       )}
 
       {/* Floating HUD Controls */}
-      <div className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/90 backdrop-blur-xl border border-stone-200/90 dark:border-white/10 shadow-2xl transition-colors">
+      <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-xl sm:rounded-2xl bg-[#faf7f2]/95 dark:bg-slate-950/90 backdrop-blur-xl border border-stone-200/90 dark:border-white/10 shadow-2xl transition-colors">
         {isEditable && (
           <button
             onClick={() => {
@@ -491,7 +552,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
               if (onAddState) onAddState(name);
             }}
             title="Quick Add State (Center)"
-            className="p-2 rounded-xl text-cyan-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/60 transition active:scale-95"
+            className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-cyan-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/60 transition active:scale-95"
           >
             <Plus className="w-4 h-4" />
           </button>
@@ -499,28 +560,28 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
         <button 
           onClick={() => handleZoom(0.15)} 
           title="Zoom In (+)"
-          className="p-2 rounded-xl text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition active:scale-95"
+          className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition active:scale-95"
         >
           <ZoomIn className="w-4 h-4" />
         </button>
         <button 
           onClick={() => handleZoom(-0.15)} 
           title="Zoom Out (-)"
-          className="p-2 rounded-xl text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition active:scale-95"
+          className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition active:scale-95"
         >
           <ZoomOut className="w-4 h-4" />
         </button>
         <button 
           onClick={resetView} 
           title="Reset Graph Layout & Zoom"
-          className="p-2 rounded-xl text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition active:scale-95"
+          className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl text-stone-600 dark:text-slate-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition active:scale-95"
         >
           <Maximize2 className="w-4 h-4" />
         </button>
       </div>
 
       {/* Drag & Pan & Right-Click Hint */}
-      <div className="absolute bottom-4 left-4 z-10 text-[11px] text-stone-500 dark:text-slate-400 font-mono flex items-center gap-1.5 pointer-events-none opacity-80">
+      <div className="hidden sm:flex absolute bottom-4 left-4 z-10 text-[11px] text-stone-500 dark:text-slate-400 font-mono items-center gap-1.5 pointer-events-none opacity-80">
         <Move className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
         <span>{isEditable ? 'Right-click canvas or node to edit • Drag nodes' : 'Drag nodes • Pan canvas'}</span>
       </div>
@@ -766,6 +827,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
                 key={node.id}
                 transform={`translate(${node.x}, ${node.y})`}
                 onMouseDown={(e) => handleNodeMouseDown(e, node.id)}
+                onTouchStart={(e) => handleNodeTouchStart(e, node.id)}
                 onMouseEnter={() => setHoveredNodeId(node.id)}
                 onMouseLeave={() => setHoveredNodeId(null)}
                 onContextMenu={(e) => handleNodeContextMenu(e, node.id)}
@@ -1140,7 +1202,7 @@ export const AutomataGraph: React.FC<AutomataGraphProps> = React.memo(({
           }}
         >
           <div 
-            className="w-full max-w-sm rounded-3xl bg-[#faf7f2]/98 dark:bg-slate-950/95 backdrop-blur-2xl border border-stone-200/90 dark:border-white/10 shadow-2xl p-5 space-y-4 animate-in zoom-in-95 duration-150 text-slate-800 dark:text-slate-100 font-sans"
+            className="w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-[#faf7f2]/98 dark:bg-slate-950/95 backdrop-blur-2xl border border-stone-200/90 dark:border-white/10 shadow-2xl p-4 sm:p-5 space-y-4 animate-in zoom-in-95 duration-150 text-slate-800 dark:text-slate-100 font-sans"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
