@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
           <ul className="space-y-1.5 text-stone-600 dark:text-slate-400">
             <li>Michael Sipser — <em>Introduction to the Theory of Computation</em></li>
             <li>Hopcroft, Motwani, Ullman — <em>Automata Theory, Languages, and Computation</em></li>
-            <li>Alan M. Turing (1936) — <em>On Computable Numbers</em></li>
+            <li>M. O. Rabin &amp; D. Scott (1959) — <em>Finite Automata and Their Decision Problems</em></li>
           </ul>
         </div>
 
@@ -38,8 +38,8 @@ export const Footer: React.FC = () => {
             Simulators
           </h4>
           <ul className="space-y-1.5 text-stone-600 dark:text-slate-400">
-            <li>Deterministic Turing Machine Engine</li>
-            <li>Interactive Horizontal Infinite Tape</li>
+            <li>Rabin-Scott Powerset Determinization</li>
+            <li>Transitive &epsilon;-Closure BFS Engine</li>
             <li>NFA to DFA Subset Construction</li>
             <li>Dual Synchronous String Simulator</li>
           </ul>

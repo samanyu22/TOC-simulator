@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { 
-  BookOpen, 
-  Cpu, 
   Network, 
   CheckCircle2, 
   XCircle, 
   ChevronDown, 
   ChevronUp, 
-  Sparkles, 
   Lightbulb, 
   AlertTriangle, 
   GraduationCap, 
@@ -28,7 +25,7 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     id: 1,
     question: "Why do NFAs and DFAs recognize exactly the same class of languages (Regular Languages)?",
     options: [
-      "Because NFAs have infinite memory like a Turing machine.",
+      "Because NFAs have infinite memory like a pushdown stack.",
       "Because every NFA can be converted to an equivalent DFA via the Subset Construction algorithm.",
       "Because DFAs can backtrack across multiple branches.",
       "Because epsilon transitions allow non-regular grammar parsing."
@@ -50,18 +47,6 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 3,
-    question: "What happens when a deterministic Turing machine encounters an undefined transition in a non-accepting state?",
-    options: [
-      "It loops forever without halting.",
-      "It halts immediately and rejects the input string.",
-      "It automatically reverts the tape to blank.",
-      "It branches into nondeterministic parallel threads."
-    ],
-    correctIndex: 1,
-    explanation: "Correct! By standard mathematical definition, if δ(q, a) is undefined and q ∉ F, the computation immediately halts and rejects."
-  },
-  {
-    id: 4,
     question: "What is an epsilon-closure (ε-closure) of a state q?",
     options: [
       "The set of states reachable from q by reading at least one '0' or '1'.",
@@ -71,6 +56,18 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
     ],
     correctIndex: 1,
     explanation: "Correct! The ε-closure of q includes q itself, plus any state reachable along paths of spontaneous ε transitions without consuming any input."
+  },
+  {
+    id: 4,
+    question: "When is a subset state S in a converted DFA marked as an accepting / final state?",
+    options: [
+      "Only when every state in S is an NFA accept state.",
+      "When S contains at least one NFA accept state (S ∩ F_NFA ≠ ∅).",
+      "When S is the dead/trap state ∅.",
+      "When S has self-loops on every alphabet symbol."
+    ],
+    correctIndex: 1,
+    explanation: "Correct! A DFA accepts a string if it ends in any subset containing at least one valid accepting branch of the original NFA."
   }
 ];
 
@@ -98,56 +95,49 @@ export const LearnAcademy: React.FC = () => {
   return (
     <div className="space-y-6 sm:space-y-8 max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
       {/* Academy Banner */}
-      <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3.5 sm:space-y-4 relative overflow-hidden transition-colors">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-violet-500/35 via-purple-500/20 to-transparent dark:from-violet-600/10 dark:to-transparent rounded-full blur-3xl pointer-events-none -mr-16 -mt-16" />
-        <div className="absolute top-0 right-0 w-44 h-44 bg-violet-400/25 dark:bg-transparent rounded-full blur-2xl pointer-events-none -mr-8 -mt-8" />
-
-        <div className="flex items-center gap-3">
-          <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-500 text-white shadow-md shrink-0">
-            <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6" />
-          </div>
-          <div>
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-5 p-4 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-stone-200/90 dark:border-white/[0.08] shadow-2xl relative overflow-hidden transition-colors">
+        <div className="space-y-1.5 sm:space-y-2">
+          <div className="flex items-center gap-2.5">
+            <span className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-600 text-white shadow-md shrink-0">
+              <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" />
+            </span>
             <h1 className="text-xl sm:text-3xl font-extrabold text-stone-900 dark:text-white tracking-tight">
-              Theory of Computation Academy
+              TOC Theory Academy
             </h1>
-            <p className="text-xs text-stone-500 dark:text-slate-400 font-mono mt-0.5">
-              Interactive guides, formal definitions, and challenge exercises
-            </p>
           </div>
+          <p className="text-xs text-stone-600 dark:text-slate-400 font-mono">
+            Interactive guide to finite automata, nondeterminism, and powerset determinization.
+          </p>
         </div>
 
-        <p className="text-xs sm:text-sm text-stone-600 dark:text-slate-300 leading-relaxed max-w-3xl font-sans">
-          Master formal languages, finite automata, subset construction, and Turing machine mechanics through interactive explanations, visual guides, and practice challenges.
-        </p>
-
-        {/* Section Tabs */}
-        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-3 sm:pt-4 border-t border-stone-200 dark:border-white/[0.08]">
+        {/* Navigation Tabs */}
+        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-[#f4efe8] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 w-full md:w-auto">
           <button
             onClick={() => setActiveSection('concepts')}
-            className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
-              activeSection === 'concepts'
-                ? 'bg-violet-600 text-white shadow-violet-900/20'
-                : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#faf7f2] dark:bg-slate-900/80 border border-stone-200/90 dark:border-white/5'
+            className={`flex-1 md:flex-initial px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer text-center ${
+              activeSection === 'concepts' 
+                ? 'bg-cyan-600 text-white shadow' 
+                : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white'
             }`}
           >
-            Core Concepts & Theory
+            Concepts
           </button>
           <button
             onClick={() => setActiveSection('tutorials')}
-            className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
-              activeSection === 'tutorials'
-                ? 'bg-cyan-600 text-white shadow-cyan-900/20'
-                : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#faf7f2] dark:bg-slate-900/80 border border-stone-200/90 dark:border-white/5'
+            className={`flex-1 md:flex-initial px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer text-center ${
+              activeSection === 'tutorials' 
+                ? 'bg-cyan-600 text-white shadow' 
+                : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white'
             }`}
           >
-            Guided Simulator Tutorials
+            Tutorials
           </button>
           <button
             onClick={() => setActiveSection('quiz')}
-            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
-              activeSection === 'quiz'
-                ? 'bg-emerald-600 text-white shadow-emerald-900/20'
-                : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white bg-[#faf7f2] dark:bg-slate-900/80 border border-stone-200/90 dark:border-white/5'
+            className={`flex-1 md:flex-initial flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer text-center ${
+              activeSection === 'quiz' 
+                ? 'bg-cyan-600 text-white shadow' 
+                : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white'
             }`}
           >
             <Award className="w-3.5 h-3.5 shrink-0" />
@@ -159,7 +149,7 @@ export const LearnAcademy: React.FC = () => {
       {/* Concept Breakdown Section */}
       {activeSection === 'concepts' && (
         <div className="space-y-4 sm:space-y-5">
-          {/* Concept 1: Automata & Subset Construction */}
+          {/* Concept: Automata & Subset Construction */}
           <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 sm:space-y-4 transition-colors">
             <button
               onClick={() => setExpandedConcept(prev => prev === 'subset-construction' ? null : 'subset-construction')}
@@ -188,7 +178,7 @@ export const LearnAcademy: React.FC = () => {
                 </p>
                 <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 font-mono space-y-2 text-stone-800 dark:text-slate-300 shadow-inner break-words">
                   <div className="font-bold text-cyan-700 dark:text-cyan-300">The 4-Step Subset Construction Algorithm:</div>
-                  <div>1. Compute initial DFA state: <span className="text-violet-700 dark:text-violet-300 font-bold">S₀ = ε-closure({'{'}q₀{'}'})</span>.</div>
+                  <div>1. Compute initial DFA state: <span className="text-cyan-700 dark:text-cyan-300 font-bold">S₀ = ε-closure({'{'}q₀{'}'})</span>.</div>
                   <div>2. For every unexpanded DFA subset S and alphabet symbol a ∈ Σ:</div>
                   <div className="pl-3 sm:pl-4">Compute target subset: <span className="text-emerald-700 dark:text-emerald-300 font-bold">T = ε-closure( ⋃_(q ∈ S) δ_NFA(q, a) )</span>.</div>
                   <div className="pl-3 sm:pl-4">If T is empty, route to dead/trap state <span className="text-rose-600 dark:text-rose-400 font-bold">∅</span> with self-loops.</div>
@@ -199,54 +189,12 @@ export const LearnAcademy: React.FC = () => {
             )}
           </div>
 
-          {/* Concept 2: Turing Machines & Computation */}
-          <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 sm:space-y-4 transition-colors">
-            <button
-              onClick={() => setExpandedConcept(prev => prev === 'turing-machines' ? null : 'turing-machines')}
-              className="w-full flex items-center justify-between text-left gap-2"
-            >
-              <div className="flex items-center gap-3 sm:gap-3.5">
-                <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-violet-600/15 dark:bg-violet-600/20 text-violet-700 dark:text-violet-400 border border-violet-500/30 shrink-0">
-                  <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-                <div>
-                  <h3 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white tracking-tight">
-                    Turing Machines & The Church-Turing Thesis
-                  </h3>
-                  <p className="text-[11px] sm:text-xs text-stone-500 dark:text-slate-400 font-mono">
-                    The mathematical foundation of general-purpose algorithmic computers
-                  </p>
-                </div>
-              </div>
-              {expandedConcept === 'turing-machines' ? <ChevronUp className="w-5 h-5 text-stone-400 shrink-0" /> : <ChevronDown className="w-5 h-5 text-stone-400 shrink-0" />}
-            </button>
-
-            {expandedConcept === 'turing-machines' && (
-              <div className="pt-3 sm:pt-4 border-t border-stone-200 dark:border-white/[0.08] space-y-3 sm:space-y-4 text-xs leading-relaxed text-stone-700 dark:text-slate-300">
-                <p>
-                  Formulated by Alan Turing in 1936, a Turing machine extends a finite control with an <strong>infinite memory tape</strong> and a movable read/write head. The formal transition function is:
-                </p>
-                <div className="p-3 rounded-xl sm:rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 font-mono text-cyan-800 dark:text-cyan-300 border border-stone-200/90 dark:border-white/10 text-center font-bold text-sm shadow-inner break-words">
-                  δ : Q × Γ → Q × Γ × {'{'}L, R, S{'}'}
-                </div>
-                <p>
-                  Three distinct outcomes can occur on any input string w:
-                </p>
-                <ul className="list-disc pl-5 space-y-1.5 text-stone-700 dark:text-slate-300">
-                  <li><strong>Accept:</strong> The machine enters an accepting state <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">q_accept</span> and halts.</li>
-                  <li><strong>Reject:</strong> The machine enters an explicit reject state or halts on an undefined transition outside <span className="font-mono text-stone-600 dark:text-slate-400 font-bold">F</span>.</li>
-                  <li><strong>Loop:</strong> The machine runs indefinitely without halting (undecidability / Halting Problem).</li>
-                </ul>
-              </div>
-            )}
-          </div>
-
           {/* Common Mistakes & Debugging Tips */}
           <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 sm:space-y-4 transition-colors">
             <div className="flex items-center gap-2.5 text-amber-600 dark:text-amber-400">
               <AlertTriangle className="w-5 h-5 shrink-0" />
               <h3 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white uppercase tracking-wider">
-                Common TOC Pitfalls & Debugging Tips
+                Common Automata Pitfalls & Debugging Tips
               </h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
@@ -265,16 +213,16 @@ export const LearnAcademy: React.FC = () => {
               </div>
 
               <div className="p-4 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.06] space-y-1.5">
-                <span className="font-bold text-rose-600 dark:text-rose-300 block">Pitfall: Assuming Halting Equals Acceptance in TM</span>
+                <span className="font-bold text-rose-600 dark:text-rose-300 block">Pitfall: Powerset State Explosion</span>
                 <p className="text-stone-600 dark:text-slate-400 leading-relaxed">
-                  A Turing machine can halt on an undefined transition while in a non-accepting state. That constitutes rejection or an abnormal crash, NOT acceptance!
+                  An NFA with n states has 2^n possible subsets. However, only reachable subsets are kept in the DFA. For most practical grammars, the reachable DFA is much smaller than 2^n.
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950/70 border border-stone-200/90 dark:border-white/[0.06] space-y-1.5">
-                <span className="font-bold text-rose-600 dark:text-rose-300 block">Pitfall: Head Movement vs. Tape Write</span>
+                <span className="font-bold text-rose-600 dark:text-rose-300 block">Pitfall: Single vs Multi-Path Acceptance</span>
                 <p className="text-stone-600 dark:text-slate-400 leading-relaxed">
-                  Remember that head movement (L, R, S) changes the index of the active scanner, while the write symbol replaces the character at the current cell.
+                  In an NFA, an input string is accepted if AT LEAST ONE computational path reaches an accept state. In DFA, exactly one path is followed.
                 </p>
               </div>
             </div>
@@ -289,32 +237,16 @@ export const LearnAcademy: React.FC = () => {
             <div className="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400">
               <Lightbulb className="w-5 h-5 shrink-0" />
               <h3 className="font-bold text-stone-900 dark:text-white text-sm">
-                Tutorial 1: Step-by-Step Subset Construction
+                Tutorial: Step-by-Step Subset Construction
               </h3>
             </div>
             <ol className="list-decimal pl-5 space-y-2 text-xs text-stone-700 dark:text-slate-300 leading-relaxed">
-              <li>Navigate to the <strong>NFA to DFA</strong> tab from the top navigation bar.</li>
+              <li>Navigate to the <strong>NFA → DFA</strong> tab from the top navigation bar.</li>
               <li>Select the preset <strong>"Strings Ending in 1"</strong> or <strong>"Contains Substring '01'"</strong> from the example dropdown.</li>
               <li>Observe how the NFA graph displays multiple arrows for the same symbol (nondeterministic forks).</li>
               <li>Click the <strong>Play Walkthrough</strong> button in the Subset Construction Stepper to watch each DFA subset form dynamically.</li>
               <li>Notice how the English explanation log explains exactly which NFA states contributed to each transition!</li>
               <li>Type an input string (like <code className="text-cyan-700 dark:text-cyan-300 font-mono px-1.5 py-0.5 rounded bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800">"0101"</code>) in the Dual String Tester and click <strong>Step Char</strong> to trace execution simultaneously on both graphs.</li>
-            </ol>
-          </div>
-
-          <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3 transition-colors">
-            <div className="flex items-center gap-2.5 text-violet-600 dark:text-violet-400">
-              <Lightbulb className="w-5 h-5 shrink-0" />
-              <h3 className="font-bold text-stone-900 dark:text-white text-sm">
-                Tutorial 2: Simulating Unary Increment on a Turing Machine
-              </h3>
-            </div>
-            <ol className="list-decimal pl-5 space-y-2 text-xs text-stone-700 dark:text-slate-300 leading-relaxed">
-              <li>Navigate to the <strong>Turing Machine</strong> tab.</li>
-              <li>Select the <strong>"Unary Increment (n + 1)"</strong> example. Notice the input tape has <code className="text-cyan-700 dark:text-cyan-300 font-mono px-1.5 py-0.5 rounded bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800">111</code> (representing number 3 in unary).</li>
-              <li>Click <strong>Step</strong> to execute one step at a time. Watch the tape head move right across the 1s until it finds the blank symbol <code className="text-violet-700 dark:text-violet-300 font-mono px-1.5 py-0.5 rounded bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800">_</code>.</li>
-              <li>On the blank symbol, watch transition rule <code className="text-emerald-700 dark:text-emerald-300 font-mono px-1.5 py-0.5 rounded bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800">δ(q0, _) → (q_accept, 1, S)</code> fire, writing an extra 1 and halting in <code className="text-emerald-700 dark:text-emerald-300 font-mono px-1.5 py-0.5 rounded bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800">q_accept</code>.</li>
-              <li>The tape now contains <code className="text-cyan-700 dark:text-cyan-300 font-mono px-1.5 py-0.5 rounded bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800">1111</code> (representing number 4). Enjoy the celebratory acceptance banner and confetti!</li>
             </ol>
           </div>
         </div>
@@ -334,38 +266,40 @@ export const LearnAcademy: React.FC = () => {
                 className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-stone-200/90 dark:border-white/[0.08] shadow-2xl space-y-3.5 sm:space-y-4 transition-colors"
               >
                 <div className="flex items-start gap-2.5 sm:gap-3">
-                  <span className="px-2.5 py-1 rounded-xl bg-violet-100 dark:bg-violet-950 text-violet-800 dark:text-violet-300 font-mono text-xs font-bold shrink-0 border border-violet-300 dark:border-violet-500/40">
+                  <span className="px-2.5 py-1 rounded-xl bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-300 font-mono text-xs font-bold shrink-0 border border-cyan-300 dark:border-cyan-500/40">
                     Q{q.id}
                   </span>
                   <h4 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white leading-snug">{q.question}</h4>
                 </div>
 
-                <div className="space-y-2 sm:space-y-2.5 pt-1">
-                  {q.options.map((opt, optIdx) => {
-                    let btnStyle = 'bg-[#faf7f2] dark:bg-slate-900/80 border-stone-200/90 dark:border-white/[0.08] text-stone-700 dark:text-slate-300 hover:border-stone-400 dark:hover:border-white/20 hover:bg-[#f4efe8] dark:hover:bg-slate-900';
+                <div className="space-y-2">
+                  {q.options.map((option, idx) => {
+                    const isSelected = selected === idx;
+                    let optionStyle = 'bg-[#f4efe8]/80 dark:bg-slate-900/60 border-stone-200/90 dark:border-white/[0.08] text-stone-800 dark:text-slate-300 hover:border-cyan-500/50';
+
                     if (isAnswered) {
-                      if (optIdx === q.correctIndex) {
-                        btnStyle = 'bg-emerald-50 dark:bg-emerald-950/80 border-emerald-500 text-emerald-900 dark:text-emerald-200 font-bold shadow-xs dark:shadow-glow-emerald';
-                      } else if (optIdx === selected) {
-                        btnStyle = 'bg-rose-50 dark:bg-rose-950/80 border-rose-500 text-rose-900 dark:text-rose-200';
+                      if (idx === q.correctIndex) {
+                        optionStyle = 'bg-emerald-500/15 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-semibold';
+                      } else if (isSelected) {
+                        optionStyle = 'bg-rose-500/15 border-rose-500 text-rose-800 dark:text-rose-300';
                       } else {
-                        btnStyle = 'bg-[#f4efe8] dark:bg-slate-950/40 border-stone-200/60 dark:border-white/[0.04] text-stone-400 dark:text-slate-500 opacity-60';
+                        optionStyle = 'opacity-40 bg-[#f4efe8] dark:bg-slate-900 border-transparent';
                       }
                     }
 
                     return (
                       <button
-                        key={optIdx}
+                        key={idx}
                         disabled={isAnswered}
-                        onClick={() => handleSelectOption(q.id, optIdx)}
-                        className={`w-full text-left p-3 sm:p-3.5 rounded-xl sm:rounded-2xl border text-xs transition-all duration-150 flex items-center justify-between ${btnStyle}`}
+                        onClick={() => handleSelectOption(q.id, idx)}
+                        className={`w-full p-3 rounded-xl border text-left text-xs transition flex items-center justify-between gap-2 cursor-pointer ${optionStyle}`}
                       >
-                        <span className="pr-2">{opt}</span>
-                        {isAnswered && optIdx === q.correctIndex && (
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 ml-2" />
+                        <span>{option}</span>
+                        {isAnswered && idx === q.correctIndex && (
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
                         )}
-                        {isAnswered && optIdx === selected && optIdx !== q.correctIndex && (
-                          <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 ml-2" />
+                        {isAnswered && isSelected && !isCorrect && (
+                          <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
                         )}
                       </button>
                     );
@@ -373,13 +307,12 @@ export const LearnAcademy: React.FC = () => {
                 </div>
 
                 {showExplanations[q.id] && (
-                  <div className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl text-xs flex items-start gap-2.5 sm:gap-3 ${
-                    isCorrect
-                      ? 'bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-500/40 text-emerald-900 dark:text-emerald-300'
-                      : 'bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-500/40 text-amber-900 dark:text-amber-300'
+                  <div className={`p-3 rounded-xl text-xs leading-relaxed border ${
+                    isCorrect 
+                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-800 dark:text-emerald-300' 
+                      : 'bg-rose-500/10 border-rose-500/30 text-rose-800 dark:text-rose-300'
                   }`}>
-                    <Sparkles className="w-4 h-4 shrink-0 mt-0.5" />
-                    <p className="leading-relaxed font-sans">{q.explanation}</p>
+                    {q.explanation}
                   </div>
                 )}
               </div>
@@ -390,3 +323,5 @@ export const LearnAcademy: React.FC = () => {
     </div>
   );
 };
+
+export default LearnAcademy;

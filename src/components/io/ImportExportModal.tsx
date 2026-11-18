@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import type { TMDefinition } from '../../types/turing';
 import type { NFADefinition } from '../../types/automata';
-import { validateTMDefinition } from '../../simulators/turing-machine/engine';
 import { 
   FileDown, 
   FileUp, 
@@ -16,18 +14,14 @@ import {
 interface ImportExportModalProps {
   isOpen: boolean;
   onClose: () => void;
-  currentTM?: TMDefinition;
   currentNFA?: NFADefinition;
-  onImportTM: (tm: TMDefinition) => void;
   onImportNFA: (nfa: NFADefinition) => void;
 }
 
 export const ImportExportModal: React.FC<ImportExportModalProps> = ({
   isOpen,
   onClose,
-  currentTM,
   currentNFA,
-  onImportTM,
   onImportNFA,
 }) => {
   const [activeTab, setActiveTab] = useState<'export' | 'import'>('export');
@@ -36,22 +30,6 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
   const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
-
-  // Export TM to CSV
-  const handleExportTMCSV = () => {
-    if (!currentTM) return;
-    let csv = 'Current State,Read Symbol,Next State,Write Symbol,Direction\n';
-    currentTM.transitions.forEach(t => {
-      csv += `"${t.currentState}","${t.readSymbol}","${t.nextState}","${t.writeSymbol}","${t.direction}"\n`;
-    });
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${currentTM.id}-transitions.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
 
   // Export NFA to CSV
   const handleExportNFACSV = () => {
@@ -64,32 +42,32 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${currentNFA.id}-nfa-transitions.csv`;
+    a.download = `${currentNFA.id || 'nfa'}-transitions.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
 
-  // Export full JSON bundle
+  // Export NFA JSON
   const handleExportFullJSON = () => {
+    if (!currentNFA) return;
     const bundle = {
       exportedAt: new Date().toISOString(),
-      tm: currentTM,
       nfa: currentNFA,
     };
     const blob = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `toc-lab-configuration.json`;
+    a.download = `${currentNFA.id || 'nfa'}-config.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
 
-  // Copy bundle JSON to clipboard
+  // Copy NFA JSON to clipboard
   const handleCopyJSON = () => {
+    if (!currentNFA) return;
     const bundle = {
       exportedAt: new Date().toISOString(),
-      tm: currentTM,
       nfa: currentNFA,
     };
     navigator.clipboard.writeText(JSON.stringify(bundle, null, 2));
@@ -102,49 +80,37 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
     setImportStatus(null);
     try {
       const parsed = JSON.parse(jsonText);
+      const targetNFA: NFADefinition = parsed.nfa || parsed;
 
-      // Check if it's a TM definition
-      if (parsed.states && parsed.blankSymbol && parsed.transitions && parsed.initialState) {
-        const val = validateTMDefinition(parsed as TMDefinition);
-        if (!val.valid) {
+      // Validate NFA structure
+      if (
+        targetNFA &&
+        Array.isArray(targetNFA.states) &&
+        Array.isArray(targetNFA.alphabet) &&
+        typeof targetNFA.initialState === 'string' &&
+        Array.isArray(targetNFA.acceptStates) &&
+        Array.isArray(targetNFA.transitions)
+      ) {
+        // Validate initialState belongs to states
+        if (!targetNFA.states.includes(targetNFA.initialState)) {
           setImportStatus({
             success: false,
-            message: `Turing Machine Validation Error: ${val.errors.join('; ')}`,
+            message: `Validation Error: Initial state "${targetNFA.initialState}" is not declared in states array.`,
           });
           return;
         }
-        onImportTM(parsed as TMDefinition);
-        setImportStatus({
-          success: true,
-          message: `Successfully imported Turing Machine "${parsed.name || 'Custom TM'}"!`,
-        });
-        return;
-      }
 
-      // Check if it's an NFA definition
-      if (parsed.states && parsed.alphabet && parsed.initialState && parsed.transitions && !parsed.blankSymbol) {
-        onImportNFA(parsed as NFADefinition);
+        onImportNFA(targetNFA);
         setImportStatus({
           success: true,
-          message: `Successfully imported NFA "${parsed.name || 'Custom NFA'}"!`,
-        });
-        return;
-      }
-
-      // Check if it's a full bundle { tm, nfa }
-      if (parsed.tm || parsed.nfa) {
-        if (parsed.tm) onImportTM(parsed.tm);
-        if (parsed.nfa) onImportNFA(parsed.nfa);
-        setImportStatus({
-          success: true,
-          message: 'Successfully restored full workspace configuration bundle!',
+          message: `Successfully imported NFA "${targetNFA.name || 'Custom NFA'}"!`,
         });
         return;
       }
 
       setImportStatus({
         success: false,
-        message: 'Unrecognized JSON schema. Expected a Turing Machine, NFA, or full project bundle.',
+        message: 'Unrecognized JSON schema. Expected a valid NFA specification with states, alphabet, initialState, and transitions.',
       });
     } catch (err: any) {
       setImportStatus({
@@ -165,7 +131,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
             </div>
             <div>
               <h2 className="text-base font-bold text-stone-900 dark:text-white">Project Portability & Storage</h2>
-              <p className="text-xs text-stone-500 dark:text-slate-400 font-mono">Validated JSON Schemas & CSV Tables</p>
+              <p className="text-xs text-stone-500 dark:text-slate-400 font-mono">Validated NFA JSON Schemas & CSV Tables</p>
             </div>
           </div>
           <button
@@ -200,7 +166,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
         {activeTab === 'export' && (
           <div className="space-y-4 text-xs">
             <p className="text-stone-600 dark:text-slate-300 leading-relaxed font-sans">
-              Export your models as validated JSON configurations or download transition function matrices in CSV format for assignments and documentation.
+              Export your NFA model as a validated JSON configuration or download the transition matrix in CSV format for laboratory reports.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
@@ -209,7 +175,7 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
                 className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 hover:bg-[#ebe4d8] dark:hover:bg-slate-900 border border-stone-200/90 dark:border-white/10 hover:border-cyan-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
               >
                 <Download className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-                <span>Full Project (JSON)</span>
+                <span>NFA Config (JSON)</span>
               </button>
 
               <button
@@ -220,23 +186,13 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
                 <span>{copied ? '✓ Copied to Clipboard!' : 'Copy to Clipboard'}</span>
               </button>
 
-              {currentTM && (
-                <button
-                  onClick={handleExportTMCSV}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 hover:bg-[#ebe4d8] dark:hover:bg-slate-900 border border-stone-200/90 dark:border-white/10 hover:border-emerald-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
-                >
-                  <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>TM Transitions (CSV)</span>
-                </button>
-              )}
-
               {currentNFA && (
                 <button
                   onClick={handleExportNFACSV}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 hover:bg-[#ebe4d8] dark:hover:bg-slate-900 border border-stone-200/90 dark:border-white/10 hover:border-emerald-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
+                  className="sm:col-span-2 flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#f4efe8]/80 dark:bg-slate-950 hover:bg-[#ebe4d8] dark:hover:bg-slate-900 border border-stone-200/90 dark:border-white/10 hover:border-emerald-400/50 text-stone-800 dark:text-slate-200 font-bold transition active:scale-95 shadow-xs"
                 >
                   <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>NFA Transitions (CSV)</span>
+                  <span>Export Transitions Table (CSV)</span>
                 </button>
               )}
             </div>
@@ -247,14 +203,14 @@ export const ImportExportModal: React.FC<ImportExportModalProps> = ({
         {activeTab === 'import' && (
           <div className="space-y-4 text-xs">
             <p className="text-stone-600 dark:text-slate-300 leading-relaxed font-sans">
-              Paste a validated JSON configuration below. The engine will verify its mathematical integrity before loading.
+              Paste a validated NFA JSON configuration below. The engine will verify its mathematical integrity before loading.
             </p>
 
             <textarea
               rows={8}
               value={jsonText}
               onChange={(e) => setJsonText(e.target.value)}
-              placeholder="Paste Turing Machine or NFA JSON here..."
+              placeholder='Paste NFA JSON here, e.g. {"states": ["q0", "q1"], "alphabet": ["0", "1"], "initialState": "q0", ...}'
               className="w-full p-3.5 rounded-2xl bg-[#f4efe6] dark:bg-slate-950 border border-stone-200/90 dark:border-white/10 font-mono text-xs text-stone-900 dark:text-cyan-300 focus:outline-none focus:border-cyan-500 shadow-inner"
             />
 

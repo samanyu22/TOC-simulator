@@ -17,7 +17,7 @@ import {
 import { FeatureCards } from './FeatureCards';
 
 interface LandingPageProps {
-  onNavigate: (view: 'tm' | 'nfa-dfa' | 'learn' | 'examples') => void;
+  onNavigate: (view: 'nfa-dfa' | 'learn' | 'examples') => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
@@ -105,20 +105,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         {/* Action CTAs */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 w-full max-w-sm sm:max-w-none mx-auto">
           <button
-            onClick={() => onNavigate('tm')}
-            className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-xl shadow-violet-900/20 transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-violet-500/30"
+            onClick={() => onNavigate('nfa-dfa')}
+            className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold text-sm shadow-xl shadow-cyan-900/20 transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-cyan-500/30"
           >
-            <Cpu className="w-4 h-4 text-cyan-300 shrink-0" />
-            <span>Launch Turing Machine</span>
+            <Network className="w-4 h-4 text-cyan-200 shrink-0" />
+            <span>Launch NFA → DFA Converter</span>
             <ArrowRight className="w-4 h-4 ml-1 shrink-0" />
           </button>
 
           <button
-            onClick={() => onNavigate('nfa-dfa')}
+            onClick={() => onNavigate('learn')}
             className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#faf7f2] hover:bg-[#f4efe6] dark:bg-white/[0.05] dark:hover:bg-white/[0.08] text-stone-800 dark:text-white font-semibold text-sm shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-stone-200/90 dark:border-white/[0.12]"
           >
-            <Network className="w-4 h-4 text-violet-600 dark:text-cyan-400 shrink-0" />
-            <span>Launch NFA → DFA Converter</span>
+            <span>Explore Academy</span>
           </button>
         </div>
 
@@ -319,7 +318,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </div>
             <h4 className="font-bold text-stone-900 dark:text-white text-sm sm:text-base">Automata Theory</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
-              Mathematical models of abstract computing devices, from simple finite state automata to pushdown automata and universal Turing machines.
+              Mathematical models of abstract computing devices, focusing on nondeterministic and deterministic finite state automata.
             </p>
           </div>
 
@@ -329,7 +328,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </div>
             <h4 className="font-bold text-stone-900 dark:text-white text-sm sm:text-base">Formal Languages</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
-              The Chomsky hierarchy: regular languages (DFA/NFA), context-free languages, and recursively enumerable languages recognized by Turing machines.
+              The Chomsky hierarchy: regular languages, regular expressions, and finite state recognizers connected through the Kleene and Rabin-Scott theorems.
             </p>
           </div>
 
@@ -337,9 +336,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             <div className="p-2 sm:p-2.5 rounded-xl bg-emerald-500/15 text-emerald-700 dark:bg-emerald-600/20 dark:text-emerald-400 w-fit">
               <Compass className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h4 className="font-bold text-stone-900 dark:text-white text-sm sm:text-base">Computability & Limits</h4>
+            <h4 className="font-bold text-stone-900 dark:text-white text-sm sm:text-base">Decidability &amp; Equivalence</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
-              Decidability, the Church-Turing thesis, and the famous Halting Problem proving that certain mathematical questions can never be resolved by any algorithm.
+              Decidable properties of regular languages, including language emptiness, finiteness, and automated equivalence verification between NFA and DFA.
             </p>
           </div>
         </div>
@@ -365,7 +364,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             <div className="text-2xl sm:text-3xl font-black font-mono text-cyan-400/30 absolute top-4 right-4">02</div>
             <h4 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white">Inspect Every Single Step</h4>
             <p className="text-xs text-stone-600 dark:text-slate-400 leading-relaxed">
-              Step forward one symbol at a time. Watch the tape head shift, observe subset creation, and read human-friendly transition explanations.
+              Step forward one symbol at a time. Trace active states, observe subset creation, and read human-friendly transition explanations.
             </p>
           </div>
 

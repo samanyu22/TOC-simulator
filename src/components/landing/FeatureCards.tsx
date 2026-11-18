@@ -1,36 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Cpu, 
   Network, 
   ArrowRight
 } from 'lucide-react';
 import { GlowCard } from '../common/GlowCard';
 
 interface FeatureCardsProps {
-  onNavigate: (view: 'tm' | 'nfa-dfa') => void;
+  onNavigate: (view: 'nfa-dfa') => void;
 }
 
 export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
-  // --- Turing Machine Interactive Preview State ---
-  const [tmTape, setTmTape] = useState(['1', '0', '1', '1', '0', '_']);
-  const [tmHead, setTmHead] = useState(2);
-  const [isTmAuto, setIsTmAuto] = useState(true);
-
-  // Gentle, calm simulation step
-  useEffect(() => {
-    if (!isTmAuto) return;
-    const timer = setInterval(() => {
-      setTmHead(prev => (prev + 1) % tmTape.length);
-    }, 2400);
-    return () => clearInterval(timer);
-  }, [isTmAuto, tmTape.length]);
-
-  // Derived TM state details based on head
-  const tmActiveState = tmHead === 5 ? 'q_accept' : tmHead === 0 ? 'q0' : `q${tmHead}`;
-  const tmActiveSymbol = tmTape[tmHead];
-  const tmNextSymbol = tmActiveSymbol === '1' ? '0' : '1';
-  const tmNextState = tmHead === 5 ? 'q_accept' : `q${(tmHead + 1) % 6}`;
-
   // --- Automata Interactive Preview State ---
   const [activeNfaIndex, setActiveNfaIndex] = useState(1);
   const [isNfaAuto, setIsNfaAuto] = useState(true);
@@ -57,134 +36,23 @@ export const FeatureCards: React.FC<FeatureCardsProps> = ({ onNavigate }) => {
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f4efe8] dark:bg-slate-900 border border-stone-200/90 dark:border-white/10 text-xs font-mono text-cyan-800 dark:text-cyan-300 shadow-xs">
           <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-          <span>Interactive Virtual Workbenches</span>
+          <span>Interactive Virtual Workbench</span>
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-900 dark:text-white tracking-tight">
-          Choose Your Computation Engine
+          Your Computation Engine
         </h2>
         <p className="text-sm text-stone-600 dark:text-slate-400 leading-relaxed font-sans">
           Engineered for computer science students and educators. Explore real theoretical algorithms through interactive visualizations, step controls, and formal mathematical telemetry.
         </p>
       </div>
 
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch relative">
-        {/* Ambient Backlight Radiance behind cards in light mode */}
-        <div className="absolute -top-12 left-1/4 -translate-x-1/2 w-[480px] h-[320px] bg-violet-400/25 dark:bg-transparent rounded-full blur-[90px] pointer-events-none -z-10" />
-        <div className="absolute -top-12 right-1/4 translate-x-1/2 w-[480px] h-[320px] bg-cyan-400/25 dark:bg-transparent rounded-full blur-[90px] pointer-events-none -z-10" />
+      {/* Hero Card — Centered */}
+      <div className="max-w-3xl mx-auto relative">
+        {/* Ambient Backlight Radiance */}
+        <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-cyan-400/25 dark:bg-transparent rounded-full blur-[90px] pointer-events-none -z-10" />
 
         {/* =========================================================
-            CARD 1: TURING MACHINE SIMULATOR
-            ========================================================= */}
-        <GlowCard 
-          glowColor="purple"
-          customSize={true}
-          borderRadius={24}
-          spotlightSize={380}
-          className="group transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/20 dark:hover:shadow-violet-900/20 p-4 sm:p-7 md:p-8 bg-[#faf7f2]/95 dark:bg-[#080d1e]/95 backdrop-blur-2xl flex-1 flex flex-col justify-between space-y-5 sm:space-y-6 overflow-hidden border border-[#ded5c5] hover:border-violet-400/50 dark:hover:border-transparent dark:border-transparent rounded-2xl sm:rounded-3xl"
-          onMouseEnter={() => setIsTmAuto(false)}
-          onMouseLeave={() => setIsTmAuto(true)}
-        >
-          {/* Ambient Lighting Glow - Rich vibrant aurora in light mode */}
-          <div className="absolute top-0 right-0 w-84 h-84 bg-gradient-to-bl from-violet-500/35 via-purple-500/22 to-transparent dark:from-violet-600/10 dark:via-transparent dark:to-transparent rounded-full blur-3xl pointer-events-none -mr-16 -mt-16 group-hover:from-violet-500/50 group-hover:via-purple-500/32 transition-all duration-500" />
-          <div className="absolute top-0 right-0 w-48 h-48 bg-violet-400/30 dark:bg-transparent rounded-full blur-2xl pointer-events-none -mr-8 -mt-8 group-hover:scale-125 transition-transform duration-700" />
-          <div className="absolute top-0 right-0 w-44 h-[2px] bg-gradient-to-l from-violet-500/70 via-purple-400/40 to-transparent dark:from-violet-400/20 dark:to-transparent pointer-events-none" />
-
-            {/* Header */}
-            <div className="space-y-3 sm:space-y-4 relative z-10">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3 sm:gap-3.5">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-violet-50 dark:bg-violet-950/80 border border-violet-200 dark:border-violet-500/40 text-violet-800 dark:text-violet-300 flex items-center justify-center shadow-xs shrink-0">
-                    <Cpu className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-violet-50 dark:bg-violet-500/20 text-violet-800 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30 tracking-wider uppercase">
-                        Formal 7-Tuple
-                      </span>
-                      <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                        Deterministic
-                      </span>
-                    </div>
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-stone-900 dark:text-white tracking-tight mt-1">
-                      Turing Machine Simulator
-                    </h3>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-xs text-stone-600 dark:text-slate-300 leading-relaxed font-sans">
-                Full deterministic Turing machine execution with an interactive infinite memory tape, bidirectional head kinematics, customizable delta transition matrix, and reversible time-travel debugging.
-              </p>
-            </div>
-
-            {/* Interactive Showcase: Virtual Tape Chassis */}
-            <div className="relative z-10 rounded-xl sm:rounded-2xl p-3 sm:p-4 bg-[#f4efe8]/90 dark:bg-[#040713] border border-stone-200/90 dark:border-white/[0.07] space-y-3 sm:space-y-3.5 transition-colors shadow-inner">
-              {/* Telemetry Bar */}
-              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-                <div className="flex items-center gap-2">
-                  <span className="text-stone-500 dark:text-slate-400 text-[11px]">Head State:</span>
-                  <span className="font-bold px-2 py-0.5 rounded-md bg-violet-50 dark:bg-violet-950 text-violet-900 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30">
-                    {tmActiveState}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2.5 sm:gap-3 text-[11px] text-stone-500 dark:text-slate-400">
-                  <span>Head: <strong className="text-violet-700 dark:text-violet-300">#{tmHead}</strong></span>
-                  <span>Scanned: <strong className="text-teal-700 dark:text-cyan-300">'{tmActiveSymbol}'</strong></span>
-                </div>
-              </div>
-
-              {/* Tape Cells Ribbon with Optical Laser Head */}
-              <div className="relative py-2 px-1 flex items-center justify-between gap-1.5 overflow-x-auto">
-                {tmTape.map((symbol, idx) => {
-                  const isCurrent = idx === tmHead;
-
-                  return (
-                    <div
-                      key={idx}
-                      onClick={() => setTmHead(idx)}
-                      onMouseEnter={() => setTmHead(idx)}
-                      className={`relative flex-1 min-w-[36px] sm:min-w-[42px] h-12 sm:h-14 rounded-xl flex flex-col items-center justify-center font-mono select-none cursor-pointer transition-[transform,border-color,background-color] duration-150 transform-gpu shrink-0 ${
-                        isCurrent
-                          ? 'bg-gradient-to-b from-violet-600 to-indigo-700 text-white border-violet-400 shadow-md shadow-violet-500/30 z-10 scale-105 will-change-transform'
-                          : 'bg-[#faf7f2] dark:bg-slate-900/70 border-stone-200/90 dark:border-white/[0.06] text-stone-800 dark:text-slate-300 hover:border-violet-400/50 hover:bg-[#f4efe8] dark:hover:bg-slate-900 shadow-xs'
-                      }`}
-                    >
-                      {/* Active Optical Marker */}
-                      {isCurrent && (
-                        <div className="absolute -top-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-xs" />
-                      )}
-
-                      <span className={`text-[8px] font-mono leading-none ${isCurrent ? 'text-violet-200' : 'text-stone-400 dark:text-slate-500'}`}>
-                        #{idx}
-                      </span>
-                      <span className="text-sm font-black mt-1">
-                        {symbol === '_' ? '␣' : symbol}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Transition Rule Preview Banner */}
-              <div className="text-[10px] sm:text-[11px] font-mono text-center text-stone-600 dark:text-slate-400 bg-[#faf7f2] dark:bg-slate-950/80 py-2 px-2.5 sm:px-3 rounded-xl border border-stone-200/90 dark:border-white/[0.05] shadow-xs truncate">
-                Active Rule: <span className="text-violet-700 dark:text-violet-300 font-bold">δ({tmActiveState}, '{tmActiveSymbol}')</span> → <span className="text-emerald-700 dark:text-emerald-400 font-bold">('{tmNextSymbol}', R, {tmNextState})</span>
-              </div>
-            </div>
-
-            {/* Launch Button */}
-            <button
-              onClick={() => onNavigate('tm')}
-              className="relative w-full flex items-center justify-center gap-2 py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold text-xs tracking-wide shadow-md shadow-violet-900/20 active:scale-[0.99] transition-all group/btn"
-            >
-              <span>Launch Turing Machine Simulator</span>
-              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform shrink-0" />
-            </button>
-        </GlowCard>
-
-        {/* =========================================================
-            CARD 2: NFA TO DFA CONVERTER
+            CARD: NFA TO DFA CONVERTER
             ========================================================= */}
         <GlowCard 
           glowColor="blue"

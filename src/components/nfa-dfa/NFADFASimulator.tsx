@@ -189,6 +189,10 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
     setConversionStepIndex(1);
   }, []);
 
+  // Dynamic keys to force instant re-render of canvas graph layouts on structure change
+  const nfaGraphKey = `${currentNFA.id}-${currentNFA.states.join(',')}-${currentNFA.transitions.length}-${currentNFA.acceptStates.join(',')}`;
+  const dfaGraphKey = `${currentNFA.id}-${dfa.states.join(',')}-${dfa.transitions.length}-${dfa.acceptStates.join(',')}`;
+
   // Highlight elements during walkthrough
   const currentWalkthroughStep = steps[conversionStepIndex - 1];
   const highlightedNFAStates = currentWalkthroughStep
@@ -287,7 +291,7 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
           {/* NFA Graph */}
           <div className="space-y-2">
             <AutomataGraph
-              key={`nfa-${currentNFA.id}`}
+              key={`nfa-${nfaGraphKey}`}
               title="Nondeterministic Finite Automaton (NFA)"
               states={currentNFA.states}
               initialState={currentNFA.initialState}
@@ -308,7 +312,7 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
           {/* DFA Graph */}
           <div className="space-y-2">
             <AutomataGraph
-              key={`dfa-${currentNFA.id}`}
+              key={`dfa-${dfaGraphKey}`}
               title="Converted Deterministic Finite Automaton (DFA)"
               states={dfa.states}
               initialState={dfa.initialState}
@@ -347,7 +351,7 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
 
           {activeTab === 'nfa' ? (
             <AutomataGraph
-              key={`nfa-tab-${currentNFA.id}`}
+              key={`nfa-tab-${nfaGraphKey}`}
               title="Original NFA"
               states={currentNFA.states}
               initialState={currentNFA.initialState}
@@ -365,7 +369,7 @@ export const NFADFASimulator: React.FC<NFADFASimulatorProps> = ({
             />
           ) : (
             <AutomataGraph
-              key={`dfa-tab-${currentNFA.id}`}
+              key={`dfa-tab-${dfaGraphKey}`}
               title="Converted DFA"
               states={dfa.states}
               initialState={dfa.initialState}

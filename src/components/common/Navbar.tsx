@@ -14,8 +14,8 @@ import {
 } from 'lucide-react';
 
 interface NavbarProps {
-  currentView: 'home' | 'tm' | 'nfa-dfa' | 'learn' | 'examples';
-  onNavigate: (view: 'home' | 'tm' | 'nfa-dfa' | 'learn' | 'examples') => void;
+  currentView: 'home' | 'nfa-dfa' | 'learn' | 'examples';
+  onNavigate: (view: 'home' | 'nfa-dfa' | 'learn' | 'examples') => void;
   onOpenIO: () => void;
   onResetDefaults: () => void;
 }
@@ -58,17 +58,6 @@ export const Navbar: React.FC<NavbarProps> = ({
       shortcut: '1',
     },
     { 
-      id: 'tm', 
-      label: 'Turing Machine', 
-      icon: Cpu, 
-      badge: undefined,
-      activeGradient: 'from-indigo-600 to-blue-600',
-      activeShadow: 'shadow-indigo-600/30 border-indigo-400/40',
-      ambientGlow: 'bg-indigo-500/20 dark:bg-indigo-500/25',
-      badgeClass: undefined,
-      shortcut: '2',
-    },
-    { 
       id: 'nfa-dfa', 
       label: 'NFA → DFA', 
       icon: Network, 
@@ -77,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       activeShadow: 'shadow-cyan-600/30 border-cyan-400/40',
       ambientGlow: 'bg-cyan-500/20 dark:bg-cyan-500/25',
       badgeClass: undefined,
-      shortcut: '3',
+      shortcut: '2',
     },
     { 
       id: 'learn', 
@@ -88,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       activeShadow: 'shadow-emerald-600/30 border-emerald-400/40',
       ambientGlow: 'bg-emerald-500/20 dark:bg-emerald-500/25',
       badgeClass: undefined,
-      shortcut: '4',
+      shortcut: '3',
     },
     { 
       id: 'examples', 
@@ -99,7 +88,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       activeShadow: 'shadow-amber-600/30 border-amber-400/40',
       ambientGlow: 'bg-amber-500/20 dark:bg-amber-500/25',
       badgeClass: undefined,
-      shortcut: '5',
+      shortcut: '4',
     },
   ] as const;
 
@@ -154,13 +143,12 @@ export const Navbar: React.FC<NavbarProps> = ({
         return;
       }
 
-      // Quick numbers 1-5 for views
+      // Quick numbers 1-4 for views
       if (!e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey) {
         if (e.key === '1') onNavigate('home');
-        if (e.key === '2') onNavigate('tm');
-        if (e.key === '3') onNavigate('nfa-dfa');
-        if (e.key === '4') onNavigate('learn');
-        if (e.key === '5') onNavigate('examples');
+        if (e.key === '2') onNavigate('nfa-dfa');
+        if (e.key === '3') onNavigate('learn');
+        if (e.key === '4') onNavigate('examples');
       }
     };
 
